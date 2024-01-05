@@ -1,5 +1,8 @@
 ﻿using BussinessObject.Model;
 using BussinessObject.Model.Authen;
+using BussinessObject.Model.FileCourse;
+using BussinessObject.Model.FilePayment;
+using BussinessObject.Model.FilePost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -26,6 +29,14 @@ namespace BussinessObject.ContextData
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Business> Businesss { get; set; }
+        public virtual DbSet<BMI> BMIs { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<CourseContent> CourseContents { get; set; }
+        public virtual DbSet<Enrollment> Enrollments { get; set; }
+        public virtual DbSet<Payment> Payment { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<PostComment> PostComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,8 +49,22 @@ namespace BussinessObject.ContextData
                 );
 
             modelBuilder.Entity<User>().HasData(
-                new User {userId = Guid.NewGuid(), userName = "admin", password = "123123Aa!", email = "admin@gmail.com", firstName = "ADMIN", lastName = "01", gender = true, phone = "012345678", roleId = 1 }
+                new User {userId = Guid.NewGuid(),
+                    userName = "admin",
+                    password = "123123Aa!",
+                    email = "admin@gmail.com",
+                    firstName = "ADMIN",
+                    lastName = "01",
+                    gender = true,
+                    phone = "012345678",
+                    birthDate = "01/01/1999",
+                    avatar = null,
+                    wallpaper = null,
+                    isActive = true,
+                    roleId = 1 }
                 );
+
+            modelBuilder.Entity<CourseContent>().HasNoKey();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace BussinessObject.Model.Authen
 {
     public class Role
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int roleId { get; set; }
         [Required] public string roleName {  get; set; }
 
