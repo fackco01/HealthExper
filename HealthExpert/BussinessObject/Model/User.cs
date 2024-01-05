@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BussinessObject.Model.Authen;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BussinessObject.Model
@@ -26,7 +28,10 @@ namespace BussinessObject.Model
         [DataType(DataType.Password)]
         public string password { get; set; }
         [Required] public bool gender { get; set; }
-        [Required] public DateTime createDate { get; set; }
-        [Required] public string role { get; set; }
+        public DateTime createDate { get; set; } = DateTime.Now;
+        [Required] public int roleId { get; set; }
+
+        [JsonIgnore]
+        public virtual Role Role { get; set; }
     }
 }
