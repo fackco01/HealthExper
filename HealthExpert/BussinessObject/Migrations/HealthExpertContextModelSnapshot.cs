@@ -36,7 +36,7 @@ namespace BussinessObject.Migrations
 
                     b.HasKey("roleId");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
@@ -374,9 +374,9 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            userId = new Guid("0a320e9f-3711-43c6-ae9d-d66e437598de"),
+                            userId = new Guid("3c4160af-0342-4983-aa90-5c3660c4851e"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 1, 5, 20, 17, 4, 555, DateTimeKind.Local).AddTicks(7038),
+                            createDate = new DateTime(2024, 1, 8, 16, 9, 3, 658, DateTimeKind.Local).AddTicks(2886),
                             email = "admin@gmail.com",
                             firstName = "ADMIN",
                             gender = true,

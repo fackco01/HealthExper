@@ -29,6 +29,7 @@ namespace BussinessObject.ContextData
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Business> Businesss { get; set; }
         public virtual DbSet<BMI> BMIs { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
