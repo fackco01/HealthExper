@@ -12,5 +12,7 @@
         public string birthDate { get; set; }
         public string avatar { get; set; } = string.Empty;
         public string wallpaper { get; set; } = string.Empty;
+        public int roleId { get; set; }
+        public bool isActive { get; set; } = true;
     }
 }

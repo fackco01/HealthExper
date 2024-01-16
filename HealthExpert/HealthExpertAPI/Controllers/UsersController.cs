@@ -62,8 +62,11 @@ namespace HealthExpertAPI.Controllers
         [HttpPut("{id}")]
         public void UpdateUser(string id, UserUpdateDTO userDTO)
         {
+            var userId = _repository.GetUserById(new Guid(id)).roleId;
+            userDTO.roleId = userId;
             var user = _mapper.Map<User>((Guid.Parse(id), userDTO));
-           //userId = new Guid(services.DecryptString(Uri.UnescapeDataString(id), _configuration)),
+            //userId = new Guid(services.DecryptString(Uri.UnescapeDataString(id), _configuration)),
+
 
             _repository.UpdateUser(user.userId, user);
         }
@@ -83,7 +86,7 @@ namespace HealthExpertAPI.Controllers
         }
 
         // DELETE: api/Users/5
-        [Authorize(Roles = "Administration")]
+        //[Authorize(Roles = "Administration")] Test
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(Guid id)
         {
