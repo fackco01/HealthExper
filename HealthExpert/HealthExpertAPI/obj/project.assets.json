@@ -12601,19 +12601,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\duanh\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
+      "projectUniqueName": "E:\\CapstoneProject\\HealthExper\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
       "projectName": "HealthExpertAPI",
-      "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
-      "packagesPath": "C:\\Users\\duanh\\.nuget\\packages\\",
-      "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\obj\\",
+      "projectPath": "E:\\CapstoneProject\\HealthExper\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "E:\\CapstoneProject\\HealthExper\\HealthExpert\\HealthExpertAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\duanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12621,17 +12626,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
-              "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj"
+            "E:\\CapstoneProject\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
+              "projectPath": "E:\\CapstoneProject\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj"
             },
-            "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj"
+            "E:\\CapstoneProject\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "E:\\CapstoneProject\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj"
             }
           }
         }
@@ -12742,7 +12748,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
