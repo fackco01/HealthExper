@@ -6,6 +6,8 @@ D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\Health
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\HealthExpertAPI.runtimeconfig.json
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\HealthExpertAPI.dll
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\HealthExpertAPI.pdb
+D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\AutoMapper.dll
+D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\Azure.Core.dll
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\Azure.Identity.dll
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\BCrypt.Net-Next.dll
@@ -243,6 +245,10 @@ D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\runtim
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\BussinessObject.dll
+D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\DataAccess.dll
+D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\BussinessObject.pdb
+D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\DataAccess.pdb
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\HealthExpertAPI.csproj.AssemblyReference.cache
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\HealthExpertAPI.GeneratedMSBuildEditorConfig.editorconfig
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\HealthExpertAPI.AssemblyInfoInputs.cache
@@ -264,9 +270,3 @@ D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\refint
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\HealthExpertAPI.pdb
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\HealthExpertAPI.genruntimeconfig.cache
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\obj\Debug\net7.0\ref\HealthExpertAPI.dll
-D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\BussinessObject.dll
-D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\DataAccess.dll
-D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\BussinessObject.pdb
-D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\DataAccess.pdb
-D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\AutoMapper.dll
-D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\HealthExpertAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -43,6 +43,13 @@ namespace BussinessObject.ContextData
         {
             base.OnModelCreating(modelBuilder);
 
+            //Tao moi quan he 1 - many
+            modelBuilder.Entity<Course>()
+                .HasMany(e => e.CourseContents)
+                .WithOne(e => e.Courses)
+                .HasForeignKey(e => e.coursesId)
+                .IsRequired();
+
             modelBuilder.Entity<Role>().HasData(
                 new Role { roleId = 1, roleName = "Administration" },
                 new Role { roleId = 2, roleName = "Enterprise" },
@@ -65,7 +72,7 @@ namespace BussinessObject.ContextData
                     roleId = 1 }
                 );
 
-            modelBuilder.Entity<CourseContent>().HasNoKey();
+            //modelBuilder.Entity<CourseContent>().HasNoKey();
         }
     }
 }

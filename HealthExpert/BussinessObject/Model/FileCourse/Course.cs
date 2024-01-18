@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace BussinessObject.Model.FileCourse
 {
+    /// <summary>
+    /// Chinh sua lai Database
+    /// </summary>
     public class Course
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,6 +31,9 @@ namespace BussinessObject.Model.FileCourse
         [JsonIgnore]
         public virtual Business? Business { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual ICollection<Enrollment>? Enrollments { get; set; }
+        [JsonIgnore]
+        [NotMapped]
+        public ICollection<CourseContent>? CourseContents { get; set; }
     }
 }

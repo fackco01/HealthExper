@@ -174,7 +174,13 @@ namespace BussinessObject.Migrations
 
             modelBuilder.Entity("BussinessObject.Model.FileCourse.CourseContent", b =>
                 {
-                    b.Property<int>("courseId")
+                    b.Property<int>("contentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("contentId"));
+
+                    b.Property<int>("coursesId")
                         .HasColumnType("int");
 
                     b.Property<string>("title")
@@ -185,7 +191,9 @@ namespace BussinessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("courseId");
+                    b.HasKey("contentId");
+
+                    b.HasIndex("coursesId");
 
                     b.ToTable("CourseContents");
                 });
@@ -374,9 +382,9 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            userId = new Guid("3c4160af-0342-4983-aa90-5c3660c4851e"),
+                            userId = new Guid("8cf985d3-d7cd-4ee4-9e1b-7b962b08f89b"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 1, 8, 16, 9, 3, 658, DateTimeKind.Local).AddTicks(2886),
+                            createDate = new DateTime(2024, 1, 17, 15, 31, 11, 796, DateTimeKind.Local).AddTicks(4214),
                             email = "admin@gmail.com",
                             firstName = "ADMIN",
                             gender = true,
@@ -413,13 +421,13 @@ namespace BussinessObject.Migrations
 
             modelBuilder.Entity("BussinessObject.Model.FileCourse.CourseContent", b =>
                 {
-                    b.HasOne("BussinessObject.Model.FileCourse.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("courseId")
+                    b.HasOne("BussinessObject.Model.FileCourse.Course", "Courses")
+                        .WithMany("CourseContents")
+                        .HasForeignKey("coursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Course");
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("BussinessObject.Model.FileCourse.Enrollment", b =>
@@ -515,6 +523,8 @@ namespace BussinessObject.Migrations
 
             modelBuilder.Entity("BussinessObject.Model.FileCourse.Course", b =>
                 {
+                    b.Navigation("CourseContents");
+
                     b.Navigation("Enrollments");
                 });
 
