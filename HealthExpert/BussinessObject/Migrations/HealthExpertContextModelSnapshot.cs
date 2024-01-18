@@ -374,9 +374,9 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            userId = new Guid("3c4160af-0342-4983-aa90-5c3660c4851e"),
+                            userId = new Guid("86982e04-cab0-465b-9825-48431d0e4fbc"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 1, 8, 16, 9, 3, 658, DateTimeKind.Local).AddTicks(2886),
+                            createDate = new DateTime(2024, 1, 16, 16, 50, 15, 82, DateTimeKind.Local).AddTicks(5572),
                             email = "admin@gmail.com",
                             firstName = "ADMIN",
                             gender = true,

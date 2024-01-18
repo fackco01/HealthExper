@@ -26,3 +26,17 @@ D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\BussinessObject\obj\Debug\net7.0\refint
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.pdb
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.genruntimeconfig.cache
 D:\FPT\SE1604\DoAnTotNghiep\HealthExpert\BussinessObject\obj\Debug\net7.0\ref\BussinessObject.dll
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\bin\Debug\net7.0\BussinessObject.deps.json
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\bin\Debug\net7.0\BussinessObject.runtimeconfig.json
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\bin\Debug\net7.0\BussinessObject.dll
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\bin\Debug\net7.0\BussinessObject.pdb
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.csproj.AssemblyReference.cache
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.GeneratedMSBuildEditorConfig.editorconfig
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.AssemblyInfoInputs.cache
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.AssemblyInfo.cs
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.csproj.CoreCompileInputs.cache
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.dll
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\refint\BussinessObject.dll
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.pdb
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\BussinessObject.genruntimeconfig.cache
+E:\CapstoneProject\HealthExper\HealthExpert\BussinessObject\obj\Debug\net7.0\ref\BussinessObject.dll

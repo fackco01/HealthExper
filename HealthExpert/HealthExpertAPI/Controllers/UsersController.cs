@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthExpertAPI.Controllers
 {
     //[Authorize(Roles = "Administration")] //Có thể chỉnh sửa lại sau
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -100,6 +100,56 @@ namespace HealthExpertAPI.Controllers
             _repository.UpdateUser(id, user);
 
             return NoContent();
+        }
+
+        //GET SPECIFIC ENTERPRISE BY NAME
+        [AllowAnonymous]
+        [HttpGet("{name}")]
+        public ActionResult GetEnterpriseByName(string name)
+        {
+            try
+            {
+                var users = _repository.GetAllUsers().Where(
+                    u => u.isActive && u.userName.Contains(name) && u.roleId == 2).ToList();
+
+                if (users.Count == 0)
+                {
+                    return NotFound("Enterprise not found!");
+                }
+
+                var userDTOs = _mapper.Map<List<UserDTO>>(users);
+                return Ok(userDTOs);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
+
+        //GET CUSTOMER BY NAME
+        [AllowAnonymous]
+        [HttpGet("{name}")]
+        public ActionResult GetCustomerByName(string name)
+        {
+            try
+            {
+                var users = _repository.GetAllUsers().Where(
+                    u => u.isActive && u.userName.Contains(name) && u.roleId == 3).ToList();
+
+                if (users.Count == 0)
+                {
+                    return NotFound("Customer not found!");
+                }
+
+                var userDTOs = _mapper.Map<List<UserDTO>>(users);
+                return Ok(userDTOs);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
     }
 }
