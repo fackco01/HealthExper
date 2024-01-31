@@ -37,4 +37,9 @@
     <ProjectReference Include="..\BussinessObject\BussinessObject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DAO\" />
+    <Folder Include="Repository\IRepository\" />
+  </ItemGroup>
+
 </Project>

@@ -38,4 +38,10 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+
 </Project>
