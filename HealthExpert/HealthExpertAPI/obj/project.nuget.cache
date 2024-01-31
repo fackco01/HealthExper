@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/qWR1+3eqTSvB12IzCdGeDsmJUN2PW0ED+oW5OcK6phwpy6B+I8nYN+UxcO3E35vvtGO7z1kgGQX8AV1/Je0HQ==",
+  "dgSpecHash": "oqI+gbwxV36qqYPRx2aR7Apsr/Z3qpgfg1Xt6ZAIguMFI+MY4+pK2wqqcPz9xk/cTBdMSbnG5p+Paz05CNYF5g==",
   "success": true,
-  "projectFilePath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
+  "projectFilePath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\duanh\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\duanh\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

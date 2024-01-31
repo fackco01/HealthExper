@@ -12606,11 +12606,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
+      "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
       "projectName": "HealthExpertAPI",
-      "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
+      "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\HealthExpertAPI\\HealthExpertAPI.csproj",
       "packagesPath": "C:\\Users\\duanh\\.nuget\\packages\\",
-      "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\HealthExpertAPI\\obj\\",
+      "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\HealthExpertAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\duanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -12627,11 +12627,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
-              "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj"
+            "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
+              "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj"
             },
-            "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj"
+            "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj"
             }
           }
         }

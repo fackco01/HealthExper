@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj": {}
+    "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj": {}
   },
   "projects": {
-    "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
+    "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj",
+        "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj",
         "projectName": "BussinessObject",
-        "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj",
+        "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj",
         "packagesPath": "C:\\Users\\duanh\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\obj\\",
+        "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\duanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -137,14 +137,14 @@
         }
       }
     },
-    "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj": {
+    "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\DataAccess.csproj",
+        "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\duanh\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\DataAccess\\obj\\",
+        "outputPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\duanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -161,8 +161,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
-                "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExpert\\BussinessObject\\BussinessObject.csproj"
+              "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj": {
+                "projectPath": "D:\\FPT\\SE1604\\DoAnTotNghiep\\HealthExper\\HealthExpert\\BussinessObject\\BussinessObject.csproj"
               }
             }
           }
