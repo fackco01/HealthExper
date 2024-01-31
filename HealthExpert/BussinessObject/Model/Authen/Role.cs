@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BussinessObject.Model.ModelUser;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,6 @@ namespace BussinessObject.Model.Authen
         [Required] public string roleName {  get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<User> users { get; set; }
+        public virtual ICollection<Account> account { get; set; }
     }
 }
