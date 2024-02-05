@@ -33,6 +33,6 @@ namespace BussinessObject.Model.ModelUser
 
         [Required] public int roleId { get; set; }
         [JsonIgnore]
-        public virtual Role role { get; set; }
+        public virtual Role? role { get; set; }
     }
 }

@@ -1,0 +1,59 @@
+﻿using BussinessObject.Model.ModelUser;
+using HealthExpertAPI.DTO.DTOAccount;
+
+namespace HealthExpertAPI.Extension.ExAccount
+{
+    public static class AccountExtensions
+    {
+        public static AccountDTO ToAccountDTO(this Account account)
+        {
+            return new AccountDTO
+            {
+                accountId = account.accountId,
+                userName = account.userName,
+                password = account.password,
+                email = account.email,
+                phone = account.phone,
+                fullName = account.fullName,
+                gender = account.gender,
+                birthDate = account.birthDate,
+                createDate = account.createDate,
+                isActive = account.isActive
+            };
+        }
+
+        public static Account ToAccountRegister(this AccountRegistrationDTO accountDTO)
+        {
+            return new Account
+            {
+                userName = accountDTO.userName,
+                password = accountDTO.password,
+                email = accountDTO.email,
+                phone = accountDTO.phone,
+                fullName = accountDTO.fullName,
+                gender = accountDTO.gender,
+                birthDate = accountDTO.birthDate,
+                roleId = accountDTO.roleId,
+                isActive = accountDTO.isActive
+            };
+        }
+
+        public static Account ToAccountUpdate(this AccountUpdateDTO accountDTO)
+        {
+            return new Account
+            {
+                //accountId = accountDTO.accountId,
+                userName = accountDTO.userName,
+                password = accountDTO.password,
+                email = accountDTO.email,
+                phone = accountDTO.phone,
+                fullName = accountDTO.fullName,
+                gender = accountDTO.gender,
+                birthDate = accountDTO.birthDate,
+                createDate = accountDTO.createDate,
+                isActive = accountDTO.isActive = true,
+                roleId = accountDTO.roleId = 4
+            };
+        }
+    }
+}
