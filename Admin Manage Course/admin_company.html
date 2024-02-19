@@ -101,6 +101,10 @@
     <hr>
     <!-- MAIN CONTENT -->
     <br>
+    <button type="button"
+    class="text-white bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium py-1 text-center w-40 ml-5"
+    ><a href="create_course.html">Create New Course</a></button>
+    <br>
     <!-- Search Bar -->
     <div class="flex">
       <input type="search" class="relative w-screen border border-solid border-neutral-300 px-3 py-[0.25rem] "
@@ -141,10 +145,9 @@
           <th>1</th>
           <th>ACTIVE</th>
           <th>
-            <div class="flex">
-              <a onclick="openEdit()"><img src="sprite/edit.png"></a>
-              <a onclick="openDelete()"><img src="sprite/delete.png"></a>
-            </div>
+            <button type="button"
+            class="text-black bg-white hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium w-14 py-1 text-center"
+            onclick="signUp()">Delete</button>
           </th>
         </tr>
         <tr>
