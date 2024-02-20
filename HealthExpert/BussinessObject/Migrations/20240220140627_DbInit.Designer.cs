@@ -4,6 +4,7 @@ using BussinessObject.ContextData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BussinessObject.Migrations
 {
     [DbContext(typeof(HealthExpertContext))]
-    partial class HealthExpertContextModelSnapshot : ModelSnapshot
+    [Migration("20240220140627_DbInit")]
+    partial class DbInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +166,9 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            accountId = new Guid("762b8750-4554-4301-ad16-ff6ce64c7675"),
+                            accountId = new Guid("959853e4-035a-453b-9a63-8d92f24dd5ef"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 2, 11, 16, 22, 51, 964, DateTimeKind.Local).AddTicks(26),
+                            createDate = new DateTime(2024, 2, 20, 21, 6, 27, 836, DateTimeKind.Local).AddTicks(8735),
                             email = "admin@gmail.com",
                             fullName = "Administrator",
                             gender = true,

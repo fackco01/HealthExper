@@ -32,7 +32,16 @@ namespace BussinessObject.Model.ModelUser
         [Required] public bool isActive { get; set; }
 
         [Required] public int roleId { get; set; }
+
+        // Additional properties
+        public byte[]? passwordHash { get; set; } = new byte[32];
+        public byte[]? passwordSalt { get; set; } = new byte[32];
+        public string? verificationToken { get; set; }
+        public DateTime? verifiedAt { get; set; }
+        public string? passwordResetToken { get; set; }
+        public DateTime? resetTokenExpires { get; set; }
+
         [JsonIgnore]
-        public virtual Role role { get; set; }
+        public virtual Role? role { get; set; }
     }
 }
