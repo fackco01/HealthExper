@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BussinessObject.Migrations
 {
     /// <inheritdoc />
-    public partial class DbInit : Migration
+    public partial class DBInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,7 +40,13 @@ namespace BussinessObject.Migrations
                     birthDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     createDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     isActive = table.Column<bool>(type: "bit", nullable: false),
-                    roleId = table.Column<int>(type: "int", nullable: false)
+                    roleId = table.Column<int>(type: "int", nullable: false),
+                    passwordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    passwordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    verificationToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    verifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    passwordResetToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    resetTokenExpires = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -135,8 +141,8 @@ namespace BussinessObject.Migrations
 
             migrationBuilder.InsertData(
                 table: "accounts",
-                columns: new[] { "accountId", "birthDate", "createDate", "email", "fullName", "gender", "isActive", "password", "phone", "roleId", "userName" },
-                values: new object[] { new Guid("7a800e68-b7c4-46ec-a20f-1c38e701ecb9"), "01/01/1999", new DateTime(2024, 2, 1, 8, 11, 40, 833, DateTimeKind.Local).AddTicks(999), "admin@gmail.com", "Administrator", true, true, "123123Aa!", "012345678", 1, "admin" });
+                columns: new[] { "accountId", "birthDate", "createDate", "email", "fullName", "gender", "isActive", "password", "passwordHash", "passwordResetToken", "passwordSalt", "phone", "resetTokenExpires", "roleId", "userName", "verificationToken", "verifiedAt" },
+                values: new object[] { new Guid("762b8750-4554-4301-ad16-ff6ce64c7675"), "01/01/1999", new DateTime(2024, 2, 11, 16, 22, 51, 964, DateTimeKind.Local).AddTicks(26), "admin@gmail.com", "Administrator", true, true, "123123Aa!", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, null, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "012345678", null, 1, "admin", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_accomplishments_accountId",

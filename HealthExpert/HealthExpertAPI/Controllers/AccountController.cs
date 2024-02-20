@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BussinessObject.ContextData;
 using BussinessObject.Model.ModelUser;
 using DataAccess.Repository;
 using DataAccess.Repository.IRepository;
@@ -8,6 +9,10 @@ using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace HealthExpertAPI.Controllers
 {
@@ -17,14 +22,16 @@ namespace HealthExpertAPI.Controllers
     {
         private readonly IAccountRepository _repository = new AccountRepository();
         private readonly HealthServices service = new HealthServices();
+        private readonly HealthExpertContext _context = new HealthExpertContext();
 
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public AccountController(IConfiguration configuration, IMapper mapper)
+        public AccountController(IConfiguration configuration, IMapper mapper, HealthExpertContext context)
         {
             _configuration = configuration;
             _mapper = mapper;
+            _context = context;
         }
 
         // Register
@@ -32,30 +39,65 @@ namespace HealthExpertAPI.Controllers
         [HttpPost]
         public IActionResult Register(AccountRegistrationDTO accountDTO)
         {
-            if (accountDTO == null)
+            if (_context.accounts.Any(a => a.email == accountDTO.email))
             {
                 return BadRequest("Account Exist!!");
             }
 
-            //var account = _mapper.Map<Account>(accountDTO);
-            //account.isActive = true;
-            //account.roleId = 4;
+            CreatedPasswordHash(accountDTO.password,
+                out byte[] passwordHash,
+                out byte[] passwordSalt);
 
-            Account account = new()
-            {
-                userName = accountDTO.userName,
-                password = accountDTO.password,
-                email = accountDTO.email,
-                phone = accountDTO.phone,
-                fullName = accountDTO.fullName,
-                gender = accountDTO.gender,
-                birthDate = accountDTO.birthDate,
-                roleId = accountDTO.roleId = 4,
-                isActive = accountDTO.isActive = true
-            };
+            Account account = accountDTO.ToAccountRegister(passwordHash, passwordSalt);
+            account.verificationToken = CreateRandomToken();
+            account.fullName = accountDTO.userName;
+            account.phone = "0123456789";
+            account.gender = true;
+            account.birthDate = "01/01/2000";
+            account.roleId = 4;
+            account.isActive = true;
 
             _repository.AddAccount(account);
-            return Ok();
+            return Ok("Account successfully register!!");
+        }
+
+        //forgot password
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(string username)
+        {
+            var account = await _context.accounts.FirstOrDefaultAsync(u => u.userName == username);
+            if (account == null && !account.isActive)
+            {
+                return BadRequest("User not found.");
+            }
+
+            account.passwordResetToken = CreateRandomToken();
+            account.resetTokenExpires = DateTime.Now.AddDays(1);
+            await _context.SaveChangesAsync();
+
+            return Ok("You may now reset your password.");
+        }
+
+        //Reset password
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResettPassword(ResetPasswordDTO resetPasswordDTO)
+        {
+            var account = await _context.accounts.FirstOrDefaultAsync(u => u.passwordResetToken == resetPasswordDTO.token);
+            if (account == null && !account.isActive || account.resetTokenExpires < DateTime.Now)
+            {
+                return BadRequest("Invalid Token.");
+            }
+
+            CreatedPasswordHash(resetPasswordDTO.password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            account.passwordHash = passwordHash;
+            account.passwordSalt = passwordSalt;
+            account.passwordResetToken = null;
+            account.resetTokenExpires = null;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Password successfully reset.");
         }
 
         //Vỉew Account
@@ -65,7 +107,6 @@ namespace HealthExpertAPI.Controllers
         {
             var accountList = _repository.GetListAccount().Select(account => account.ToAccountDTO());
             return Ok(accountList);
-            //return Ok(accountList.Select(account => _mapper.Map<AccountDTO>(account)));
         }
 
         //Get Account by Id
@@ -98,7 +139,7 @@ namespace HealthExpertAPI.Controllers
 
         //Delete Account when change isActive = false
         [AllowAnonymous]
-        [HttpDelete("{id}")]
+        [HttpPost("{id}")]
         public ActionResult DeleteAccount(Guid id)
         {
             var account = _repository.GetAccountById(id);
@@ -109,6 +150,23 @@ namespace HealthExpertAPI.Controllers
             account.isActive = false;
             _repository.UpdateAccount(id, account);
             return NoContent();
+        }
+
+        //Create Password Hash
+        private void CreatedPasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac
+                    .ComputeHash(Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        //Create Random Token
+        private string CreateRandomToken()
+        {
+            return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
         }
     }
 }

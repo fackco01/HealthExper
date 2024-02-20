@@ -1,11 +1,16 @@
-﻿using BussinessObject.Model.Authen;
+﻿using BussinessObject.ContextData;
+using BussinessObject.Model.Authen;
 using DataAccess.Repository;
+using HealthExpertAPI.DTO.DTOAccount;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace HealthExpertAPI.Controllers
 {
@@ -17,38 +22,89 @@ namespace HealthExpertAPI.Controllers
         private readonly AccountRepository accountRepository = new AccountRepository();
         private readonly RoleRepository roleRepository = new RoleRepository();
         private readonly HealthServices service = new HealthServices();
+        private readonly HealthExpertContext _context = new HealthExpertContext();
 
         private readonly IConfiguration _configuration;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, HealthExpertContext context)
         {
             _configuration = configuration;
+            _context = context;
         }
 
         //LOGIN
 
+        //[AllowAnonymous]
+        //[HttpPost]
+        //public IActionResult Login([FromBody] UserLogin login)
+        //{
+        //    var user = accountRepository.Authenticate(login);
+        //    var role = roleRepository.GetAllRoles();
+        //    if (user != null && user.isActive)
+        //    {
+        //        var claims = new List<Claim>
+        //        {
+        //            new Claim(ClaimTypes.Name, user.userName),
+        //            new Claim(ClaimTypes.Role, role.First(role => role.roleId == user.roleId).roleName)
+        //        };
+
+        //        string token = service.CreateToken(claims, _configuration);
+
+        //        SetCookie("access_token", token, true);
+        //        SetCookie("uid", service.EncryptString(user.accountId.ToString(), _configuration), false);
+        //        return Ok(token);
+        //    }
+
+        //    return BadRequest("User not found!!!");
+        //}
+
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] UserLogin login)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
-            var user = accountRepository.Authenticate(login);
-            var role = roleRepository.GetAllRoles();
-            if (user != null && user.isActive)
+            var account = await _context.accounts.FirstOrDefaultAsync(a => a.userName == loginDTO.userName);
+            if (account == null && !account.isActive)
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.userName),
-                    new Claim(ClaimTypes.Role, role.First(role => role.roleId == user.roleId).roleName)
-                };
-
-                string token = service.CreateToken(claims, _configuration);
-
-                SetCookie("access_token", token, true);
-                SetCookie("uid", service.EncryptString(user.accountId.ToString(), _configuration), false);
-                return Ok(token);
+                return BadRequest("User not found!!!");
             }
 
-            return BadRequest("User not found!!!");
+            if (!VerifyPasswordHash(loginDTO.password, account.passwordHash, account.passwordSalt))
+            {
+                return BadRequest("Password is incorrect!!!");
+            }
+
+            if(account.verifiedAt == null)
+            {
+                return BadRequest("Please verify your account!!!");
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, account.userName),
+                new Claim(ClaimTypes.Role, roleRepository.GetAllRoles().First(role => role.roleId == account.roleId).roleName)
+            };
+            string token = service.CreateToken(claims, _configuration);
+
+            SetCookie("access_token", token, true);
+            SetCookie("uid", service.EncryptString(account.accountId.ToString(), _configuration), false);
+
+            return Ok($"Wellcome back, {account.userName}!");
+        }
+
+        //Verify token
+        [HttpPost("verify")]
+        public async Task<IActionResult> Verify(string token)
+        {
+            var account = await _context.accounts.FirstOrDefaultAsync(u => u.verificationToken == token);
+            if (account == null)
+            {
+                return BadRequest("Invalid token.");
+            }
+
+            account.verifiedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            return Ok("User verified! :)");
         }
 
         //LOGOUT
@@ -80,6 +136,17 @@ namespace HealthExpertAPI.Controllers
                 HttpOnly = httpOnly,
                 SameSite = SameSiteMode.None
             });
+        }
+
+        //Create Verify Password Hash
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac
+                    .ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
         }
     }
 }

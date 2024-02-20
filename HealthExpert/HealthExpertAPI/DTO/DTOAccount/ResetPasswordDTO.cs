@@ -2,11 +2,13 @@
 
 namespace HealthExpertAPI.DTO.DTOAccount
 {
-    public class LoginDTO
+    public class ResetPasswordDTO
     {
         [Required]
-        public string userName { get; set; } = string.Empty;
+        public string token { get; set; } = string.Empty;
         [Required]
         public string password { get; set; } = string.Empty;
+        [Required, Compare("Password")]
+        public string confirmPassword { get; set; } = string.Empty;
     }
 }

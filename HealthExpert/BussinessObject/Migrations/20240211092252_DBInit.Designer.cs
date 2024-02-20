@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BussinessObject.Migrations
 {
     [DbContext(typeof(HealthExpertContext))]
-    [Migration("20240201011140_DbInit")]
-    partial class DbInit
+    [Migration("20240211092252_DBInit")]
+    partial class DBInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,9 +128,21 @@ namespace BussinessObject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<byte[]>("passwordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("passwordResetToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("passwordSalt")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("resetTokenExpires")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("roleId")
                         .HasColumnType("int");
@@ -138,6 +150,12 @@ namespace BussinessObject.Migrations
                     b.Property<string>("userName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("verificationToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("verifiedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("accountId");
 
@@ -148,14 +166,16 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            accountId = new Guid("7a800e68-b7c4-46ec-a20f-1c38e701ecb9"),
+                            accountId = new Guid("762b8750-4554-4301-ad16-ff6ce64c7675"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 2, 1, 8, 11, 40, 833, DateTimeKind.Local).AddTicks(999),
+                            createDate = new DateTime(2024, 2, 11, 16, 22, 51, 964, DateTimeKind.Local).AddTicks(26),
                             email = "admin@gmail.com",
                             fullName = "Administrator",
                             gender = true,
                             isActive = true,
                             password = "123123Aa!",
+                            passwordHash = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            passwordSalt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                             phone = "012345678",
                             roleId = 1,
                             userName = "admin"

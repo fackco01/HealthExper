@@ -22,19 +22,32 @@ namespace HealthExpertAPI.Extension.ExAccount
             };
         }
 
-        public static Account ToAccountRegister(this AccountRegistrationDTO accountDTO)
+        public static Account ToAccountRegister(this AccountRegistrationDTO accountDTO, byte[] passwordHash, byte[] passwordSalt)
         {
             return new Account
             {
                 userName = accountDTO.userName,
                 password = accountDTO.password,
+                passwordHash = passwordHash,
+                passwordSalt = passwordSalt,
                 email = accountDTO.email,
-                phone = accountDTO.phone,
                 fullName = accountDTO.fullName,
+                phone = accountDTO.phone,
                 gender = accountDTO.gender,
                 birthDate = accountDTO.birthDate,
                 roleId = accountDTO.roleId,
                 isActive = accountDTO.isActive
+            };
+        }
+
+        public static Account ToAccountLogin(this LoginDTO accountDTO, byte[] passwordHash, byte[] passwordSalt)
+        {
+            return new Account
+            {
+                userName = accountDTO.userName,
+                password = accountDTO.password,
+                passwordHash = passwordHash,
+                passwordSalt = passwordSalt
             };
         }
 
