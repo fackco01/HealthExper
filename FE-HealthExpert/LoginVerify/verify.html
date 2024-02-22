@@ -43,7 +43,7 @@
             const token = document.getElementById('token').value;
 
             // Make a GET request to the backend API for account verification
-            fetch(`https://localhost:7158/api/Auth/Verify/verify?token=${token}`)
+            fetch(`https://localhost:7158/api/Auth/Verify/verify?token=${token}`, { method: 'POST' })
                 .then(response => response.json())
                 .then(data => {
                     // Handle the response from the server
