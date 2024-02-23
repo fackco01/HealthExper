@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BussinessObject.Migrations
 {
     [DbContext(typeof(HealthExpertContext))]
-    [Migration("20240220140627_DbInit")]
+    [Migration("20240223121312_DbInit")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -166,9 +166,9 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            accountId = new Guid("959853e4-035a-453b-9a63-8d92f24dd5ef"),
+                            accountId = new Guid("747e347d-7ea3-47b2-b7bc-77365c8bef93"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 2, 20, 21, 6, 27, 836, DateTimeKind.Local).AddTicks(8735),
+                            createDate = new DateTime(2024, 2, 23, 19, 13, 12, 372, DateTimeKind.Local).AddTicks(313),
                             email = "admin@gmail.com",
                             fullName = "Administrator",
                             gender = true,
@@ -211,6 +211,43 @@ namespace BussinessObject.Migrations
                     b.HasIndex("accountId");
 
                     b.ToTable("avatars");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelUser.BMI", b =>
+                {
+                    b.Property<int>("bmiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bmiId"));
+
+                    b.Property<Guid>("accountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("bmiDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("bmiStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("bmiValue")
+                        .HasColumnType("float");
+
+                    b.Property<double>("height")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("bmiId");
+
+                    b.HasIndex("accountId");
+
+                    b.ToTable("bmis");
                 });
 
             modelBuilder.Entity("BussinessObject.Model.ModelUser.Photo", b =>
@@ -267,6 +304,17 @@ namespace BussinessObject.Migrations
                 });
 
             modelBuilder.Entity("BussinessObject.Model.ModelUser.Avatar", b =>
+                {
+                    b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
+                        .WithMany()
+                        .HasForeignKey("accountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("account");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelUser.BMI", b =>
                 {
                     b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
                         .WithMany()

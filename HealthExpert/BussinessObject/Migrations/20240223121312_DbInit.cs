@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BussinessObject.Migrations
 {
     /// <inheritdoc />
-    public partial class DBInit : Migration
+    public partial class DbInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -106,6 +106,31 @@ namespace BussinessObject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "bmis",
+                columns: table => new
+                {
+                    bmiId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    weight = table.Column<double>(type: "float", nullable: false),
+                    height = table.Column<double>(type: "float", nullable: false),
+                    bmiValue = table.Column<double>(type: "float", nullable: false),
+                    bmiStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    bmiDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    accountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_bmis", x => x.bmiId);
+                    table.ForeignKey(
+                        name: "FK_bmis_accounts_accountId",
+                        column: x => x.accountId,
+                        principalTable: "accounts",
+                        principalColumn: "accountId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "photos",
                 columns: table => new
                 {
@@ -142,7 +167,7 @@ namespace BussinessObject.Migrations
             migrationBuilder.InsertData(
                 table: "accounts",
                 columns: new[] { "accountId", "birthDate", "createDate", "email", "fullName", "gender", "isActive", "password", "passwordHash", "passwordResetToken", "passwordSalt", "phone", "resetTokenExpires", "roleId", "userName", "verificationToken", "verifiedAt" },
-                values: new object[] { new Guid("762b8750-4554-4301-ad16-ff6ce64c7675"), "01/01/1999", new DateTime(2024, 2, 11, 16, 22, 51, 964, DateTimeKind.Local).AddTicks(26), "admin@gmail.com", "Administrator", true, true, "123123Aa!", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, null, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "012345678", null, 1, "admin", null, null });
+                values: new object[] { new Guid("747e347d-7ea3-47b2-b7bc-77365c8bef93"), "01/01/1999", new DateTime(2024, 2, 23, 19, 13, 12, 372, DateTimeKind.Local).AddTicks(313), "admin@gmail.com", "Administrator", true, true, "123123Aa!", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, null, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, "012345678", null, 1, "admin", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_accomplishments_accountId",
@@ -160,6 +185,11 @@ namespace BussinessObject.Migrations
                 column: "accountId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_bmis_accountId",
+                table: "bmis",
+                column: "accountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_photos_accountId",
                 table: "photos",
                 column: "accountId");
@@ -173,6 +203,9 @@ namespace BussinessObject.Migrations
 
             migrationBuilder.DropTable(
                 name: "avatars");
+
+            migrationBuilder.DropTable(
+                name: "bmis");
 
             migrationBuilder.DropTable(
                 name: "photos");

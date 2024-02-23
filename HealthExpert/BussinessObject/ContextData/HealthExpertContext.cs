@@ -21,6 +21,7 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Avatar> avatars { get; set; }
         public virtual DbSet<Photo> photos { get; set; }
         public virtual DbSet<Accomplishment> accomplishments { get; set; }
+        public virtual DbSet<BMI> bmis { get; set; }
         public virtual DbSet<Role> roles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
