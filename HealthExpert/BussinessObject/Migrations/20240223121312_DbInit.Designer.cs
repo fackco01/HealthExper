@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BussinessObject.Migrations
 {
     [DbContext(typeof(HealthExpertContext))]
-    [Migration("20240131125658_DbInit")]
+    [Migration("20240223121312_DbInit")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -128,9 +128,21 @@ namespace BussinessObject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<byte[]>("passwordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("passwordResetToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("passwordSalt")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("resetTokenExpires")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("roleId")
                         .HasColumnType("int");
@@ -138,6 +150,12 @@ namespace BussinessObject.Migrations
                     b.Property<string>("userName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("verificationToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("verifiedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("accountId");
 
@@ -148,14 +166,16 @@ namespace BussinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            accountId = new Guid("2f65e949-9f94-4241-92ea-cca248f69f09"),
+                            accountId = new Guid("747e347d-7ea3-47b2-b7bc-77365c8bef93"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 1, 31, 19, 56, 57, 483, DateTimeKind.Local).AddTicks(8454),
+                            createDate = new DateTime(2024, 2, 23, 19, 13, 12, 372, DateTimeKind.Local).AddTicks(313),
                             email = "admin@gmail.com",
                             fullName = "Administrator",
                             gender = true,
                             isActive = true,
                             password = "123123Aa!",
+                            passwordHash = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                            passwordSalt = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                             phone = "012345678",
                             roleId = 1,
                             userName = "admin"
@@ -191,6 +211,43 @@ namespace BussinessObject.Migrations
                     b.HasIndex("accountId");
 
                     b.ToTable("avatars");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelUser.BMI", b =>
+                {
+                    b.Property<int>("bmiId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bmiId"));
+
+                    b.Property<Guid>("accountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("bmiDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("bmiStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("bmiValue")
+                        .HasColumnType("float");
+
+                    b.Property<double>("height")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("bmiId");
+
+                    b.HasIndex("accountId");
+
+                    b.ToTable("bmis");
                 });
 
             modelBuilder.Entity("BussinessObject.Model.ModelUser.Photo", b =>
@@ -247,6 +304,17 @@ namespace BussinessObject.Migrations
                 });
 
             modelBuilder.Entity("BussinessObject.Model.ModelUser.Avatar", b =>
+                {
+                    b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
+                        .WithMany()
+                        .HasForeignKey("accountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("account");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelUser.BMI", b =>
                 {
                     b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
                         .WithMany()
