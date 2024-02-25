@@ -1,5 +1,7 @@
 
+using BussinessObject.ContextData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -18,6 +20,7 @@ namespace HealthExpertAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddDbContext<HealthExpertContext>();
 
             //Config Cookie
             builder.Services.ConfigureApplicationCookie(options =>
