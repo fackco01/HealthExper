@@ -44,15 +44,17 @@
 
             // Make a GET request to the backend API for account verification
             fetch(`https://localhost:7158/api/Auth/Verify/verify?token=${token}`, { method: 'POST' })
-                .then(response => response.json())
+
                 .then(data => {
                     // Handle the response from the server
-                    alert(data.message);
+                    console.log(data.status);
+                    location.replace("login.html");
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Error verifying account. Please try again.');
                 });
+
         }
     </script>
 
