@@ -11,6 +11,10 @@ function ManageUser() {
     navigate('/adminCourseHome');
   };
 
+  const navigateToManageUser = () => {
+    navigate('/manageUser');
+  };
+
     return (
       <>
       
@@ -36,13 +40,11 @@ function ManageUser() {
           <ul className="space-y-2 font-medium">
             <li>
               <a
-                href="#"
                 className="flex items-center p-7 text-yellow-900 group bg-yellow-600"
               ></a>
             </li>
             <li>
               <a
-                href="#"
                 className="flex items-center p-2 text-yellow-900 rounded-lg group"
               >
                 <svg
@@ -55,6 +57,20 @@ function ManageUser() {
               </a>
             </li>
             <h2 className="px-3 py-4 text-yellow-900">MANAGE</h2>
+            <li>
+              <a
+                onClick = {navigateToManageUser}
+                className="flex items-center p-2 text-yellow-900 rounded-lg group"
+              >
+                <svg
+                  className="w-5 h-5"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 22 21"
+                ></svg>
+                <span className="ms-3">MANAGE USER</span>
+              </a>
+            </li>
             <li>
               <a
                 onClick = {navigateToManageCourse}
