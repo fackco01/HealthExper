@@ -87,7 +87,7 @@ namespace HealthExpertAPI
             });
 
             builder.Services.AddMvc();
-
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
