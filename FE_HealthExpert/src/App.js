@@ -7,10 +7,10 @@ import {
   useNavigate
 } from "react-router-dom";
 
-import CreateCourse from './Course_Admin/create_course';
-import AdminCourseHome from './Course_Admin/course_admin_manage';
-import SignUp from './Guest/sign_up';
-import ManageUser from './Admin/manage_user';
+import CreateCourse from './page/Course_Admin/create_course';
+import AdminCourseHome from './page//Course_Admin/course_admin_manage';
+import SignUp from './page/Guest/sign_up';
+import ManageUser from './page//Admin/manage_user';
 
 /* IMPORT END */
 
