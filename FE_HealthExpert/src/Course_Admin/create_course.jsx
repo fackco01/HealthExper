@@ -1,6 +1,15 @@
 import React from "react";
+import {
+  useNavigate
+} from "react-router-dom";
 
 function CreateCourse() {
+  const navigate = useNavigate();
+
+  const navigateToCourseAdminHome = () => {
+    navigate('/adminCourseHome');
+  };
+
     return (
         <>
   <base href="./" />
@@ -203,7 +212,7 @@ function CreateCourse() {
       <button
         type="button"
         className="text-black bg-white hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium w-28 py-1 text-center ml-5"
-        onclick="signUp()"
+        onClick = {navigateToCourseAdminHome}
       >
         Cancel
       </button>

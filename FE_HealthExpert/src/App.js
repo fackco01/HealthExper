@@ -18,12 +18,17 @@ function Root() {
     <>
         <Routes>
           <Route
+          path = "/"
+          element = {<AdminCourseHome/>}
+          />
+          
+          <Route
           path = "/createCourse"
           element = {<CreateCourse/>}
           />
 
           <Route
-          path = "/"
+          path = "/adminCourseHome"
           element = {<AdminCourseHome/>}
           />
 
