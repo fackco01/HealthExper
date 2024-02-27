@@ -10,6 +10,10 @@ function CreateCourse() {
     navigate('/adminCourseHome');
   };
 
+  const navigateToManageUser = () => {
+    navigate('/manageUser');
+  };
+
     return (
         <>
   <base href="./" />
@@ -48,7 +52,7 @@ function CreateCourse() {
             <h2 className="px-3 py-4 text-yellow-900">MANAGE</h2>
             <li>
               <a
-                href="admin_customer.html"
+                onClick = {navigateToManageUser}
                 className="flex items-center p-2 text-yellow-900 rounded-lg group"
               >
                 <svg
@@ -57,7 +61,7 @@ function CreateCourse() {
                   fill="currentColor"
                   viewBox="0 0 22 21"
                 ></svg>
-                <span className="ms-3">placeholder</span>
+                <span className="ms-3">MANAGE USER</span>
               </a>
             </li>
           </ul>

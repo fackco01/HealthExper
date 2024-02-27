@@ -3,16 +3,12 @@ import {
   useNavigate
 } from "react-router-dom";
 
-function AdminCourseHome() {
+function ManageUser() {
 
   const navigate = useNavigate();
 
-  const navigateToCreateCourse = () => {
-    navigate('/createCourse');
-  };
-
-  const navigateToManageUser = () => {
-    navigate('/manageUser');
+  const navigateToManageCourse = () => {
+    navigate('/adminCourseHome');
   };
 
     return (
@@ -61,7 +57,7 @@ function AdminCourseHome() {
             <h2 className="px-3 py-4 text-yellow-900">MANAGE</h2>
             <li>
               <a
-                onClick = {navigateToManageUser}
+                onClick = {navigateToManageCourse}
                 className="flex items-center p-2 text-yellow-900 rounded-lg group"
               >
                 <svg
@@ -70,7 +66,7 @@ function AdminCourseHome() {
                   fill="currentColor"
                   viewBox="0 0 22 21"
                 ></svg>
-                <span className="ms-3">MANAGE USER</span>
+                <span className="ms-3">MANAGE COURSE</span>
               </a>
             </li>
           </ul>
@@ -97,15 +93,6 @@ function AdminCourseHome() {
         {/* Breadcrumb */}
         ADMIN MANAGE COURSE
         <hr />
-        {/* MAIN CONTENT */}
-        <br />
-        <button
-          type="button"
-          className="text-white bg-orange-600 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium py-1 text-center w-40 ml-5"    
-          onClick = {navigateToCreateCourse}
-        >
-          Create New Course
-        </button>
         <br />
         {/* Search Bar */}
         <div className="flex">
@@ -137,13 +124,13 @@ function AdminCourseHome() {
         <table className="text-left">
           <thead>
             <tr>
-              <td>Course Code</td>
-              <td>Course Name</td>
-              <td>Programme</td>
-              <td>Course Manager</td>
-              <td>Course Type</td>
-              <td>Course Size</td>
-              <td>Status</td>
+              <td>Username</td>
+              <td>Password</td>
+              <td>Email</td>
+              <td>Phone</td>
+              <td>Full Name</td>
+              <td>Gender</td>
+              <td>Birthday</td>
               <td style={{ width: "6%" }} />
             </tr>
           </thead>
@@ -161,7 +148,7 @@ function AdminCourseHome() {
                 <button
                   type="button"
                   className="text-black bg-white hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium w-14 py-1 text-center"
-                  onclick="signUp()"
+                  onclick="delete()"
                 >
                   Delete
                 </button>
@@ -223,6 +210,144 @@ function AdminCourseHome() {
             </div>
           </div>
         </div>
+        {/* Popup / Edit */}
+        <div
+          className="hidden fixed top-0 right-0 left-0 z-50 h-screen justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-700/50"
+          id="editForm"
+        >
+          <div className="relative p-4 max-w-md flex h-screen inset-0 m-auto max-h-full items-center justify-center">
+            <div className="m-auto">
+              <div className="relative bg-white rounded-lg shadow">
+                <div className="p-4 text-center">
+                  {/* What's inside the box start here */}
+                  <h1 className="text-lg mb-3">
+                    <b>Edit</b>
+                  </h1>
+                  <div className="w-full max-w-96">
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <label htmlFor="fname" className="text-left">
+                          Company ID:
+                        </label>
+                      </div>
+                      <div className="md:w-2/3">
+                        <input
+                          type="text"
+                          className="border-2"
+                          id="cid"
+                          name="cid"
+                        />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <label htmlFor="lname" className="text-left">
+                          User ID:
+                        </label>
+                      </div>
+                      <div className="md:w-2/3">
+                        <input
+                          type="text"
+                          className="border-2"
+                          id="uid"
+                          name="uid"
+                        />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <label htmlFor="cnamel" className="text-left">
+                          Company Name:
+                        </label>
+                      </div>
+                      <div className="md:w-2/3">
+                        <input
+                          type="text"
+                          className="border-2"
+                          id="cname"
+                          name="cname"
+                        />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <label htmlFor="addl" className="text-left">
+                          Address:
+                        </label>
+                      </div>
+                      <div className="md:w-2/3">
+                        <input
+                          type="text"
+                          className="border-2"
+                          id="address"
+                          name="address"
+                        />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <label htmlFor="datel" className="text-left">
+                          Date Created:
+                        </label>
+                      </div>
+                      <div className="md:w-2/3">
+                        <input
+                          type="text"
+                          className="border-2"
+                          id="date"
+                          name="date"
+                        />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <div className="md:flex">
+                      <div className="md:w-1/3">
+                        <label htmlFor="maill" className="text-left">
+                          Email:
+                        </label>
+                      </div>
+                      <div className="md:w-2/3">
+                        <input
+                          type="text"
+                          className="border-2"
+                          id="email"
+                          name="email"
+                        />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex">
+                    <button
+                      type="button"
+                      className="text-white bg-amber-500 hover:bg-amber-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg items-center px-5 py-2.5 text-center me-2"
+                      onclick="closeEdit()"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-yellow-900 focus:z-10"
+                      onclick="closeEdit()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* FOOTER */}
         <div className="mt-auto">
           <hr />
@@ -237,4 +362,4 @@ function AdminCourseHome() {
     );
 };
 
-export default AdminCourseHome;
+export default ManageUser;
