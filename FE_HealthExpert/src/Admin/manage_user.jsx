@@ -91,7 +91,7 @@ function ManageUser() {
         <hr />
         <br />
         {/* Breadcrumb */}
-        ADMIN MANAGE COURSE
+        ADMIN MANAGE USER
         <hr />
         <br />
         {/* Search Bar */}
@@ -120,6 +120,16 @@ function ManageUser() {
           </span>
         </div>
         <br />
+
+        <button
+                  type="button"
+                  className="text-black bg-white hover:bg-orange-300 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium w-36 py-1 text-center"
+                  id="showButton"
+        >
+          Show Data
+        </button>
+        <br />
+        
         {/* Manage Table */}
         <table className="text-left">
           <thead>
