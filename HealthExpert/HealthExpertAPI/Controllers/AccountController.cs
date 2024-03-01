@@ -7,6 +7,7 @@ using HealthExpertAPI.DTO.DTOAccount;
 using HealthExpertAPI.Extension.ExAccount;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,8 @@ using System.Text;
 
 namespace HealthExpertAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [EnableCors("AllowAllHeaders")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {

@@ -68,5 +68,16 @@ namespace HealthExpertAPI.Extension.ExAccount
                 roleId = accountDTO.roleId = 4
             };
         }
+
+        public static Account ToReserPassword(this ResetPasswordDTO resetPasswordDTO, byte[] passwordHash, byte[] passwordSalt)
+        {
+            return new Account
+            {
+                passwordResetToken = resetPasswordDTO.token,
+                password = resetPasswordDTO.password,
+                passwordHash = passwordHash,
+                passwordSalt = passwordSalt
+            };
+        }
     }
 }

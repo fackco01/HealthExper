@@ -1,5 +1,6 @@
 ﻿using BussinessObject.Model;
 using BussinessObject.Model.Authen;
+using BussinessObject.Model.ModelSession;
 using BussinessObject.Model.ModelUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,8 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Accomplishment> accomplishments { get; set; }
         public virtual DbSet<BMI> bmis { get; set; }
         public virtual DbSet<Role> roles { get; set; }
+        public virtual DbSet<Session> sessions { get; set; }
+        public virtual DbSet<Lesson> lessons { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
