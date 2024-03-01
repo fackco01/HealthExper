@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BussinessObject.Migrations
 {
     [DbContext(typeof(HealthExpertContext))]
-    [Migration("20240223121312_DbInit")]
+    [Migration("20240229102806_DbInit")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -64,6 +64,164 @@ namespace BussinessObject.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Course", b =>
+                {
+                    b.Property<string>("courseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("bmiMax")
+                        .HasColumnType("float");
+
+                    b.Property<double>("bmiMin")
+                        .HasColumnType("float");
+
+                    b.Property<string>("certificate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("courseAdminaccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("courseAdmincourseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("courseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("createBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("dateUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("language")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("rating")
+                        .HasColumnType("float");
+
+                    b.Property<int>("studentNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("typeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("courseId");
+
+                    b.HasIndex("courseAdminaccountId", "courseAdmincourseId");
+
+                    b.ToTable("courses");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.CourseAdmin", b =>
+                {
+                    b.Property<Guid>("accountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("courseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("accountId", "courseId");
+
+                    b.ToTable("courseAdmins");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.CourseManagement", b =>
+                {
+                    b.Property<int>("courseManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("courseManagerId", "courseId");
+
+                    b.ToTable("courseManagements");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Course_CourseManager_Mapping", b =>
+                {
+                    b.Property<string>("courseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("courseManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseManagementcourseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("courseManagementcourseManagerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("courseId", "courseManagerId");
+
+                    b.HasIndex("courseManagementcourseManagerId", "courseManagementcourseId");
+
+                    b.ToTable("Course_CourseManager_Mapping");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Enrollment", b =>
+                {
+                    b.Property<Guid>("accountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("courseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("enrollDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("enrollStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("accountId", "courseId");
+
+                    b.HasIndex("courseId1");
+
+                    b.ToTable("enrollments");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Feedback", b =>
+                {
+                    b.Property<Guid>("accountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("courseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("createDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("detail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("feedbackId")
+                        .HasColumnType("int");
+
+                    b.HasKey("accountId", "courseId");
+
+                    b.HasIndex("courseId1");
+
+                    b.ToTable("feedbacks");
+                });
+
             modelBuilder.Entity("BussinessObject.Model.ModelUser.Accomplishment", b =>
                 {
                     b.Property<int>("acplId")
@@ -105,6 +263,18 @@ namespace BussinessObject.Migrations
                     b.Property<string>("birthDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("courseAdminaccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("courseAdmincourseId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("courseManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("courseManagercourseId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("createDate")
                         .HasColumnType("datetime2");
@@ -161,14 +331,18 @@ namespace BussinessObject.Migrations
 
                     b.HasIndex("roleId");
 
+                    b.HasIndex("courseAdminaccountId", "courseAdmincourseId");
+
+                    b.HasIndex("courseManagerId", "courseManagercourseId");
+
                     b.ToTable("accounts");
 
                     b.HasData(
                         new
                         {
-                            accountId = new Guid("747e347d-7ea3-47b2-b7bc-77365c8bef93"),
+                            accountId = new Guid("b488603d-ce50-49e4-87a1-19159f1c7824"),
                             birthDate = "01/01/1999",
-                            createDate = new DateTime(2024, 2, 23, 19, 13, 12, 372, DateTimeKind.Local).AddTicks(313),
+                            createDate = new DateTime(2024, 2, 29, 17, 28, 5, 946, DateTimeKind.Local).AddTicks(9000),
                             email = "admin@gmail.com",
                             fullName = "Administrator",
                             gender = true,
@@ -281,6 +455,66 @@ namespace BussinessObject.Migrations
                     b.ToTable("photos");
                 });
 
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Course", b =>
+                {
+                    b.HasOne("BussinessObject.Model.ModelCourse.CourseAdmin", "courseAdmin")
+                        .WithMany("courses")
+                        .HasForeignKey("courseAdminaccountId", "courseAdmincourseId");
+
+                    b.Navigation("courseAdmin");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Course_CourseManager_Mapping", b =>
+                {
+                    b.HasOne("BussinessObject.Model.ModelCourse.Course", "course")
+                        .WithMany("courseManagerMappings")
+                        .HasForeignKey("courseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BussinessObject.Model.ModelCourse.CourseManagement", "courseManagement")
+                        .WithMany()
+                        .HasForeignKey("courseManagementcourseManagerId", "courseManagementcourseId");
+
+                    b.Navigation("course");
+
+                    b.Navigation("courseManagement");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Enrollment", b =>
+                {
+                    b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
+                        .WithMany("enrollments")
+                        .HasForeignKey("accountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BussinessObject.Model.ModelCourse.Course", "course")
+                        .WithMany("enrollments")
+                        .HasForeignKey("courseId1");
+
+                    b.Navigation("account");
+
+                    b.Navigation("course");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Feedback", b =>
+                {
+                    b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
+                        .WithMany("feedbacks")
+                        .HasForeignKey("accountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BussinessObject.Model.ModelCourse.Course", "course")
+                        .WithMany("feedbacks")
+                        .HasForeignKey("courseId1");
+
+                    b.Navigation("account");
+
+                    b.Navigation("course");
+                });
+
             modelBuilder.Entity("BussinessObject.Model.ModelUser.Accomplishment", b =>
                 {
                     b.HasOne("BussinessObject.Model.ModelUser.Account", "account")
@@ -299,6 +533,18 @@ namespace BussinessObject.Migrations
                         .HasForeignKey("roleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BussinessObject.Model.ModelCourse.CourseAdmin", "courseAdmin")
+                        .WithMany("account")
+                        .HasForeignKey("courseAdminaccountId", "courseAdmincourseId");
+
+                    b.HasOne("BussinessObject.Model.ModelCourse.CourseManagement", "courseManager")
+                        .WithMany("accounts")
+                        .HasForeignKey("courseManagerId", "courseManagercourseId");
+
+                    b.Navigation("courseAdmin");
+
+                    b.Navigation("courseManager");
 
                     b.Navigation("role");
                 });
@@ -339,6 +585,34 @@ namespace BussinessObject.Migrations
             modelBuilder.Entity("BussinessObject.Model.Authen.Role", b =>
                 {
                     b.Navigation("account");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.Course", b =>
+                {
+                    b.Navigation("courseManagerMappings");
+
+                    b.Navigation("enrollments");
+
+                    b.Navigation("feedbacks");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.CourseAdmin", b =>
+                {
+                    b.Navigation("account");
+
+                    b.Navigation("courses");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelCourse.CourseManagement", b =>
+                {
+                    b.Navigation("accounts");
+                });
+
+            modelBuilder.Entity("BussinessObject.Model.ModelUser.Account", b =>
+                {
+                    b.Navigation("enrollments");
+
+                    b.Navigation("feedbacks");
                 });
 #pragma warning restore 612, 618
         }

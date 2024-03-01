@@ -78,20 +78,22 @@ namespace HealthExpertAPI.Controllers
             return Ok();
         }
 
-        //UPDATE BMI
-        [HttpPut("{accountId}")]
+        //UPDATE BMI by bmiId
+        [HttpPut("{bmiId}")]
         [AllowAnonymous]
-        public ActionResult UpdateBMI(Guid accountId, BMIDTOUpdate updatedBMI)
+        public IActionResult UpdateBMI(int bmiId, BMIDTOUpdate bmiDTO)
         {
-            var bmi = _repository.GetBMI().FirstOrDefault(b => b.accountId == accountId);
+            var bmi = _repository.GetBMIById(bmiId);
             if (bmi == null)
             {
                 return BadRequest("BMI not found!!");
             }
-            var bmiUpdate = updatedBMI.ToUpdateBMI();
-            _repository.UpdateBMI(bmiUpdate);
+            BMI updatedBMI = bmiDTO.ToUpdateBMI();
+            updatedBMI.bmiId = bmiId;
+            _repository.UpdateBMI(updatedBMI);
             return Ok();
         }
+        
 
 
             //GET all BMI
