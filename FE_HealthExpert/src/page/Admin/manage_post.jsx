@@ -3,7 +3,7 @@ import {
   useNavigate
 } from "react-router-dom";
 
-function ManageUser() {
+function ManagePost() {
 
   const navigate = useNavigate();
 
@@ -185,13 +185,13 @@ function ManageUser() {
         <table className="text-left">
           <thead>
             <tr>
-              <td>Username</td>
-              <td>Password</td>
-              <td>Email</td>
-              <td>Phone</td>
-              <td>Full Name</td>
-              <td>Gender</td>
-              <td>Birthday</td>
+              <td>Account ID</td>
+              <td>Title</td>
+              <td>Content</td>
+              <td>Image</td>
+              <td>Date Created</td>
+              <td>Last Updated</td>
+              <td>Date Published</td>
               <td style={{ width: "6%" }} />
             </tr>
           </thead>
@@ -423,4 +423,4 @@ function ManageUser() {
     );
 };
 
-export default ManageUser;
+export default ManagePost;

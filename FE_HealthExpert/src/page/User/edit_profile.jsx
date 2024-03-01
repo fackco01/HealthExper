@@ -1,7 +1,7 @@
 import React from "react";
-import splash from '../../img/center.png';
+import splash from './Asset/center.png';
 
-function SignUp() {
+function EditProfile() {
     return (
       <>
     <base href="./" />

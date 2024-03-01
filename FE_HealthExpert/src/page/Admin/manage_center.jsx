@@ -3,7 +3,7 @@ import {
   useNavigate
 } from "react-router-dom";
 
-function ManageUser() {
+function ManageCenter() {
 
   const navigate = useNavigate();
 
@@ -423,4 +423,4 @@ function ManageUser() {
     );
 };
 
-export default ManageUser;
+export default ManageCenter;
