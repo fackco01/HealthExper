@@ -1,5 +1,6 @@
 ﻿using BussinessObject.Model;
 using BussinessObject.Model.Authen;
+using BussinessObject.Model.ModelSession;
 using BussinessObject.Model.ModelCourse;
 using BussinessObject.Model.ModelUser;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,8 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Accomplishment> accomplishments { get; set; }
         public virtual DbSet<BMI> bmis { get; set; }
         public virtual DbSet<Role> roles { get; set; }
+        public virtual DbSet<Session> sessions { get; set; }
+        public virtual DbSet<Lesson> lessons { get; set; }
         public virtual DbSet<Course> courses { get; set; }
         public virtual DbSet<Enrollment> enrollments { get; set; }
         public virtual DbSet<Feedback> feedbacks { get; set; }
