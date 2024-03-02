@@ -86,7 +86,7 @@ namespace HealthExpertAPI.Controllers
                     return BadRequest($"User with email {email} not found!!");
                 }
 
-                var courseManager = courseManagerDTO.ToCreateCourseManager();
+                var courseManager = courseManagerDTO.ToCreateCourseManager();   
                 _repository.AddCourseManagerByEmail(email, courseManagerDTO.courseId); // Assuming the method now accepts a single email
             }
             return Ok();
@@ -109,6 +109,7 @@ namespace HealthExpertAPI.Controllers
             _repository.UpdateCourse(updateCourse);
             return Ok();
         }
+
 
         //Delete Course
         [HttpDelete("{courseId}")]

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
-    //Create CourseDAO
+    //CourseDAO
     public class CourseDAO
     {
         public static void AddCourse(Course course)
@@ -51,11 +51,7 @@ namespace DataAccess.DAO
         {
             using (var context = new HealthExpertContext())
             {
-                if (!context.courses.Local.Any(c => c.courseId == course.courseId))
-                {
-                    context.courses.Attach(course);
-                    context.Entry(course).State = EntityState.Modified;
-                }
+                context.courses.Update(course);
                 context.SaveChanges();
             }
         }

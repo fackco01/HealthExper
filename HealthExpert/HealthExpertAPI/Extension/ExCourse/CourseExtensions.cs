@@ -48,7 +48,6 @@ namespace HealthExpertAPI.Extension.ExCourse
         {
             return new Course
             {
-                courseId = courseDTO.courseId,
                 courseName = courseDTO.courseName,
                 price = courseDTO.price,
                 rating = courseDTO.rating,
