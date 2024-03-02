@@ -1,5 +1,6 @@
 ﻿using BussinessObject.Model;
 using BussinessObject.Model.Authen;
+using BussinessObject.Model.ModelCourse;
 using BussinessObject.Model.ModelUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,11 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Accomplishment> accomplishments { get; set; }
         public virtual DbSet<BMI> bmis { get; set; }
         public virtual DbSet<Role> roles { get; set; }
+        public virtual DbSet<Course> courses { get; set; }
+        public virtual DbSet<Enrollment> enrollments { get; set; }
+        public virtual DbSet<Feedback> feedbacks { get; set; }
+        public virtual DbSet<CourseAdmin> courseAdmins { get; set; }
+        public virtual DbSet<CourseManagement> courseManagements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,6 +42,12 @@ namespace BussinessObject.ContextData
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CourseAdmin>().HasKey(CourseAdmin => new { CourseAdmin.accountId, CourseAdmin.courseId });
+            modelBuilder.Entity<Enrollment>().HasKey(Enrollment => new { Enrollment.accountId, Enrollment.courseId });
+            modelBuilder.Entity<Feedback>().HasKey(Feedback => new { Feedback.accountId, Feedback.courseId });
+            modelBuilder.Entity<CourseManagement>().HasKey(CourseManagement => new { CourseManagement.courseManagerId, CourseManagement.courseId });
+            modelBuilder.Entity<Course_CourseManager_Mapping>().HasKey(Course_CourseManager_Mapping => new { Course_CourseManager_Mapping.courseId, Course_CourseManager_Mapping.courseManagerId });
 
             modelBuilder.Entity<Role>().HasData(
                 new Role { roleId = 1, roleName = "Administration" },

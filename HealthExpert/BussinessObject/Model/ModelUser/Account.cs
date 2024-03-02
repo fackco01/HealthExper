@@ -1,4 +1,5 @@
 ﻿using BussinessObject.Model.Authen;
+using BussinessObject.Model.ModelCourse;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -40,8 +41,10 @@ namespace BussinessObject.Model.ModelUser
         public DateTime? verifiedAt { get; set; }
         public string? passwordResetToken { get; set; }
         public DateTime? resetTokenExpires { get; set; }
-
-        [JsonIgnore]
         public virtual Role? role { get; set; }
+        public ICollection<Enrollment>? enrollments { get; set; }
+        public ICollection<Feedback>? feedbacks { get; set; }
+        public virtual CourseAdmin? courseAdmin { get; set; }
+        public virtual CourseManagement? courseManager { get; set; }
     }
 }

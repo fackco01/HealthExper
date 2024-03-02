@@ -11,7 +11,6 @@ namespace DataAccess.DAO
     //Create BMIDao
     public class BMIDao
     {
-        //create AddBMI using new variable weight and height to culculate bmiValue
         public static void AddBMI(BMI bmi)
         {
             using (var context = new HealthExpertContext())

@@ -4,7 +4,6 @@ namespace HealthExpertAPI.DTO.DTOBMI
 {
     public class BMIDTOUpdate
     {
-        public int bmiId { get; set; }
         public double weight { get; set; }
         public double height { get; set; }
         [JsonIgnore]
@@ -12,6 +11,7 @@ namespace HealthExpertAPI.DTO.DTOBMI
         [JsonIgnore]
         public string? bmiStatus { get; set; }
         public DateTime createDate { get; set; }
+        [JsonIgnore]
         public Guid accountId { get; set; }
     }
 }
