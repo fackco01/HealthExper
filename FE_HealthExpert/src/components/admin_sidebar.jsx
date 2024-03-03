@@ -3,7 +3,7 @@ import {
   useNavigate
 } from "react-router-dom";
 
-function AdminSidebar() {
+const AdminSidebar = () => {
   const navigate = useNavigate();
 
   const navigateToManageUser = () => {

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -6,9 +5,11 @@ import {
   Route
 } from "react-router-dom";
 
-import CreateCourse from './page/Course_Admin/create_course';
-import AdminCourseHome from './page//Course_Admin/course_admin_manage';
 import SignUp from './page/Guest/sign_up';
+import YourProfile from './page/User/profile';
+import CreateCourse from './page/Course_Admin/create_course';
+import AdminCourseHome from './page/Course_Admin/course_admin_manage';
+import EditProfile from './page/User/edit_profile';
 import ManageUser from './page/Admin/manage_user';
 import ManageCenter from './page/Admin/manage_center';
 import ManagePost from './page/Admin/manage_post';
@@ -21,6 +22,8 @@ function Root() {
         <Routes>
           <Route path = "/" element = {<AdminCourseHome/>}/>
           <Route path = "/signUp" element = {<SignUp/>}/>
+          <Route path = "/yourProfile" element = {<YourProfile/>}/>
+          <Route path = "/editProfile" element = {<EditProfile/>}/>
 
           <Route path = "/createCourse" element = {<CreateCourse/>}/>
           <Route path = "/adminCourseHome" element = {<AdminCourseHome/>}/>
