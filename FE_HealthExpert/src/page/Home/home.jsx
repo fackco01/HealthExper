@@ -16,6 +16,18 @@ import feedback2 from "../../img/feedback2.jpg";
 import feedback3 from "../../img/feedback3.jpg";
 import feedback4 from "../../img/feedback4.jpg";
 import Header from "../../components/Header";
+import avt1 from "../../img/avt1.jpg";
+import avt2 from "../../img/avt2.jpg";
+import avt3 from "../../img/avt3.jpg";
+import avt4 from "../../img/avt4.jpg";
+import center1 from "../../img/center1.jpg";
+import center2 from "../../img/center2.jpg";
+import center3 from "../../img/center3.jpg";
+import background from "../../img/backgroundImage.jpg";
+import blog1 from "../../img/blog1.jpg";
+import blog2 from "../../img/blog2.jpg";
+import blog3 from "../../img/blog3.jpg";
+import logo from "../../img/logo.png";
 // import { useDispatch } from "react-redux";
 
 export default function Home() {
@@ -23,6 +35,7 @@ export default function Home() {
   const onChange = (currentSlide) => {
     console.log(currentSlide);
   };
+
   return (
     <>
       <div className="home-page">
@@ -204,9 +217,16 @@ export default function Home() {
           </button>
         </div>
       </section>
-      <section>
-        <div className="mt-10">
-          <h2 className="text-orange-600 text-[30px] justify-center text-center">
+      <section
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="mt-5">
+          <h2 className="text-orange-600 text-[30px] justify-center text-center mt-3">
             HỌC VIÊN CẢM NHẬN GÌ?
           </h2>
           <p className="text-center">
@@ -239,18 +259,182 @@ export default function Home() {
           </div>
 
           {/* right introduce  */}
-          <div className="w-1/2 flex">
-            <div className="flex-col">
-              <h1 className="text-yellow-600 text-3xl	">Healthexpert</h1>
-              <p className="mt-3">
-                Nơi kết nối giữa người mong muốn cải thiện chất lượng cơ thể và
-                trung tâm gym. Chúng tôi tự hào là cầu nối đưa bạn đến với cộng
-                đồng các trung tâm gym hàng đầu, giúp bạn dễ dàng khám phá và
-                lựa chọn nơi tập luyện phù hợp với nhu cầu của mình.
-              </p>
-            </div>
+          <div className="w-1/2 ">
+            {/* //this is feedback */}
+
+            <Carousel
+              className="item-center w-[700px] h-[400px] mx-auto"
+              autoplay
+            >
+              <div className=" w-[90%] mb-40 flex-col border border-gray-300 p-4 bg-orange-400	">
+                <p>
+                  Mình đã gắn bó với HD từ năm đầu tiên của HD, là một thành
+                  viên “kì cựu” mình thật sự rất vui khi nhìn thấy sự đổi thay
+                  ngày càng tích cực của HD, các PT thường xuyên được huấn luyện
+                  nâng cao trình độ
+                </p>
+                <div className="flex ">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4 mt-3"
+                    src={avt1}
+                    alt=""
+                  />
+                  <p className="mt-4">Trần Nhật Hoàng</p>
+                </div>
+              </div>
+              <div className=" w-[90%] mb-40 flex-col border border-gray-300 p-4 bg-orange-400	">
+                <p>
+                  Mình đã gắn bó với HD từ năm đầu tiên của HD, là một thành
+                  viên “kì cựu” mình thật sự rất vui khi nhìn thấy sự đổi thay
+                  ngày càng tích cực của HD, các PT thường xuyên được huấn luyện
+                  nâng cao trình độ
+                </p>
+                <div className="flex ">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4 mt-3"
+                    src={avt2}
+                    alt=""
+                  />
+                  <p className="mt-4">Nguyễn Phát</p>
+                </div>
+              </div>
+              <div className=" w-[90%] mb-40 flex-col border border-gray-300 p-4 bg-orange-400	">
+                <p>
+                  Mình đã gắn bó với HD từ năm đầu tiên của HD, là một thành
+                  viên “kì cựu” mình thật sự rất vui khi nhìn thấy sự đổi thay
+                  ngày càng tích cực của HD, các PT thường xuyên được huấn luyện
+                  nâng cao trình độ
+                </p>
+                <div className="flex ">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4 mt-3"
+                    src={avt3}
+                    alt=""
+                  />
+                  <p className="mt-4">Ngô Thị Kim Bông</p>
+                </div>
+              </div>
+              <div className=" w-[90%] mb-40 flex-col border border-gray-300 p-4 bg-orange-400	">
+                <p>
+                  Mình đã gắn bó với HD từ năm đầu tiên của HD, là một thành
+                  viên “kì cựu” mình thật sự rất vui khi nhìn thấy sự đổi thay
+                  ngày càng tích cực của HD, các PT thường xuyên được huấn luyện
+                  nâng cao trình độ
+                </p>
+                <div className="flex ">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4 mt-3"
+                    src={avt4}
+                    alt=""
+                  />
+                  <p className="mt-4">Trương Thị Khánh Hòa</p>
+                </div>
+              </div>
+            </Carousel>
           </div>
         </div>
+      </section>
+      <section>
+        <div className="flex-col text-center mt-3">
+          <h2 className="text-orange-600 text-[30px] ">
+            HỆ THỐNG PHÒNG TẬP ĐẲNG CẤP
+          </h2>
+          <div className="mx-auto w-[50%]">
+            <p>
+              Nơi tập trung những trung tâm gym hàng đầu, với đa dạng không gian
+              tập luyện bao gồm phòng yoga, dance và nhiều hoạt động khác, giúp
+              bạn tìm thấy sự hoàn hảo cho mọi nhu cầu về sức khỏe và thể chất
+            </p>
+          </div>
+        </div>
+        {/* hệ thống các center */}
+        <div className="flex bg-orange-400 w-full ">
+          <img className="w-[25%]" src={center1} alt="" />
+          <img className="w-[25%]" src={center2} alt="" />
+          <img className="w-[25%]" src={center3} alt="" />
+          <img className="w-[25%]" src={center2} alt="" />
+        </div>
+        <a className="flex  justify-center" href="#page">
+          <button className="bg-blue-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded opacity-100 hover:opacity-80 transition-opacity mt-3">
+            XEM THÊM TRUNG TÂM
+          </button>
+        </a>
+      </section>
+      {/* BLOG  */}
+      <section className="">
+        <h2 className="text-orange-400 mt-5 text-center text-[30px] ">BLOG</h2>
+        {/* các blog */}
+
+        <div
+          className="flex justify-center items-center h-screen px-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 20%, rgba(0, 0, 0, 0.8) 80%)",
+          }}
+        >
+          {/* item 1 */}
+          <div className="mx-auto mr-4 h-[600px] bg-gradient-to-b from-white to-orange-500 p-8 rounded-lg transition-all duration-300 ease-in-out hover:opacity-80 hover:from-white hover:to-orange-500">
+            <a href="">
+              <img className="w-[350px] h-[300px]" src={blog1} alt="" />
+              <h3 className="text-[18px] w-[70%] mt-4 mx-3 mb-3">
+                Ăn bánh Chưng bánh tét sao cho không tăng cân ngày tết
+              </h3>
+            </a>
+            <p className="text-[14px] w-[70%] mx-3 mb-3">
+              Tết cổ truyền đến rồi, bạn có nghe mùi bánh Chưng bánh Tét khắp
+              mọi nơi. Vào dịp này, không
+            </p>
+            <a className="text-orange-600 text-[18px] mx-3" href="">
+              Xem thêm
+            </a>
+          </div>
+
+          {/* item 2 */}
+          <div className="mx-auto mr-4 h-[600px] bg-gradient-to-b from-white to-orange-500 p-8 rounded-lg transition-all duration-300 ease-in-out hover:opacity-80 hover:from-white hover:to-orange-500">
+            <a href="">
+              <img className="w-[350px] h-[300px]" src={blog1} alt="" />
+              <h3 className="text-[18px] w-[70%] mt-4 mx-3 mb-3">
+                Ăn bánh Chưng bánh tét sao cho không tăng cân ngày tết
+              </h3>
+            </a>
+            <p className="text-[14px] w-[70%] mx-3 mb-3">
+              Tết cổ truyền đến rồi, bạn có nghe mùi bánh Chưng bánh Tét khắp
+              mọi nơi. Vào dịp này, không
+            </p>
+            <a className="text-orange-600 text-[18px] mx-3" href="">
+              Xem thêm
+            </a>
+          </div>
+
+          {/* item 3 */}
+          <div className="mx-auto h-[600px] bg-gradient-to-b from-white to-orange-500 p-8 rounded-lg transition-all duration-300 ease-in-out hover:opacity-80 hover:from-white hover:to-orange-500">
+            <a href="">
+              <img className="w-[350px] h-[300px]" src={blog1} alt="" />
+              <h3 className="text-[18px] w-[70%] mt-4 mx-3 mb-3">
+                Ăn bánh Chưng bánh tét sao cho không tăng cân ngày tết
+              </h3>
+            </a>
+            <p className="text-[14px] w-[70%] mx-3 mb-3">
+              Tết cổ truyền đến rồi, bạn có nghe mùi bánh Chưng bánh Tét khắp
+              mọi nơi. Vào dịp này, không
+            </p>
+            <a className="text-orange-600 text-[18px] mx-3" href="">
+              Xem thêm
+            </a>
+          </div>
+        </div>
+        <a
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.8) 80%)",
+          }}
+          className="item-center flex   justify-center"
+          href="#page"
+        >
+          <button className="bg-blue-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded opacity-100 hover:opacity-80 transition-opacity mt-3 mb-10">
+            XEM THÊM BÀI VIẾT
+          </button>
+        </a>
       </section>
     </>
   );
