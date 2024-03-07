@@ -34,13 +34,30 @@ namespace HealthExpertAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult AddSession(SessionDTO sessionDTO)
         {
+            var course = _context.courses.FirstOrDefault(c => c.courseId == sessionDTO.courseId);
+            if (course == null)
+            {
+                return BadRequest("Course not found.");
+            }
+
             if (_context.sessions.Any(s => s.sessionId == sessionDTO.sessionId))
             {
                 return BadRequest("Session does exists!!!");
             }
+
+            int sessionId;
+            if (!int.TryParse(sessionDTO.sessionId, out sessionId))
+            {
+                return BadRequest("Invalid sessionId. sessionId must be an integer.");
+            }
+
             Session session = sessionDTO.ToSessionAdd();
+            session.sessionId = sessionId.ToString();
+            session.learnProgress = false;
 
             _repository.AddSession(session);
+            _context.SaveChanges();
+
             return Ok("Session successfully add!!!");
         }
 
@@ -63,7 +80,7 @@ namespace HealthExpertAPI.Controllers
         public ActionResult<SessionDTO> GetSessionById(string id)
         {
             var session = _repository.GetSessionById(id);
-            if (session == null)
+            if (session == null || session.learnProgress != true)
             {
                 return NotFound();
             }
@@ -102,6 +119,7 @@ namespace HealthExpertAPI.Controllers
 
             session.sessionName = sessionDTO.sessionName;
             session.description = sessionDTO.description;
+            session.learnProgress = sessionDTO.learnProgress;
 
             _repository.UpdateSession(id, session);
             return NoContent();

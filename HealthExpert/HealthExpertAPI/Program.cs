@@ -1,5 +1,6 @@
 
 using BussinessObject.ContextData;
+using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,6 +22,14 @@ namespace HealthExpertAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddDbContext<HealthExpertContext>();
+            builder.Services.AddTransient<IManageFile, ManageFile>();
+
+            // Configure upload path
+            var uploadPath = builder.Configuration.GetValue<string>("UploadPath");
+            if (!string.IsNullOrEmpty(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
 
             //Config Cookie
             builder.Services.ConfigureApplicationCookie(options =>

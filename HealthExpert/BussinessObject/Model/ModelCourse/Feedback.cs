@@ -16,7 +16,7 @@ namespace BussinessObject.Model.ModelCourse
         [Key]
         public Guid accountId { get; set; }
         [Key]
-        public int courseId { get; set; }
+        public string courseId { get; set; }
         public string detail { get; set; }
         public DateTime createDate { get; set; } = DateTime.Now;
         [JsonIgnore]

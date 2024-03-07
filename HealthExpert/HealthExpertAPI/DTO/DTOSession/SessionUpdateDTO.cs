@@ -11,5 +11,6 @@ namespace HealthExpertAPI.DTO.DTOSession
         [JsonIgnore] public DateTime dateStart { get; set; }
         [JsonIgnore] public DateTime dateEnd { get; set; }
         public string description { get; set; }
+        public bool learnProgress { get; set; }
     }
 }

@@ -8,10 +8,10 @@ namespace HealthExpertAPI.DTO.DTOSession
     {
         public string sessionId { get; set; }
         [Required] public string sessionName { get; set; }
-        [JsonIgnore] public DateTime dateStart { get; set; }
-        [JsonIgnore] public DateTime dateEnd { get; set; }
+        [JsonIgnore] public DateTime dateStart { get; set; } = DateTime.Now;
+        [JsonIgnore] public DateTime dateEnd { get; set; } = DateTime.MaxValue;
         public string description { get; set; }
-        [Required] public bool learnProgress { get; set; }
-        //[Required] public string courseId { get; set; }
+        public bool learnProgress { get; set; }
+        [Required] public string courseId { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace BussinessObject.Model.ModelSession
         [Required] public string caption { get; set; } //Lesson Name
         [Required] public string cover { get; set; }
         [Required] public string sessionId { get; set; }
+        [Required] public bool isActive { get; set; }
+        public decimal viewProgress { get; set; }
 
         [JsonIgnore]
         public virtual Session? Session { get; set; }

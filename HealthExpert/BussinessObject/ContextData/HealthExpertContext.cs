@@ -1,15 +1,9 @@
-﻿using BussinessObject.Model;
-using BussinessObject.Model.Authen;
-using BussinessObject.Model.ModelSession;
+﻿using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelSession;
 using BussinessObject.Model.ModelUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BussinessObject.ContextData
 {
@@ -32,6 +26,8 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Feedback> feedbacks { get; set; }
         public virtual DbSet<CourseAdmin> courseAdmins { get; set; }
         public virtual DbSet<CourseManagement> courseManagements { get; set; }
+        public virtual DbSet<Model.ModelCourse.Type> types { get; set; }
+        public virtual DbSet<Course_CourseManager_Mapping> course_CourseManager_Mappings { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,6 +41,10 @@ namespace BussinessObject.ContextData
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Lesson>()
+            .Property(l => l.viewProgress)
+            .HasColumnType("decimal(18, 2)");
 
             modelBuilder.Entity<CourseAdmin>().HasKey(CourseAdmin => new { CourseAdmin.accountId, CourseAdmin.courseId });
             modelBuilder.Entity<Enrollment>().HasKey(Enrollment => new { Enrollment.accountId, Enrollment.courseId });

@@ -1,4 +1,5 @@
-﻿using BussinessObject.Model.ModelSession;
+﻿using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelSession;
 using HealthExpertAPI.DTO.DTOSession;
 
 namespace HealthExpertAPI.Extension.ExSession
@@ -14,7 +15,8 @@ namespace HealthExpertAPI.Extension.ExSession
                 dateStart = session.dateStart,
                 dateEnd = session.dateEnd,
                 description = session.description,
-                learnProgress = session.learnProgress
+                learnProgress = session.learnProgress,
+                courseId = session.courseId,
             };
         }
 
@@ -28,6 +30,7 @@ namespace HealthExpertAPI.Extension.ExSession
                 dateEnd = sessionDTO.dateEnd,
                 description = sessionDTO.description,
                 learnProgress = sessionDTO.learnProgress,
+                courseId = sessionDTO.courseId,
             };
         }
 
@@ -39,7 +42,8 @@ namespace HealthExpertAPI.Extension.ExSession
                 sessionName = sessionDTO.sessionName,
                 dateStart = sessionDTO.dateStart,
                 dateEnd = sessionDTO.dateEnd,
-                description = sessionDTO.description
+                description = sessionDTO.description,
+                learnProgress = sessionDTO.learnProgress,
             };
         }
     }

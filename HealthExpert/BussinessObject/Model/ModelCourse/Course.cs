@@ -1,4 +1,5 @@
-﻿using BussinessObject.Model.ModelUser;
+﻿using BussinessObject.Model.ModelSession;
+using BussinessObject.Model.ModelUser;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -42,5 +43,10 @@ namespace BussinessObject.Model.ModelCourse
         public virtual CourseAdmin? courseAdmin { get; set; }
         [JsonIgnore]
         public ICollection<Course_CourseManager_Mapping>? courseManagerMappings { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Session>? sessions { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Type> types { get; set; }
     }
 }
