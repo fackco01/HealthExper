@@ -2,6 +2,7 @@ import React from "react";
 import splash from '../../img/bg.png';
 import pfp from '../../img/pfp.png';
 import cover from '../../img/course_cover.png';
+import Header from "../../components/Header_user";
 
 function YourProfile() {
   return (
@@ -11,6 +12,9 @@ function YourProfile() {
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       {/* Main styles for this application*/}
       {/* idk */}
+      <div className="home-page">
+        <Header />
+      </div>
       <div class="grid gap-4 ml-16 mr-16">
         {/* banner and pfp hijinx */}
         <div class="">

@@ -7,6 +7,7 @@ import {
 
 import SignUp from './page/Guest/sign_up';
 import YourProfile from './page/User/profile';
+import Lesson from './page/User/lesson';
 import CreateCourse from './page/Course_Admin/create_course';
 import AdminCourseHome from './page/Course_Admin/course_admin_manage';
 import EditProfile from './page/User/edit_profile';
@@ -20,10 +21,11 @@ function Root() {
   return(
     <>
         <Routes>
-          <Route path = "/" element = {<AdminCourseHome/>}/>
+          <Route path = "/" element = {<YourProfile/>}/>
           <Route path = "/signUp" element = {<SignUp/>}/>
           <Route path = "/yourProfile" element = {<YourProfile/>}/>
           <Route path = "/editProfile" element = {<EditProfile/>}/>
+          <Route path = "/lesson" element = {<Lesson/>}/>
 
           <Route path = "/createCourse" element = {<CreateCourse/>}/>
           <Route path = "/adminCourseHome" element = {<AdminCourseHome/>}/>
