@@ -86,14 +86,13 @@ const Header = () => {
             </a>
           </li>
         </ul>
-        <div className="ml-auto flex mr-3">
+        <div className="ml-auto mr-3">
           {/* User menu dropdown */}
           <img id="avatarButton" type="button" class="w-10 h-10 rounded-full cursor-pointer" src={pfp} alt="User dropdown" onClick={handleDropDown} />
 
           <div
             id="dropdown"
-            className={`z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ${isOpen ? "block" : "hidden"
-              }`}
+            className={`z-10 absolute right-12 mt-3 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ${isOpen ? "block" : "hidden"}`}
           >
             <div class="px-4 py-3 text-gray-900 dark:text-white">
               <div>Username</div>
