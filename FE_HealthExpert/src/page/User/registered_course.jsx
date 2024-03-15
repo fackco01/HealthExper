@@ -1,21 +1,8 @@
 import React from "react";
-import splash from '../../img/bg.png';
-import pfp from '../../img/pfp.png';
 import cover from '../../img/course_cover.png';
 import Header from "../../components/Header_user";
 
-import {
-  useNavigate
-} from "react-router-dom";
-
-function YourProfile() {
-
-  const navigate = useNavigate();
-
-  const navigateToRegistered = () => {
-    navigate('/registeredCourse');
-  };
-
+function RegisteredCourse() {
   return (
     <>
       <base href="./" />
@@ -27,32 +14,20 @@ function YourProfile() {
         <Header />
       </div>
       <div class="grid gap-4 ml-16 mr-16">
-        {/* banner and pfp hijinx */}
         <div class="">
-          <img src={splash} alt="" class="relative object-cover w-full h-96 z-0" />
-          <div className="flex">
-            <div class="flex ml-5 -mt-28 z-10 px-2">
-              <img src={pfp} alt="" class="z-10 object-scale-down w-48" />
-              <p className='text-xl font-bold ml-8 mt-32'>my NAME???</p>
-            </div>
+            <div className="font-medium px-3 py-4">
+              <h2 className="font-bold p-1 text-yellow-900">
+                Go Back
+              </h2>
           </div>
         </div>
         {/* two columns */}
         <div class="flex columns-2 gap-4">
-          {/* left column: about */}
-          <div class="flex-auto border rounded shadow-2xl w-2/5">
-            <p class="ml-3 mt-3 font-bold">Giới thiệu</p>
+          {/* left column:*/}
+          <div class="flex-auto w-4/5">
+            <p class="ml-3 mt-3 font-bold">Các khóa học đã đăng ký</p>
             <br />
-            <p class="ml-3 text-center">hi i'm a placeholder</p>
-            <br />
-            <hr />
-            <p class="ml-3 text-center">i'm a different placeholder</p>
-          </div>
-          {/* right column: joined courses */}
-          <div class="flex-auto border rounded shadow-2xl w-3/5">
-            <p class="ml-3 mt-3 font-bold">Các khóa học đã tham gia</p>
-            <br />
-            {/* section for one course begins */}
+            {/* one course example */}
             <div class="flex px-2 ml-6 mb-7">
               <img src={cover} alt="" class="rounded object-scale-down w-48" />
               <div class="">
@@ -62,7 +37,7 @@ function YourProfile() {
             </div>
             <hr />
             <br />
-            {/* section for one course ends */}
+            {/* one course example ends */}
             {/* dummy data */}
             <div class="flex px-2 ml-6 mb-7">
               <img src={cover} alt="" class="rounded object-scale-down w-48" />
@@ -76,8 +51,9 @@ function YourProfile() {
             </div>
             <hr />
             <br />
-            <a onClick={navigateToRegistered} style={{cursor: 'pointer'}} className="flex px-2 ml-6 hover:underline hover:text-blue-500">Danh sách các khóa học bạn đã đăng ký</a>
-            <br />
+          </div>
+          {/* right column:*/}
+          <div class="flex-auto w-1/5">
           </div>
         </div>
       </div>
@@ -95,4 +71,4 @@ function YourProfile() {
   );
 };
 
-export default YourProfile;
+export default RegisteredCourse;

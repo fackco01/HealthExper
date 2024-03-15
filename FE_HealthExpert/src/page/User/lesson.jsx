@@ -4,6 +4,9 @@ import {
 } from "react-router-dom";
 import Header from "../../components/Header_user";
 import vid from "../../img/YTCPVideo10.mp4";
+import quiz_icon from "../../img/quiz_icon.png";
+import vid_icon from "../../img/video_icon.png";
+import read_icon from "../../img/read_icon.png";
 
 function Lesson() {
   const navigate = useNavigate();
@@ -37,35 +40,20 @@ function Lesson() {
                 </h2>
                 <li>
                   <a className="flex items-center p-1 text-yellow-900 rounded-lg group">
-                    <svg
-                      className="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 22 21"
-                    />
-                    <span className="ms-3">A Video</span>
+                    <img src={vid_icon} alt="logo" className="w-5 h-5" />
+                    <p className="ms-3">A Video</p>
                   </a>
                 </li>
                 <li>
                   <a className="flex items-center p-1 text-yellow-900 rounded-lg group">
-                    <svg
-                      className="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 22 21"
-                    />
-                    <span className="ms-3">A Read</span>
+                    <img src={read_icon} alt="logo" className="w-5 h-5" />
+                    <p className="ms-3">A Read</p>
                   </a>
                 </li>
                 <li>
                   <a className="flex items-center p-1 text-yellow-900 rounded-lg group">
-                    <svg
-                      className="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 22 21"
-                    />
-                    <span className="ms-3">A Test</span>
+                    <img src={quiz_icon} alt="logo" className="w-5 h-5" />
+                    <p className="ms-3">A Test</p>
                   </a>
                 </li>
               </ul>
