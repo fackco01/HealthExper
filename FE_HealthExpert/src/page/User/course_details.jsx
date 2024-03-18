@@ -83,7 +83,7 @@ function CourseDetails() {
                   Course Title
                 </h2>
                 <li>
-                  <a className="flex items-center p-1 text-yellow-900 rounded-lg group ml-12">
+                  <a className="flex items-center p-1 text-yellow-900 rounded-lg group ml-12 hover:bg-slate-200 hover:underline-offset-1 hover:text-yellow-400 hover:cursor-pointer">
                     <img src={vid_icon} alt="logo" className="w-5 h-5" />
                     <p className="ms-3">Lesson Name<br/>
                     <p className="text-sm whitespace">Lesson Description</p>
@@ -91,7 +91,7 @@ function CourseDetails() {
                   </a>
                 </li>
                 <li>
-                  <a className="flex items-center p-1 text-yellow-900 rounded-lg group ml-12">
+                  <a className="flex items-center p-1 text-yellow-900 rounded-lg group ml-12 hover:bg-slate-200 hover:underline-offset-1 hover:text-yellow-400 hover:cursor-pointer">
                     <img src={read_icon} alt="logo" className="w-5 h-5" />
                     <p className="ms-3">Lesson Name<br/>
                     <p className="text-sm whitespace">Lesson Description</p>
@@ -99,7 +99,7 @@ function CourseDetails() {
                   </a>
                 </li>
                 <li>
-                  <a className="flex items-center p-1 text-yellow-900 rounded-lg group ml-12">
+                  <a className="flex items-center p-1 text-yellow-900 rounded-lg group ml-12 hover:bg-slate-200 hover:underline-offset-1 hover:text-yellow-400 hover:cursor-pointer">
                     <img src={quiz_icon} alt="logo" className="w-5 h-5" />
                     <p className="ms-3">Lesson Name<br/>
                     <p className="text-sm whitespace">Lesson Description</p>

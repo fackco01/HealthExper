@@ -8,6 +8,7 @@ import {
 import SignUp from './page/Guest/sign_up';
 import YourProfile from './page/User/profile';
 import RegisteredCourse from './page/User/registered_course';
+import ManagedCourse from './page/Course_Manager/managed_course';
 import CourseDetails from './page/User/course_details';
 import Lesson from './page/User/lesson';
 import CreateCourse from './page/Course_Admin/create_course';
@@ -33,6 +34,8 @@ function Root() {
 
           <Route path = "/createCourse" element = {<CreateCourse/>}/>
           <Route path = "/adminCourseHome" element = {<AdminCourseHome/>}/>
+
+          <Route path = "/managedCourse" element = {<ManagedCourse/>}/>
 
           <Route path = "/manageUser" element = {<ManageUser/>}/>
           <Route path = "/manageCenter" element = {<ManageCenter/>}/>
