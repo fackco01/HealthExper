@@ -9,9 +9,12 @@ import SignUp from './page/Guest/sign_up';
 import YourProfile from './page/User/profile';
 import RegisteredCourse from './page/User/registered_course';
 import ManagedCourse from './page/Course_Manager/managed_course';
+import EditCourse from './page/Course_Manager/edit_course';
 import CourseDetails from './page/User/course_details';
 import Lesson from './page/User/lesson';
 import CreateCourse from './page/Course_Admin/create_course';
+import CreateCourseSimple from './page/Course_Admin/create_course_simple';
+import CreateCourseAdmin from './page/Course_Admin/create_course_admin';
 import AdminCourseHome from './page/Course_Admin/course_admin_manage';
 import EditProfile from './page/User/edit_profile';
 import ManageUser from './page/Admin/manage_user';
@@ -34,8 +37,11 @@ function Root() {
 
           <Route path = "/createCourse" element = {<CreateCourse/>}/>
           <Route path = "/adminCourseHome" element = {<AdminCourseHome/>}/>
+          <Route path = "/createCourseAlt" element = {<CreateCourseSimple/>}/>
+          <Route path = "/createCourseAdmin" element = {<CreateCourseAdmin/>}/>
 
           <Route path = "/managedCourse" element = {<ManagedCourse/>}/>
+          <Route path = "/editCourse" element = {<EditCourse/>}/>
 
           <Route path = "/manageUser" element = {<ManageUser/>}/>
           <Route path = "/manageCenter" element = {<ManageCenter/>}/>

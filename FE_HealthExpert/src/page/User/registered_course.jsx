@@ -15,46 +15,68 @@ function RegisteredCourse() {
       </div>
       <div class="grid gap-4 ml-16 mr-16">
         <div class="">
-            <div className="font-medium px-3 py-4">
-              <h2 className="font-bold p-1 text-yellow-900">
-                Go Back
-              </h2>
+          <div className="font-medium px-3 py-4">
+            <h2 className="font-bold p-1 text-yellow-900">
+              Go Back
+            </h2>
           </div>
         </div>
         {/* two columns */}
-        <div class="flex columns-2 gap-4">
-          {/* left column:*/}
-          <div class="flex-auto w-4/5">
-            <p class="ml-3 mt-3 font-bold">Các khóa học đã đăng ký</p>
-            <br />
-            {/* one course example */}
-            <div class="flex px-2 ml-6 mb-7">
-              <img src={cover} alt="" class="rounded object-scale-down w-48" />
-              <div class="">
-                <p className='text-xl font-bold ml-8'>my COURSE???</p>
-                <p className="text-ellipsis overflow-hidden line-clamp-4 ml-8 mr-5">my desc???</p>
+        <p class="ml-3 mt-3 font-bold">Các khóa học bạn đã đăng ký</p>
+        <div className="ml-3 mt-3">
+          <div class="flex border rounded shadow-2xl columns-2 gap-4 mb-14">
+            {/* left column:*/}
+            <div class="flex-auto w-4/5">
+              <br />
+              {/* one course example */}
+              <div class="flex px-2 ml-6 mb-7">
+                <img src={cover} alt="" class="rounded object-scale-down w-48" />
+                <div class="">
+                  <p className='text-xl font-bold ml-8'>my COURSE???</p>
+                  <p className="text-ellipsis overflow-hidden line-clamp-4 ml-8 mr-5">my desc???</p>
+                </div>
               </div>
+              {/* one course example ends */}
             </div>
-            <hr />
-            <br />
-            {/* one course example ends */}
-            {/* dummy data */}
-            <div class="flex px-2 ml-6 mb-7">
-              <img src={cover} alt="" class="rounded object-scale-down w-48" />
-              <div class="">
-                <p className='text-xl font-bold ml-8'>my COURSE???</p>
-                <p class="text-ellipsis overflow-hidden line-clamp-4 ml-8 mr-5">
-                  Pizza Hut was launched on May 31, 1958, by two brothers, Dan and Frank Carney, both Wichita State
-                  students, as a single location in Wichita, Kansas. Six months later they opened a second outlet, and
-                  within a year they were operating six locations.</p>
+            {/* right column:*/}
+            <div class="flex-auto w-1/5">
+              <button
+                type="button"
+                className="text-black bg-orange-400 hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded w-44 h-14 py-1 text-center mt-14"
+                
+              >
+                Xem khóa học
+              </button>
+            </div>
+          </div>
+
+
+          <div class="flex border rounded shadow-2xl columns-2 gap-4 mb-14">
+            {/* left column:*/}
+            <div class="flex-auto w-4/5">
+              <br />
+              {/* one course example */}
+              <div class="flex px-2 ml-6 mb-7">
+                <img src={cover} alt="" class="rounded object-scale-down w-48" />
+                <div class="">
+                  <p className='text-xl font-bold ml-8'>my COURSE???</p>
+                  <p className="text-ellipsis overflow-hidden line-clamp-4 ml-8 mr-5">my desc???</p>
+                </div>
               </div>
+              {/* one course example ends */}
             </div>
-            <hr />
-            <br />
+            {/* right column:*/}
+            <div class="flex-auto w-1/5">
+              <button
+                type="button"
+                className="text-black bg-orange-400 hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded w-44 h-14 py-1 text-center mt-14"
+                
+              >
+                Xem khóa học
+              </button>
+            </div>
           </div>
-          {/* right column:*/}
-          <div class="flex-auto w-1/5">
-          </div>
+
         </div>
       </div>
       <div className="mt-auto">
