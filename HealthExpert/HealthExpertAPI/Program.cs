@@ -2,7 +2,6 @@
 using BussinessObject.ContextData;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -22,7 +21,9 @@ namespace HealthExpertAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddDbContext<HealthExpertContext>();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddTransient<IManageFile, ManageFile>();
+            builder.Services.AddSingleton<IVnPayService, VnPayService>();
 
             // Configure upload path
             var uploadPath = builder.Configuration.GetValue<string>("UploadPath");
@@ -88,7 +89,8 @@ namespace HealthExpertAPI
                     builder =>
                     {
                         builder
-                                .WithOrigins("http://localhost:5500")
+                               .WithOrigins("http://localhost:5500", "https://sandbox.vnpayment.vn")
+                               //.AllowAnyOrigin()
                                .AllowAnyHeader()
                                .AllowAnyMethod()
                                .AllowCredentials();
