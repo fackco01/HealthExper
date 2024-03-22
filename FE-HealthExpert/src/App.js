@@ -13,7 +13,9 @@ import ManageUser from "./admin/user_manager/manage_user";
 import ManageCenter from "./admin/center_manager/manage_center";
 import ManagePost from "./admin/post_manager/manage_post";
 import Verify from "./page/Auth/Verify";
-
+import VideoUploader from "./page/Course/Session";
+import VideoPlayer from "./page/Course/VideoPlayer";
+import VideoPlayerContainer from "./page/Course/VideoPlayerContainer";
 export default function App() {
   return (
     <Routes>
@@ -27,10 +29,9 @@ export default function App() {
       <Route path="/manageUser" element={<ManageUser />} />
       <Route path="/manageCenter" element={<ManageCenter />} />
       <Route path="/managePost" element={<ManagePost />} />
-
-      {/* <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-        <Route path="*" element={<NoPage />} /> */}
+      <Route path="/videoUploader" element={<VideoUploader />} />
+      <Route path="/videoPlayer" element={<VideoPlayer />} />
+      <Route path="/videoPlayerContainer" element={<VideoPlayerContainer />} />
       {/* </Route> */}
     </Routes>
   );
