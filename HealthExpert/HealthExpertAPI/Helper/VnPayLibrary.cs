@@ -68,28 +68,28 @@ namespace HealthExpertAPI.Helper
 
         private string GetResponseData()
         {
-            var data = new StringBuilder();
+
+            StringBuilder data = new StringBuilder();
             if (_responseData.ContainsKey("vnp_SecureHashType"))
             {
                 _responseData.Remove("vnp_SecureHashType");
             }
-
             if (_responseData.ContainsKey("vnp_SecureHash"))
             {
                 _responseData.Remove("vnp_SecureHash");
             }
-
-            foreach (var (key, value) in _responseData.Where(kv => !string.IsNullOrEmpty(kv.Value)))
+            foreach (KeyValuePair<string, string> kv in _responseData)
             {
-                data.Append(WebUtility.UrlEncode(key) + "=" + WebUtility.UrlEncode(value) + "&");
+                if (!String.IsNullOrEmpty(kv.Value))
+                {
+                    data.Append(WebUtility.UrlEncode(kv.Key) + "=" + WebUtility.UrlEncode(kv.Value) + "&");
+                }
             }
-
             //remove last '&'
             if (data.Length > 0)
             {
                 data.Remove(data.Length - 1, 1);
             }
-
             return data.ToString();
         }
         #endregion
@@ -98,14 +98,14 @@ namespace HealthExpertAPI.Helper
 
     public class Utils
     {
-        public static string HmacSHA512(string key, string inputData)
+        public static String HmacSHA512(string key, String inputData)
         {
             var hash = new StringBuilder();
-            var keyBytes = Encoding.UTF8.GetBytes(key);
-            var inputBytes = Encoding.UTF8.GetBytes(inputData);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] inputBytes = Encoding.UTF8.GetBytes(inputData);
             using (var hmac = new HMACSHA512(keyBytes))
             {
-                var hashValue = hmac.ComputeHash(inputBytes);
+                byte[] hashValue = hmac.ComputeHash(inputBytes);
                 foreach (var theByte in hashValue)
                 {
                     hash.Append(theByte.ToString("x2"));
@@ -126,7 +126,7 @@ namespace HealthExpertAPI.Helper
 
                 if (remoteIpAddress != null)
                 {
-                    if (remoteIpAddress.AddressFamily == AddressFamily.InterNetworkV6)
+                    if (remoteIpAddress.IsIPv6SiteLocal)
                     {
                         remoteIpAddress = Dns.GetHostEntry(remoteIpAddress).AddressList
                             .FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);

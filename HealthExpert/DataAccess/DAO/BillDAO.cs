@@ -4,35 +4,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.DAO
 {
-    public class PaymentDAO
+    public class BillDAO
     {
         //Get payment by id
-        public static Payment GetPaymentById(int id)
+        public static Bill GetBillById(Guid id)
         {
-            var payment = new Payment();
+            var bill = new Bill();
             try
             {
                 using (var ctx = new HealthExpertContext())
                 {
-                    payment = ctx.payments.FirstOrDefault(payment => payment.paymentId == id);
+                    bill = ctx.bills.FirstOrDefault(bill => bill.billId == id);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return payment;
+            return bill;
         }
 
-        //Get all payments
-        public static List<Payment> GetAllPayments()
+        //Get all bill
+        public static List<Bill> GetBills()
         {
-            var listPayment = new List<Payment>();
+            var listPayment = new List<Bill>();
             try
             {
                 using (var ctx = new HealthExpertContext())
                 {
-                    listPayment = ctx.payments.ToList();
+                    listPayment = ctx.bills.ToList();
                 }
             }
             catch (Exception ex)
@@ -43,13 +43,13 @@ namespace DataAccess.DAO
         }
 
         //Insert payment
-        public static void InsertPayment(Payment payment)
+        public static void InsertBill(Bill bill)
         {
             try
             {
                 using (var ctx = new HealthExpertContext())
                 {
-                    ctx.payments.Add(payment);
+                    ctx.bills.Add(bill);
                     ctx.SaveChanges();
                 }
             }
@@ -60,16 +60,16 @@ namespace DataAccess.DAO
         }
 
         //Update payment
-        public static void UpdatePayment(int id,Payment payment)
+        public static void UpdateBill(Guid id,Bill bill)
         {
             try
             {
                 using (var ctx = new HealthExpertContext())
                 {
-                    if(GetPaymentById(id) != null)
+                    if(GetBillById(id) != null)
                     {
-                        ctx.payments.Add(payment);
-                        ctx.Entry(payment).State = EntityState.Modified;
+                        ctx.bills.Add(bill);
+                        ctx.Entry(bill).State = EntityState.Modified;
                     }
                 }
             }
@@ -80,14 +80,14 @@ namespace DataAccess.DAO
         }
 
         //Delete payment
-        public static void DeletePayment(int id)
+        public static void DeleteBill(Guid id)
         {
             try
             {
                 using (var ctx = new HealthExpertContext())
                 {
-                    var payment = ctx.payments.FirstOrDefault(payment => payment.paymentId == id);
-                    ctx.payments.Remove(payment);
+                    var payment = ctx.bills.FirstOrDefault(payment => payment.billId == id);
+                    ctx.bills.Remove(payment);
                     ctx.SaveChanges();
                 }
             }

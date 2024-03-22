@@ -29,8 +29,8 @@ namespace BussinessObject.ContextData
         public virtual DbSet<CourseManagement> courseManagements { get; set; }
         public virtual DbSet<Model.ModelCourse.Type> types { get; set; }
         public virtual DbSet<Course_CourseManager_Mapping> course_CourseManager_Mappings { get; set; }
-        public virtual DbSet<Payment> payments { get; set; }
         public virtual DbSet<Order> orders { get; set; }
+        public virtual DbSet<Bill> bills { get; set; }
         public virtual DbSet<OrderStatus> orderStatuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -29,5 +29,37 @@ namespace HealthExpertAPI.Extension.ExOrder
                 courseId = orderDTO.courseId,
             };
         }
+
+        public static BillDTO ToBillDTO(this Bill bill)
+        {
+            return new BillDTO
+            {
+                billId = bill.billId,
+                orderId = bill.orderId,
+                accountId = bill.accountId,
+                amount = bill.amount,
+                bankCode = bill.bankCode,
+                bankTranNo = bill.bankTranNo,
+                cardType = bill.cardType,
+                orderInfo = bill.orderInfo,
+                payDate = bill.payDate,
+            };
+        }
+
+        public static Bill ToCreateBill(this CreateBillDTO billDTO)
+        {
+            return new Bill
+            {
+                orderId = billDTO.orderId,
+                accountId = billDTO.accountId,
+                amount = billDTO.amount,
+                bankCode = billDTO.bankCode,
+                bankTranNo = billDTO.bankTranNo,
+                cardType = billDTO.cardType,
+                orderInfo = billDTO.orderInfo,
+                billTime = billDTO.billTime,
+                payDate = billDTO.payDate,
+            };
+        }
     }
 }

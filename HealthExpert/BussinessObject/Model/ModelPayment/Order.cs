@@ -14,10 +14,7 @@ namespace BussinessObject.Model.ModelPayment
         [Column(TypeName = "decimal(18, 2)")]  public decimal? discount { get; set; }
         [Required]public Guid? accountId { get; set; }
         [Required] public string? courseId { get; set; }
-        public int? paymentId { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<Payment>? Payments { get; set; }
         [JsonIgnore]
         public virtual ICollection<OrderStatus>? OrderStatuses { get; set; }
         [JsonIgnore]

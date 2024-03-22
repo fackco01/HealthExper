@@ -8,6 +8,5 @@
         public decimal? discount { get; set; }
         public Guid? accountId { get; set; }
         public string? courseId { get; set; }
-        public int? paymentId { get; set; }
     }
 }

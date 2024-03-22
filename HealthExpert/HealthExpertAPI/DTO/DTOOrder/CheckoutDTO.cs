@@ -2,6 +2,7 @@
 {
     public class CheckoutDTO
     {
+        public bool isAccount { get; set; }
         public Guid orderId { get; set; }
         public Guid? accountId { get; set; }
         public string? courseId { get; set; }

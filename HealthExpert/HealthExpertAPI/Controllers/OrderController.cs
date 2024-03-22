@@ -17,6 +17,7 @@ namespace HealthExpertAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _repository = new OrderRepository();
+        private readonly IBillRepository _repoBill = new BillRepository();
         private readonly HealthExpertContext _context;
         private static readonly Random random = new Random();
         private static List<CheckoutDTO> _checkoutDataList = new List<CheckoutDTO>();
@@ -91,9 +92,11 @@ namespace HealthExpertAPI.Controllers
                 courseId = order.courseId
             };
 
+            var accountId = order.accountId;
             _checkoutDataList.Add(checkoutData);
 
-            return Ok(order);
+            //return Ok(order);
+            return Ok(new { order, accountId });
         }
 
         //Remove Order
@@ -114,7 +117,7 @@ namespace HealthExpertAPI.Controllers
         }
 
         //Checkout Order
-        [AllowAnonymous]
+        [AllowAnonymous] //[Authorize]
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -134,16 +137,80 @@ namespace HealthExpertAPI.Controllers
 
             var vnPayModel = new PaymentRequest
             {
-                orderId = checkoutData.orderId,
-                fullName = checkoutData.name,
-                description = "Payment for order: " + checkoutData.orderId,
-                amount = (double)checkoutData.price,
+                //orderId = checkoutData.orderId,
+                amount = (decimal)checkoutData.price,
                 createdDate = DateTime.Now
             };
+            //_checkoutDataList.Add(new CheckoutDTO
+            //{
+            //    orderId = (Guid)vnPayModel.orderId,
+            //    price = vnPayModel.amount
+            //});
 
             var paymentUrl = _service.CreatePaymentUrl(HttpContext, vnPayModel);
+            var accountId = checkoutData.accountId;
+
+            var bill = new Bill
+            {
+                accountId = accountId.HasValue ? accountId.Value : Guid.Empty,
+                orderId = checkoutData.orderId,
+                amount = Convert.ToInt64(vnPayModel.amount),
+            };
+
+            _context.Database.BeginTransaction();
+            _context.bills.Add(bill);
+            _context.SaveChanges();
+
             return Ok(paymentUrl);
         }
 
+
+        //Payment Call Back
+        [AllowAnonymous]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult PaymentCallback([FromQuery] PaymentCallbackQueryParams queryParams)
+        {
+            if (queryParams == null)
+            {
+                return BadRequest(new { message = "Invalid query parameters" });
+            }
+
+            var response = _service.PaymentExecute(Request.Query);
+
+            if (response == null || response.vnPayResponseCode != "00")
+            {
+                return BadRequest(new { message = "Payment failed" });
+            }
+
+            //var checkoutData = _checkoutDataList.FirstOrDefault(c => c.orderId == response.orderId);
+            var checkoutData = _checkoutDataList.FirstOrDefault();
+            if (checkoutData != null)
+            {
+                var billDTO = new CreateBillDTO();
+                Bill bill = billDTO.ToCreateBill();
+                bill.accountId = checkoutData.accountId.HasValue ? checkoutData.accountId.Value : Guid.Empty;
+                bill.orderId = checkoutData.orderId;
+                bill.amount = Convert.ToInt64(queryParams.vnp_Amount);
+                bill.bankCode = Convert.ToString(queryParams.vnp_BankCode);
+                bill.bankTranNo = Convert.ToString(queryParams.vnp_BankTranNo);
+                bill.cardType = Convert.ToString(queryParams.vnp_CardType);
+                bill.orderInfo = Convert.ToString(queryParams.vnp_OrderInfo);
+
+                _context.Database.BeginTransaction();
+                //_context.bills.Add(bill);
+                _repoBill.InsertBill(bill);
+                _context.SaveChanges();
+
+                //_checkoutDataList.Remove(checkoutData);
+
+                return Ok(new { message = "Payment successful" });
+            }
+            else
+            {
+                return BadRequest(new { message = "Checkout Data null" });
+            }
+        }
     }
 }

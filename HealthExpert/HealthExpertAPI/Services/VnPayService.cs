@@ -42,7 +42,8 @@ namespace HealthExpertAPI.Services
             return paymentUrl;
         }
 
-        public Payment PaymentExecute(IQueryCollection collections)
+        //public PaymentResponse PaymentExecute(IQueryCollection collections)
+        public PaymentResponse PaymentExecute(IQueryCollection collections)
         {
             var vnpay = new VnPayLibrary();
 
@@ -54,34 +55,46 @@ namespace HealthExpertAPI.Services
                 }
             }
 
-            //var vnp_orderId = Convert.ToInt32(vnpay.GetResponseData("vnp_TxnRef"));
             var vnp_TransactionId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
-            var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
+            //var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
             var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
+            var vnp_Amount = Convert.ToInt64(vnpay.GetResponseData("vnp_Amount"));
+            //var vnp_SecureHash = collections.FirstOrDefault(p => string.Equals(p.Key, "vnp_SecureHash", StringComparison.OrdinalIgnoreCase)).Value;
+            var vnp_SecureHash = collections["vnp_SecureHash"];
 
-            var vnp_TxnRef = Convert.ToInt32(vnpay.GetResponseData("vnp_TxnRef"));
+            var vnp_TxnRef = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
             var orderIdInt = vnp_TxnRef.GetHashCode();
             var vnp_orderId = (new Guid(orderIdInt, 0, 0, new byte[8]));
+
+            //var vnp_TransactionId = Convert.ToInt64(collections.vnp_TransactionNo);
+            //var vnp_SecureHash = collections.vnp_SecureHash;
+            //var vnp_ResponseCode = collections.vnp_ResponseCode;
+            //var vnp_OrderInfo = collections.vnp_OrderInfo;
+            //var vnp_Amount = Convert.ToInt64(collections.vnp_Amount);
+
+            //var vnp_TxnRef = Convert.ToInt64(collections.vnp_TxnRef);
+            //var orderIdInt = vnp_TxnRef.GetHashCode();
+            //var vnp_orderId = (new Guid(orderIdInt, 0, 0, new byte[8]));
 
             bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _config["VnPay:HashSecret"]);
             if (!checkSignature)
             {
-                return new Payment
+                return new PaymentResponse
                 {
-                    isPaid = false
+                   success = false
                 };
             }
 
-            return new Payment
+            return new PaymentResponse
             {
-                isPaid = true,
+                success = true,
                 paymentMethod = "VnPay",
                 orderDescription = vnp_OrderInfo,
                 orderId = vnp_orderId,
                 transactionId = vnp_TransactionId.ToString(),
                 token = vnp_SecureHash,
-                vnPayResponseCode = vnp_ResponseCode
+                vnPayResponseCode = vnp_ResponseCode,
             };
         }
     }

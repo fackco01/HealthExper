@@ -2,7 +2,7 @@
 {
     public class MySetting
     {
-        public static string CLAIM_ACCOUNT = "accountId";
+        public static string CLAIM_ACCOUNT_ID = "accountId";
     }
 
     public class PaymentType
