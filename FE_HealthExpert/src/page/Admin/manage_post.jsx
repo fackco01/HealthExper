@@ -2,6 +2,7 @@ import React from "react";
 import {
   useNavigate
 } from "react-router-dom";
+import Header from "../../components/Header_admin";
 
 function ManagePost() {
 
@@ -126,19 +127,7 @@ function ManagePost() {
       </aside>
       <div className="flex flex-col h-screen p-4 sm:ml-64">
         {/* HEADER */}
-        <header className="ml-5 h-10 header text-neutral-500">
-          <nav className="flex justify-start gap-x-5">
-            <a className="nav-link" href="#">
-              Dashboard
-            </a>
-            <a className="nav-link" href="#">
-              Users
-            </a>
-            <a className="nav-link" href="#">
-              Settings
-            </a>
-          </nav>
-        </header>
+        <Header />
         <hr />
         <br />
         {/* Breadcrumb */}

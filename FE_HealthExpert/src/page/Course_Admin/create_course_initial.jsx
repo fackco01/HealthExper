@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cover from '../../img/course_cover.png';
-import Header from "../../components/Header_user";
+import Header from "../../components/Header_admin";
 
 function CreateCourseSimple() {
   const [file, setFile] = useState();

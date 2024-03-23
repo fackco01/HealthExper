@@ -96,12 +96,12 @@ const Header = () => {
           >
             <div class="px-4 py-3 text-gray-900 dark:text-white">
               <div>Username</div>
-              <div class="font-medium truncate">mail?</div>
+              <div class="text-sm truncate">mail?</div>
             </div>
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
               <li>
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                  Dashboard
+                  Profile của bạn
                 </a>
               </li>
               <li>
@@ -111,7 +111,9 @@ const Header = () => {
               </li>
             </ul>    
             <div class="py-1">
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                Đăng xuất
+                </a>
             </div>
           </div>
         </div>

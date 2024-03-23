@@ -16,9 +16,13 @@ function RegisteredCourse() {
       <div class="grid gap-4 ml-16 mr-16">
         <div class="">
           <div className="font-medium px-3 py-4">
-            <h2 className="font-bold p-1 text-yellow-900">
-              Go Back
-            </h2>
+            <span>
+              <span className="align-middle inline-block fill-yellow-900">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1 1 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64z"></path>
+                </svg></span>
+              <span className=" ml-1 align-middle inline-block font-bold p-1 text-yellow-900">Go Back</span>
+            </span>
           </div>
         </div>
         {/* two columns */}
@@ -43,7 +47,7 @@ function RegisteredCourse() {
               <button
                 type="button"
                 className="text-black bg-orange-400 hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded w-44 h-14 py-1 text-center mt-14"
-                
+
               >
                 Xem khóa học
               </button>
@@ -70,7 +74,7 @@ function RegisteredCourse() {
               <button
                 type="button"
                 className="text-black bg-orange-400 hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded w-44 h-14 py-1 text-center mt-14"
-                
+
               >
                 Xem khóa học
               </button>

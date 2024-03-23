@@ -2,6 +2,7 @@ import React from "react";
 import {
   useNavigate
 } from "react-router-dom";
+import Header from "../../components/Header_admin";
 
 function ManageCenter() {
 
@@ -126,19 +127,7 @@ function ManageCenter() {
       </aside>
       <div className="flex flex-col h-screen p-4 sm:ml-64">
         {/* HEADER */}
-        <header className="ml-5 h-10 header text-neutral-500">
-          <nav className="flex justify-start gap-x-5">
-            <a className="nav-link" href="#">
-              Dashboard
-            </a>
-            <a className="nav-link" href="#">
-              Users
-            </a>
-            <a className="nav-link" href="#">
-              Settings
-            </a>
-          </nav>
-        </header>
+        <Header />
         <hr />
         <br />
         {/* Breadcrumb */}
@@ -262,144 +251,6 @@ function ManageCenter() {
                       type="button"
                       className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-yellow-900 focus:z-10"
                       onclick="closeDelete()"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Popup / Edit */}
-        <div
-          className="hidden fixed top-0 right-0 left-0 z-50 h-screen justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-700/50"
-          id="editForm"
-        >
-          <div className="relative p-4 max-w-md flex h-screen inset-0 m-auto max-h-full items-center justify-center">
-            <div className="m-auto">
-              <div className="relative bg-white rounded-lg shadow">
-                <div className="p-4 text-center">
-                  {/* What's inside the box start here */}
-                  <h1 className="text-lg mb-3">
-                    <b>Edit</b>
-                  </h1>
-                  <div className="w-full max-w-96">
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <label htmlFor="fname" className="text-left">
-                          Company ID:
-                        </label>
-                      </div>
-                      <div className="md:w-2/3">
-                        <input
-                          type="text"
-                          className="border-2"
-                          id="cid"
-                          name="cid"
-                        />
-                        <br />
-                        <br />
-                      </div>
-                    </div>
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <label htmlFor="lname" className="text-left">
-                          User ID:
-                        </label>
-                      </div>
-                      <div className="md:w-2/3">
-                        <input
-                          type="text"
-                          className="border-2"
-                          id="uid"
-                          name="uid"
-                        />
-                        <br />
-                        <br />
-                      </div>
-                    </div>
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <label htmlFor="cnamel" className="text-left">
-                          Company Name:
-                        </label>
-                      </div>
-                      <div className="md:w-2/3">
-                        <input
-                          type="text"
-                          className="border-2"
-                          id="cname"
-                          name="cname"
-                        />
-                        <br />
-                        <br />
-                      </div>
-                    </div>
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <label htmlFor="addl" className="text-left">
-                          Address:
-                        </label>
-                      </div>
-                      <div className="md:w-2/3">
-                        <input
-                          type="text"
-                          className="border-2"
-                          id="address"
-                          name="address"
-                        />
-                        <br />
-                        <br />
-                      </div>
-                    </div>
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <label htmlFor="datel" className="text-left">
-                          Date Created:
-                        </label>
-                      </div>
-                      <div className="md:w-2/3">
-                        <input
-                          type="text"
-                          className="border-2"
-                          id="date"
-                          name="date"
-                        />
-                        <br />
-                        <br />
-                      </div>
-                    </div>
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <label htmlFor="maill" className="text-left">
-                          Email:
-                        </label>
-                      </div>
-                      <div className="md:w-2/3">
-                        <input
-                          type="text"
-                          className="border-2"
-                          id="email"
-                          name="email"
-                        />
-                        <br />
-                        <br />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex">
-                    <button
-                      type="button"
-                      className="text-white bg-amber-500 hover:bg-amber-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg items-center px-5 py-2.5 text-center me-2"
-                      onclick="closeEdit()"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-yellow-900 focus:z-10"
-                      onclick="closeEdit()"
                     >
                       Cancel
                     </button>
