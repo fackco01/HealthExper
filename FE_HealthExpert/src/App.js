@@ -13,6 +13,7 @@ import EditCourse from './page/Course_Manager/edit_course';
 import CourseDetails from './page/User/course_details';
 import Lesson from './page/User/lesson';
 import CreateCourse from './page/Course_Admin/create_course';
+import CreateCourseList from './page/Course_Admin/create_course_list';
 import CreateCourseSimple from './page/Course_Admin/create_course_initial';
 import CreateCourseDetail from './page/Course_Admin/create_course_detail';
 import CreateCourseAdmin from './page/Course_Admin/create_course_admin';
@@ -41,7 +42,7 @@ function Root() {
           <Route path = "/paymentComplete" element = {<PaymentComplete/>}/>
 
           <Route path = "/createCourse" element = {<CreateCourse/>}/>
-          <Route path = "/adminCourseHome" element = {<AdminCourseHome/>}/>
+          <Route path = "/adminCourseHome" element = {<CreateCourseList/>}/>
           <Route path = "/createCourseAlt" element = {<CreateCourseSimple/>}/>
           <Route path = "/createCourseDetail" element = {<CreateCourseDetail/>}/>
           <Route path = "/createCourseAdmin" element = {<CreateCourseAdmin/>}/>

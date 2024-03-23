@@ -1,0 +1,25 @@
+.slick-dots li.slick-active button:before {
+    margin-top: 10px;
+    color: #000000;
+  }
+
+.slick-dots li button:before {
+    margin-top: 10px;
+    opacity: 1;
+    color: #FFA500;
+  }
+  
+.slick-prev {
+    left: 495px;
+    margin-top: 275px;
+}
+
+.slick-next {
+    right: 495px;
+    margin-top: 275px;
+}
+
+.slick-prev:before, .slick-next:before{
+    opacity: 1;
+    color: #FFA500;
+}

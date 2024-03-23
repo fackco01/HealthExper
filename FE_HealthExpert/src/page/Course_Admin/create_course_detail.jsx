@@ -1,6 +1,9 @@
 import React, { Fragment, useState } from "react";
 import cover from '../../img/course_cover.png';
 import Header from "../../components/Header_admin";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 function CreateCourseDetail() {
   const [file, setFile] = useState();
   function handleChange(e) {
@@ -24,7 +27,7 @@ function CreateCourseDetail() {
         <div className="mx-auto mb-auto mt-[150px]">
           <div className="bg-amber-500  border-2 rounded-lg drop-shadow-lg w-[45rem]">
             <div className="p-4">
-              <CourseTime />
+              <CourseContent />
             </div>
           </div>
         </div>
@@ -61,9 +64,41 @@ function CourseTime() {
 };
 
 function CourseContent() {
+
   return (
     <>
       <p className="font-bold text-center my-auto">Nội dung khóa học</p>
+
+      <Tabs className="mt-5" selectedTabClassName="rounded-t border-black border-t border-l border-r bg-[#ffffff]">
+        <TabList className="flex" >
+          <Tab className="bg-gray-200 rounded-t">
+            <p className="mx-2 my-2">
+              Tuần 1
+            </p>
+          </Tab>
+          <Tab className="bg-gray-200 rounded-t">
+            <p className="mx-2 my-2">
+              Ngày 1
+            </p>
+          </Tab>
+        </TabList>
+
+        <TabPanel className="bg-white border-l border-r border-b border-black">
+          <h2>Any content 1</h2>
+        </TabPanel>
+        <TabPanel className="bg-white">
+          <h2>Any content 2</h2>
+        </TabPanel>
+      </Tabs>
+
+
+      <button
+        type="button"
+        className="mt-5 text-black bg-white hover:bg-orange-800 border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium w-24 py-2 text-center ml-[585px]"
+        onclick="delete()"
+      >
+        Hoàn tất
+      </button>
     </>
   );
 };
@@ -96,46 +131,46 @@ function TimeList() {
         </button>
 
         {/* {isOpen && ( */}
-          <div className="absolute w-full rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-            <ul role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 border-b-2 border-black text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  1 Tuần
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 border-b-2 border-black text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  2 Tuần
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 border-b-2 border-black text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  3 Tuần
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={closeDropdown}
-                >
-                  12 Tuần
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div className="absolute w-full rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <ul role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 border-b-2 border-black text-sm text-gray-700 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                1 Tuần
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 border-b-2 border-black text-sm text-gray-700 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                2 Tuần
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 border-b-2 border-black text-sm text-gray-700 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                3 Tuần
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={closeDropdown}
+              >
+                12 Tuần
+              </a>
+            </li>
+          </ul>
+        </div>
         {/* )} */}
       </div>
     </div>
