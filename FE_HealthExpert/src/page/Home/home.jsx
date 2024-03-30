@@ -53,6 +53,7 @@ export default function Home() {
           <img src={carousel4} alt="" />
         </Carousel>
       </div>
+
       {/* introduce */}
       <section>
         {/* left intro */}
@@ -402,7 +403,7 @@ export default function Home() {
               mọi nơi. Vào dịp này, không
             </p>
             <a className="text-orange-600 text-[18px] mx-3" href="">
-              Xem thêm
+              Xem thêm bài viết
             </a>
           </div>
 
@@ -423,16 +424,9 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <a
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.8) 80%)",
-          }}
-          className="item-center flex   justify-center"
-          href="#page"
-        >
-          <button className="bg-blue-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded opacity-100 hover:opacity-80 transition-opacity mt-3 mb-10">
-            XEM THÊM BÀI VIẾT
+        <a className="flex  justify-center" href="#page">
+          <button className="bg-blue-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded opacity-100 hover:opacity-80 transition-opacity mt-3">
+            XEM THÊM TRUNG TÂM
           </button>
         </a>
       </section>
