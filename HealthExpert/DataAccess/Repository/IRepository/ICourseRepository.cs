@@ -16,5 +16,8 @@ namespace DataAccess.Repository.IRepository
         Course GetCourseById(string courseId);
         void UpdateCourse(Course course);
         void AddCourseManagerByEmail(string email, string courseId);
+        void AddEnrollment(Enrollment enrollment);
+        List<Enrollment> GetEnrollments();
+        bool IsCourseManager(string email, string courseId);
     }
 }

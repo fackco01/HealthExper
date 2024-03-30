@@ -18,7 +18,8 @@ namespace HealthExpertAPI.Extension.ExAccount
                 gender = account.gender,
                 birthDate = account.birthDate,
                 createDate = account.createDate,
-                isActive = account.isActive
+                isActive = account.isActive,
+                verificationToken = account.verificationToken
             };
         }
 

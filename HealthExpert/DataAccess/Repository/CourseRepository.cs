@@ -62,5 +62,23 @@ namespace DataAccess.Repository
                 throw new Exception("Course not found");
             }
         }
+
+        //Add Enrollment
+        public void AddEnrollment(Enrollment enrollment)
+        {
+            CourseDAO.AddEnrollment(enrollment);
+        }
+
+        //Get List of Enrollments
+        public List<Enrollment> GetEnrollments()
+        {
+            return CourseDAO.GetEnrollments();
+        }
+
+        //Check if user already a course manager
+        public bool IsCourseManager(string email, string courseId)
+        {
+            return CourseDAO.IsCourseManager(email, courseId);
+        }
     }
 }

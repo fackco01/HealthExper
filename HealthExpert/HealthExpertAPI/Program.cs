@@ -79,7 +79,7 @@ namespace HealthExpertAPI
                     builder =>
                     {
                         builder
-                                .WithOrigins("http://localhost:5500")
+                                .WithOrigins("http://localhost:3000")
                                .AllowAnyHeader()
                                .AllowAnyMethod()
                                .AllowCredentials();

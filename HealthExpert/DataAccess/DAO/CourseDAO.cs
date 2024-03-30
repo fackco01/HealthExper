@@ -1,5 +1,6 @@
 ﻿using BussinessObject.ContextData;
 using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelUser;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -63,11 +64,14 @@ namespace DataAccess.DAO
                 var user = context.accounts.FirstOrDefault(x => x.email == email);
                 if (user != null)
                 {
+                    var roleId = 3; // Assuming the role id for course manager is 3
                     var courseManager = new CourseManagement
                     {
                        courseManagerId = GenerateUniqueCourseManagerId(),
                        courseId = courseId
                     };
+                    courseManager.accounts = new List<Account> { user };
+                    user.roleId = roleId;
                     context.courseManagements.Add(courseManager);
                     context.SaveChanges();
                 }
@@ -79,6 +83,35 @@ namespace DataAccess.DAO
             {
                 int existingCount = context.courseManagements.Count();
                 return existingCount + 1;
+            }
+        }
+
+        public static void AddEnrollment(Enrollment enrollment)
+        {
+            using (var context = new HealthExpertContext())
+            {
+                context.enrollments.Add(enrollment);
+                context.SaveChanges();
+            }
+        }
+
+        //Get List of Enrollments
+        public static List<Enrollment> GetEnrollments()
+        {
+            using (var context = new HealthExpertContext())
+            {
+                return context.enrollments.ToList();
+            }
+        }
+
+        //Check if user already a course manager with email and courseId
+        public static bool IsCourseManager(string email, string courseId)
+        {
+            using (var context = new HealthExpertContext())
+            {
+                var courseManager = context.courseManagements.FirstOrDefault(
+                                       cm => cm.accounts.Any(a => a.email.Equals(email) && cm.courseId.Equals(courseId)));
+                return courseManager != null;
             }
         }
     }

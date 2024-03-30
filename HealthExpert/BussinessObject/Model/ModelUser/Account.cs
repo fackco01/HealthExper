@@ -1,5 +1,6 @@
 ﻿using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelPost;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -46,5 +47,6 @@ namespace BussinessObject.Model.ModelUser
         public ICollection<Feedback>? feedbacks { get; set; }
         public virtual CourseAdmin? courseAdmin { get; set; }
         public virtual CourseManagement? courseManager { get; set; }
+        public ICollection<Post>? posts { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BussinessObject.Model;
 using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelPost;
 using BussinessObject.Model.ModelUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,10 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Feedback> feedbacks { get; set; }
         public virtual DbSet<CourseAdmin> courseAdmins { get; set; }
         public virtual DbSet<CourseManagement> courseManagements { get; set; }
+        public virtual DbSet<Post> posts { get; set; }
+        public virtual DbSet<Category> categories { get; set; }
+        public virtual DbSet<Post_Like> post_Likes { get; set; }
+        public virtual DbSet<Post_Meta> post_Metas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,6 +53,7 @@ namespace BussinessObject.ContextData
             modelBuilder.Entity<Feedback>().HasKey(Feedback => new { Feedback.accountId, Feedback.courseId });
             modelBuilder.Entity<CourseManagement>().HasKey(CourseManagement => new { CourseManagement.courseManagerId, CourseManagement.courseId });
             modelBuilder.Entity<Course_CourseManager_Mapping>().HasKey(Course_CourseManager_Mapping => new { Course_CourseManager_Mapping.courseId, Course_CourseManager_Mapping.courseManagerId });
+            modelBuilder.Entity<Post_Category>().HasKey(Post_Category => new { Post_Category.postId, Post_Category.categoryId });
 
             modelBuilder.Entity<Role>().HasData(
                 new Role { roleId = 1, roleName = "Administration" },
@@ -56,19 +62,22 @@ namespace BussinessObject.ContextData
                 new Role { roleId = 4, roleName = "Learner" }
                 );
 
-            modelBuilder.Entity<Account>().HasData(
-                new Account
+            modelBuilder.Entity<Course>().HasData(
+                new Course
                 {
-                    accountId = Guid.NewGuid(),
-                    userName = "admin",
-                    password = "123123Aa!",
-                    email = "admin@gmail.com",
-                    fullName = "Administrator",
-                    gender = true,
-                    phone = "012345678",
-                    birthDate = "01/01/1999",
-                    isActive = true,
-                    roleId = 1
+                    courseId = "C001",
+                    courseName = "Course 1",
+                    price = 10,
+                    rating = 5,
+                    description = "This is course 1",
+                    studentNumber = 100,
+                    certificate = "Certificate 1",
+                    createBy = "admin",
+                    dateUpdate = DateTime.Now,
+                    language = "English",
+                    bmiMax = 20,
+                    bmiMin = 10,
+                    typeId = 1
                 }
                 );
         }

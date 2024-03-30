@@ -12,5 +12,6 @@
         public string birthDate { get; set; } = string.Empty;
         public DateTime createDate { get; set; }
         public bool isActive { get; set; }
+        public string verificationToken { get; set; } = string.Empty;
     }
 }
