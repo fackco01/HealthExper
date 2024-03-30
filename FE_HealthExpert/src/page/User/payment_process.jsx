@@ -24,9 +24,9 @@ function PaymentProcess() {
                                     <p className="mb-5">Account ID:</p>
                                 </div>
                                 <div className="w-4/5">
-                                    <p className="mb-5 font-bold text-right">
-                                        sdsauiy320-clksajd
-                                    </p>
+                                    <p className="mb-5 font-bold text-right" id="accountId">
+                                        {/* Account ID goes here */} 111
+                                    </p> 
                                 </div>
                             </div>
                             {/* Course */}
@@ -35,8 +35,8 @@ function PaymentProcess() {
                                     <p className="mb-5">Khóa học:</p>
                                 </div>
                                 <div className="w-4/5">
-                                    <p className="mb-5 font-bold text-right">
-                                    At the Academy Awards, Oppenheimer wins seven awards, including Best Picture.
+                                    <p className="mb-5 font-bold text-right" id="courseId">
+                                    {/* Course ID goes here */} 222
                                     </p>
                                 </div>
                             </div>
@@ -55,11 +55,15 @@ function PaymentProcess() {
                             <button
                                 type="button"
                                 className="text-black bg-orange-400 hover:bg-orange-600 hover:text-white hover:border-white hover:fill-white border-2 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded w-full h-10 py-1 text-center mt-8"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    link = "https://en.wikipedia.org"
-                                    window.location.href = link;
-                                    }}
+                                onClick = {() => {
+                                    addOrder();
+                                    checkoutOrder();
+                                }}
+                                // onClick = {(e) => {
+                                //     e.preventDefault();
+                                //     link = "https://en.wikipedia.org"
+                                //     window.location.href = link;
+                                //     }}
                             >
                                 <span className=" ml-1 align-middle inline-block">Thanh Toán</span>
                             </button>
@@ -78,5 +82,49 @@ function PaymentProcess() {
         </>
     );
 };
+
+function addOrder() {
+    var courseId = document.getElementById("courseId").innerHTML;
+    var accountId = document.getElementById("accountId").innerHTML;
+
+    var orderDTO = {
+        courseId: courseId,
+        accountId: accountId
+    };
+
+    fetch('https://localhost:7158/api/Order/AddOrder', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderDTO)
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("result").innerText = JSON.stringify(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById("result").innerText = 'Error: ' + error;
+    });
+}
+
+function checkoutOrder() {
+    fetch('https://localhost:7158/api/Order/CheckoutOrder', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        window.location.href = data; // Redirect to the payment URL
+        console.log(data)
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById("result").innerText = 'Error: ' + error;
+    });
+}
 
 export default PaymentProcess;

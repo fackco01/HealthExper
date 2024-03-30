@@ -1,10 +1,19 @@
 import React from "react";
+import { useEffect } from "react";
 import {
     useNavigate
 } from "react-router-dom";
 import Header from "../../components/Header_user";
 
 function PaymentComplete() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      setTimeout(() => {
+        navigate('/home')
+      }, 5000)
+    }, [])
+
     return (
         <>
             <base href="./" />
@@ -96,6 +105,12 @@ function PaymentComplete() {
                             >
                                 <span className="align-middle inline-block">Về Trang Khóa Học</span>
                             </button>
+                            {/* Redirect 
+                            <div className="">
+                                    <p className="text-center text-orange-400 font-bold">
+                                        Bạn sẽ được chuyển hướng ngay
+                                    </p>
+                            </div>*/}
                         </div>
                     </div>
                 </div>
