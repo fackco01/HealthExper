@@ -6,7 +6,6 @@ using HealthExpertAPI.DTO.DTOSession;
 using HealthExpertAPI.Extension.ExSession;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthExpertAPI.Controllers
@@ -45,14 +44,7 @@ namespace HealthExpertAPI.Controllers
                 return BadRequest("Session does exists!!!");
             }
 
-            int sessionId;
-            if (!int.TryParse(sessionDTO.sessionId, out sessionId))
-            {
-                return BadRequest("Invalid sessionId. sessionId must be an integer.");
-            }
-
             Session session = sessionDTO.ToSessionAdd();
-            session.sessionId = sessionId.ToString();
             session.learnProgress = false;
 
             _repository.AddSession(session);

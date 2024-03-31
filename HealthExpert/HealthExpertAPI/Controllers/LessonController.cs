@@ -54,20 +54,22 @@ namespace HealthExpertAPI.Controllers
             {
                 Upload(file);
 
+                var lessonId = formData["caption"].ToString();
+                var caption = formData["caption"].ToString();
+                var cover = formData["cover"].ToString();
+                var sessionId = formData["sessionId"].ToString();
+
                 if (!string.IsNullOrEmpty(formData["caption"]) &&
                     !string.IsNullOrEmpty(formData["cover"]) &&
-                    !string.IsNullOrEmpty(formData["sessionId"])
-                    &&
-                        int.TryParse(formData["lessonId"], out int lessonId))
+                    !string.IsNullOrEmpty(formData["sessionId"]))
                 {
                     var lesson = new Lesson
                     {
-                        //lessonId = formData["lessonId"],
-                        lessonId = lessonId.ToString(),
+                        lessonId = lessonId,
                         videoFile = file.VideoFile.FileName,
-                        caption = formData["caption"],
-                        cover = formData["cover"],
-                        sessionId = formData["sessionId"],
+                        caption = caption,
+                        cover = cover,
+                        sessionId = sessionId,
                         viewProgress = 0
                     };
 
