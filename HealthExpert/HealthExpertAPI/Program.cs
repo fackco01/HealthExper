@@ -86,11 +86,6 @@ namespace HealthExpertAPI
                         }
 
                     };
-                })
-                .AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = "816694182627-5tffmnfm19relnq96vcm7t2lkkonbh5m.apps.googleusercontent.com";
-                    googleOptions.ClientSecret = "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";
                 });
 
             //Add Cor
