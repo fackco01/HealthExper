@@ -20,6 +20,7 @@ namespace HealthExpertAPI.Extension.ExAccount
                 createDate = account.createDate,
                 isActive = account.isActive,
                 verificationToken = account.verificationToken
+
             };
         }
 
@@ -67,6 +68,17 @@ namespace HealthExpertAPI.Extension.ExAccount
                 createDate = accountDTO.createDate,
                 isActive = accountDTO.isActive = true,
                 roleId = accountDTO.roleId = 4
+            };
+        }
+
+        public static Account ToReserPassword(this ResetPasswordDTO resetPasswordDTO, byte[] passwordHash, byte[] passwordSalt)
+        {
+            return new Account
+            {
+                passwordResetToken = resetPasswordDTO.token,
+                password = resetPasswordDTO.password,
+                passwordHash = passwordHash,
+                passwordSalt = passwordSalt
             };
         }
     }

@@ -1,11 +1,7 @@
-﻿using BussinessObject.Model.ModelUser;
-using System;
-using System.Collections.Generic;
+﻿using BussinessObject.Model.ModelPayment;
+using BussinessObject.Model.ModelSession;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace BussinessObject.Model.ModelCourse
 {
@@ -42,5 +38,12 @@ namespace BussinessObject.Model.ModelCourse
         public virtual CourseAdmin? courseAdmin { get; set; }
         [JsonIgnore]
         public ICollection<Course_CourseManager_Mapping>? courseManagerMappings { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Session>? sessions { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Type> types { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Order>? orders { get; set; }
     }
 }

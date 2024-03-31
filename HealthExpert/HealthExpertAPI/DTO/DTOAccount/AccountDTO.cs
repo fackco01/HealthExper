@@ -9,7 +9,7 @@
         public string phone { get; set; }
         public string fullName { get; set; } = string.Empty;
         public bool gender { get; set; }
-        public string birthDate { get; set; } = string.Empty;
+        public DateTime birthDate { get; set; }
         public DateTime createDate { get; set; }
         public bool isActive { get; set; }
         public string verificationToken { get; set; } = string.Empty;

@@ -1,7 +1,7 @@
-
+using Azure.Storage.Blobs;
 using BussinessObject.ContextData;
+using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -21,6 +21,21 @@ namespace HealthExpertAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddDbContext<HealthExpertContext>();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddTransient<IManageFile, ManageFile>();
+            builder.Services.AddSingleton<IVnPayService, VnPayService>();
+            builder.Services.AddScoped(_ =>
+            {
+                return new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobStorage"));
+            });
+            builder.Services.AddScoped<IFileService, FileService>();
+
+            // Configure upload path
+            var uploadPath = builder.Configuration.GetValue<string>("UploadPath");
+            if (!string.IsNullOrEmpty(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
 
             //Config Cookie
             builder.Services.ConfigureApplicationCookie(options =>
@@ -68,7 +83,7 @@ namespace HealthExpertAPI
                             return Task.CompletedTask;
 
                         }
-                    
+
                     };
                 });
 
@@ -79,7 +94,8 @@ namespace HealthExpertAPI
                     builder =>
                     {
                         builder
-                                .WithOrigins("http://localhost:3000")
+                               .WithOrigins("http://localhost:5500", "https://sandbox.vnpayment.vn", "http://localhost:3000", "http://20.2.73.15")
+                               //.AllowAnyOrigin()
                                .AllowAnyHeader()
                                .AllowAnyMethod()
                                .AllowCredentials();
@@ -87,7 +103,7 @@ namespace HealthExpertAPI
             });
 
             builder.Services.AddMvc();
-
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -97,7 +113,8 @@ namespace HealthExpertAPI
                 app.UseSwaggerUI();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseCors("AllowAllHeaders");
 

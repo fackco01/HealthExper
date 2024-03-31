@@ -7,16 +7,16 @@ using HealthExpertAPI.DTO.DTOAccount;
 using HealthExpertAPI.Extension.ExAccount;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Plugins;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace HealthExpertAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [EnableCors("AllowAllHeaders")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -53,7 +53,6 @@ namespace HealthExpertAPI.Controllers
             account.fullName = accountDTO.userName;
             account.phone = "0123456789";
             account.gender = true;
-            account.birthDate = "01/01/2000";
             account.roleId = 4;
             account.isActive = true;
 

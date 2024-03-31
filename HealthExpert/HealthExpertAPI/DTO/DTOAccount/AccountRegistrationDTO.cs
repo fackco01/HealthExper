@@ -17,7 +17,7 @@ namespace HealthExpertAPI.DTO.DTOAccount
         public string fullName { get; set; } = string.Empty;
         public string phone { get; set; } = string.Empty;
         public bool gender { get; set; }
-        public string birthDate { get; set; }= string.Empty;
+        public DateTime birthDate { get; set; }
         public int roleId { get; set; }
         public bool isActive { get; set; }
     }

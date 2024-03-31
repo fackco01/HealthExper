@@ -32,32 +32,6 @@ namespace HealthExpertAPI.Controllers
             _context = context;
         }
 
-        //LOGIN
-
-        //[AllowAnonymous]
-        //[HttpPost]
-        //public IActionResult Login([FromBody] UserLogin login)
-        //{
-        //    var user = accountRepository.Authenticate(login);
-        //    var role = roleRepository.GetAllRoles();
-        //    if (user != null && user.isActive)
-        //    {
-        //        var claims = new List<Claim>
-        //        {
-        //            new Claim(ClaimTypes.Name, user.userName),
-        //            new Claim(ClaimTypes.Role, role.First(role => role.roleId == user.roleId).roleName)
-        //        };
-
-        //        string token = service.CreateToken(claims, _configuration);
-
-        //        SetCookie("access_token", token, true);
-        //        SetCookie("uid", service.EncryptString(user.accountId.ToString(), _configuration), false);
-        //        return Ok(token);
-        //    }
-
-        //    return BadRequest("User not found!!!");
-        //}
-
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
