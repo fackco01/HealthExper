@@ -54,7 +54,7 @@ namespace HealthExpertAPI.Controllers
             {
                 Upload(file);
 
-                var lessonId = formData["caption"].ToString();
+                var lessonId = formData["lessonId"].ToString();
                 var caption = formData["caption"].ToString();
                 var cover = formData["cover"].ToString();
                 var sessionId = formData["sessionId"].ToString();
