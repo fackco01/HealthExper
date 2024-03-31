@@ -1,13 +1,6 @@
 ﻿using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelCourse;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace BussinessObject.Model.ModelUser
 {
@@ -28,7 +21,7 @@ namespace BussinessObject.Model.ModelUser
         [DataType(DataType.Password)]
         public string password { get; set; }
         [Required] public bool gender { get; set; }
-        [Required] public string birthDate { get; set; }
+        [Required] public DateTime birthDate { get; set; }
         public DateTime createDate { get; set; } = DateTime.Now;
         [Required] public bool isActive { get; set; }
 

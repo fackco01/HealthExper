@@ -19,12 +19,15 @@ namespace HealthExpertAPI.Controllers
         private readonly ILessonRepository _repository = new LessonRepository();
         private readonly HealthExpertContext _context = new HealthExpertContext();
         private readonly IManageFile _service;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IFileService _serviceAzure;
+
 
         private readonly IConfiguration _configuration;
         private Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
         private string _uploadPath;
 
-        public LessonController(IConfiguration configuration, HealthExpertContext context, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, IManageFile service)
+        public LessonController(IConfiguration configuration, HealthExpertContext context, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, IManageFile service, IWebHostEnvironment webHostEnvironment, IFileService serviceAzure)
         {
             _configuration = configuration;
             _context = context;
@@ -32,6 +35,8 @@ namespace HealthExpertAPI.Controllers
             _uploadPath = Path.Combine(_env.ContentRootPath, "Uploads");
             Directory.CreateDirectory(_uploadPath);
             _service = service;
+            _webHostEnvironment = webHostEnvironment;
+            _serviceAzure = serviceAzure;
         }
 
 
@@ -42,11 +47,12 @@ namespace HealthExpertAPI.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UploadFile(IFormCollection formData)
         {
-            var file = formData.Files[0];
+            var file = new FileModels(formData.Files[0]);
 
-            if (file.Length > 0)
+
+            if (file.VideoFile.Length > 0)
             {
-                var result = await _service.UploadFile(file);
+                Upload(file);
 
                 if (!string.IsNullOrEmpty(formData["caption"]) &&
                     !string.IsNullOrEmpty(formData["cover"]) &&
@@ -58,7 +64,7 @@ namespace HealthExpertAPI.Controllers
                     {
                         //lessonId = formData["lessonId"],
                         lessonId = lessonId.ToString(),
-                        videoFile = result,
+                        videoFile = file.VideoFile.FileName,
                         caption = formData["caption"],
                         cover = formData["cover"],
                         sessionId = formData["sessionId"],
@@ -66,7 +72,7 @@ namespace HealthExpertAPI.Controllers
                     };
 
                     _repository.AddLesson(lesson);
-                    return Ok("File uploaded successfully.");
+                    return Ok();
                 }
                 else
                 {
@@ -77,10 +83,26 @@ namespace HealthExpertAPI.Controllers
             {
                 return BadRequest("No file selected.");
             }
-            return Ok();
         }
 
+        private async Task Upload(FileModels file)
+        {
+            await _serviceAzure.Upload(file);
+            //return Ok();
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Get(string name)
+        {
+            var videoFileStream = await _serviceAzure.Get(name);
+            string fileType = "mp4";
+            if (name.Contains("mov"))
+            {
+                fileType = "mov";
+            }
+
+            return File(videoFileStream, $"video/{fileType}");
+        }
 
         //Get List Lesson
         [AllowAnonymous]

@@ -24,19 +24,17 @@ namespace HealthExpertAPI.Services
             }
         }
 
+
         public async Task<string> UploadFile(IFormFile _IFormFile)
         {
-            string FileName = "";
             try
             {
-                FileInfo _FileInfo = new FileInfo(_IFormFile.FileName);
-                FileName = _IFormFile.FileName + "_" + DateTime.Now.Ticks.ToString() + _FileInfo.Extension;
-                var _GetFilePath = Common.GetFilePath(FileName);
+                var _GetFilePath = Common.GetFilePath(_IFormFile.FileName);
                 using (var _FileStream = new FileStream(_GetFilePath, FileMode.Create))
                 {
                     await _IFormFile.CopyToAsync(_FileStream);
                 }
-                return FileName;
+                return _IFormFile.FileName;
             }
             catch (Exception ex)
             {

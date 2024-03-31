@@ -1,4 +1,5 @@
 
+using Azure.Storage.Blobs;
 using BussinessObject.ContextData;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,6 +25,11 @@ namespace HealthExpertAPI
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddTransient<IManageFile, ManageFile>();
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
+            builder.Services.AddScoped(_ =>
+            {
+                return new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobStorage"));
+            });
+            builder.Services.AddScoped<IFileService, FileService>();
 
             // Configure upload path
             var uploadPath = builder.Configuration.GetValue<string>("UploadPath");
@@ -78,8 +84,13 @@ namespace HealthExpertAPI
                             return Task.CompletedTask;
 
                         }
-                    
+
                     };
+                })
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = "816694182627-5tffmnfm19relnq96vcm7t2lkkonbh5m.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "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";
                 });
 
             //Add Cor
@@ -89,7 +100,7 @@ namespace HealthExpertAPI
                     builder =>
                     {
                         builder
-                               .WithOrigins("http://localhost:5500", "https://sandbox.vnpayment.vn")
+                               .WithOrigins("http://localhost:5500", "https://sandbox.vnpayment.vn", "http://localhost:3000", "http://20.2.73.15")
                                //.AllowAnyOrigin()
                                .AllowAnyHeader()
                                .AllowAnyMethod()
@@ -108,7 +119,8 @@ namespace HealthExpertAPI
                 app.UseSwaggerUI();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseCors("AllowAllHeaders");
 

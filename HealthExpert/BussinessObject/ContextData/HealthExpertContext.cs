@@ -73,7 +73,7 @@ namespace BussinessObject.ContextData
                     fullName = "Administrator",
                     gender = true,
                     phone = "012345678",
-                    birthDate = "01/01/1999",
+                    birthDate = DateTime.Now,
                     isActive = true,
                     roleId = 1
                 }
