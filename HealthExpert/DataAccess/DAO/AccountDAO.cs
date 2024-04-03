@@ -1,11 +1,6 @@
 ﻿using BussinessObject.ContextData;
 using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelUser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
@@ -94,19 +89,16 @@ namespace DataAccess.DAO
         }
 
         //Update Account Data
-        public static void UpdateAccount(Guid id, Account account)
+        public static void UpdateAccount(Account account)
         {
             try
             {
                 using (var ctx = new HealthExpertContext())
                 {
-                    if (GetAccountById(id) != null)
-                    {
-                        ctx.accounts.Add(account);
-                        ctx.Entry(account).State =
-                            Microsoft.EntityFrameworkCore.EntityState.Modified;
-                        ctx.SaveChanges();
-                    }
+                    ctx.accounts.Add(account);
+                    ctx.Entry(account).State =
+                        Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    ctx.SaveChanges();
                 }
             }
             catch (Exception ex)

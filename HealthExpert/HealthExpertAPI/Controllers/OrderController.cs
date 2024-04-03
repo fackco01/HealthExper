@@ -76,7 +76,6 @@ namespace HealthExpertAPI.Controllers
             var course = _context.courses.SingleOrDefault(c => c.courseId == orderDTO.courseId);
             var account = _context.accounts.SingleOrDefault(account => account.accountId == orderDTO.accountId);
 
-
             Order order = orderDTO.ToCreateOrder();
 
             order.price = (decimal?)Convert.ToDouble(course.price);
@@ -137,15 +136,9 @@ namespace HealthExpertAPI.Controllers
 
             var vnPayModel = new PaymentRequest
             {
-                //orderId = checkoutData.orderId,
                 amount = (decimal)checkoutData.price,
                 createdDate = DateTime.Now
             };
-            //_checkoutDataList.Add(new CheckoutDTO
-            //{
-            //    orderId = (Guid)vnPayModel.orderId,
-            //    price = vnPayModel.amount
-            //});
 
             var paymentUrl = _service.CreatePaymentUrl(HttpContext, vnPayModel);
             var accountId = checkoutData.accountId;
@@ -197,13 +190,20 @@ namespace HealthExpertAPI.Controllers
                 bill.bankTranNo = Convert.ToString(queryParams.vnp_BankTranNo);
                 bill.cardType = Convert.ToString(queryParams.vnp_CardType);
                 bill.orderInfo = Convert.ToString(queryParams.vnp_OrderInfo);
-
+              
                 _context.Database.BeginTransaction();
                 //_context.bills.Add(bill);
                 _repoBill.InsertBill(bill);
                 _context.SaveChanges();
 
-                //_checkoutDataList.Remove(checkoutData);
+                //var enroll = _context.enrollments.FirstOrDefault(x => x.courseId == checkoutData.courseId);
+                //if (enroll != null)
+                //{
+                //    enroll.enrollStatus = true;
+                //    _repoEnroll.Update(enroll);
+                //}
+
+                _checkoutDataList.Remove(checkoutData);
 
                 return Ok(new { message = "Payment successful" });
             }

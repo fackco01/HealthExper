@@ -1,10 +1,5 @@
 ﻿using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelUser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Repository.IRepository
 {
@@ -15,7 +10,7 @@ namespace DataAccess.Repository.IRepository
         List<Account> GetListAccount();
         Account GetAccountById(Guid id);
         void AddAccount(Account account);
-        void UpdateAccount(Guid id,Account account);
+        void UpdateAccount(Account account);
         void DeleteAccount(Guid id);
     }
 }

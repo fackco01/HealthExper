@@ -50,9 +50,8 @@ namespace HealthExpertAPI.Controllers
 
             Account account = accountDTO.ToAccountRegister(passwordHash, passwordSalt);
             account.verificationToken = CreateRandomToken();
-            account.fullName = accountDTO.userName;
-            account.phone = "0123456789";
-            account.gender = true;
+            account.phone = accountDTO.phone;
+            account.birthDate = accountDTO.birthDate;
             account.roleId = 4;
             account.isActive = true;
 
@@ -131,8 +130,14 @@ namespace HealthExpertAPI.Controllers
             {
                 return NotFound();
             }
-            account = accountDTO.ToAccountUpdate();
-            _repository.UpdateAccount(id, account);
+
+            CreatedPasswordHash(accountDTO.password,
+                out byte[] passwordHash,
+                out byte[] passwordSalt);
+
+            account = accountDTO.ToAccountUpdate(id, passwordHash, passwordSalt);
+            account.verificationToken = CreateRandomToken();
+            _repository.UpdateAccount(account);
             return NoContent();
         }
 
@@ -147,7 +152,7 @@ namespace HealthExpertAPI.Controllers
                 return NotFound();
             }
             account.isActive = false;
-            _repository.UpdateAccount(id, account);
+            _repository.UpdateAccount(account);
             return NoContent();
         }
 

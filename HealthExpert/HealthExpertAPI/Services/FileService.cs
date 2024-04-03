@@ -14,7 +14,7 @@ namespace HealthExpertAPI.Services
 
         public async Task Upload(FileModels fileModels)
         {
-            var containerInstance = _blobServiceClient.GetBlobContainerClient("healthexpertvideos");
+            var containerInstance = _blobServiceClient.GetBlobContainerClient("healthexpertvideos2");
 
             var blobInstance = containerInstance.GetBlobClient(fileModels.VideoFile.FileName);
 

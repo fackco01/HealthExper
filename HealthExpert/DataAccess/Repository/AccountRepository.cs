@@ -2,11 +2,6 @@
 using BussinessObject.Model.ModelUser;
 using DataAccess.DAO;
 using DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
@@ -20,7 +15,7 @@ namespace DataAccess.Repository
 
         public Account GetAccountById(Guid id) => AccountDAO.GetAccountById(id);
 
-        public void UpdateAccount(Guid id, Account account) => AccountDAO.UpdateAccount(id, account);
+        public void UpdateAccount(Account account) => AccountDAO.UpdateAccount(account);
 
         public void DeleteAccount(Guid id)  => AccountDAO.DeleteAccount(id);
 

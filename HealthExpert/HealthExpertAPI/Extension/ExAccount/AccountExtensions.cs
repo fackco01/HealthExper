@@ -53,21 +53,23 @@ namespace HealthExpertAPI.Extension.ExAccount
             };
         }
 
-        public static Account ToAccountUpdate(this AccountUpdateDTO accountDTO)
+        public static Account ToAccountUpdate(this AccountUpdateDTO accountDTO,Guid id, byte[] passwordHash, byte[] passwordSalt)
         {
             return new Account
             {
-                //accountId = accountDTO.accountId,
+                accountId = id,
                 userName = accountDTO.userName,
                 password = accountDTO.password,
+                passwordHash = passwordHash,
+                passwordSalt = passwordSalt,
                 email = accountDTO.email,
                 phone = accountDTO.phone,
                 fullName = accountDTO.fullName,
                 gender = accountDTO.gender,
                 birthDate = accountDTO.birthDate,
                 createDate = accountDTO.createDate,
-                isActive = accountDTO.isActive = true,
-                roleId = accountDTO.roleId = 4
+                isActive = accountDTO.isActive,
+                roleId = 4
             };
         }
 

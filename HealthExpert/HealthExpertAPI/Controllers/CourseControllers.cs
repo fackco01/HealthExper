@@ -10,7 +10,6 @@ using HealthExpertAPI.Extension.ExEnrollment;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace HealthExpertAPI.Controllers
 {
@@ -21,6 +20,7 @@ namespace HealthExpertAPI.Controllers
         private readonly HealthExpertContext _context = new HealthExpertContext();
         private readonly HealthServices service = new HealthServices();
         private readonly ICourseRepository _repository = new CourseRepository();
+        private readonly IBillRepository _billRepository = new BillRepository();
 
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
@@ -250,6 +250,8 @@ namespace HealthExpertAPI.Controllers
             {
                 return BadRequest("User not found!!");
             }
+
+            //var bill = _billRepository.GetAllBills().FirstOrDefault(x => x.orderId.Equals());
 
             var enrollment = enrollmentDTO.ToEnrollment();
             _repository.AddEnrollment(enrollment);
