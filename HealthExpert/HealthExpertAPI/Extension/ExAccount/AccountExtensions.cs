@@ -19,6 +19,7 @@ namespace HealthExpertAPI.Extension.ExAccount
                 birthDate = account.birthDate,
                 createDate = account.createDate,
                 isActive = account.isActive,
+                roleId = account.roleId,
                 verificationToken = account.verificationToken
 
             };
@@ -69,7 +70,7 @@ namespace HealthExpertAPI.Extension.ExAccount
                 birthDate = accountDTO.birthDate,
                 createDate = accountDTO.createDate,
                 isActive = accountDTO.isActive,
-                roleId = 4
+                roleId = accountDTO.roleId,
             };
         }
 

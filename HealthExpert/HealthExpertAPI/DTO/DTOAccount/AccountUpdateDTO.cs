@@ -11,7 +11,7 @@
         public bool gender { get; set; }
         public DateTime birthDate { get; set; }
         public DateTime createDate { get; set; }
-        public bool isActive { get; set; }
+        public bool isActive { get; set; } = true;
         public int roleId { get; set; }
     }
 }

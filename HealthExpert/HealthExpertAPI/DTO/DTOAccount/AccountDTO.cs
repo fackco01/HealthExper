@@ -12,6 +12,7 @@
         public DateTime birthDate { get; set; }
         public DateTime createDate { get; set; }
         public bool isActive { get; set; }
+        public int roleId { get; set; }
         public string verificationToken { get; set; } = string.Empty;
     }
 }
