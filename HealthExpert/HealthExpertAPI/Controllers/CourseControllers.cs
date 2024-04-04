@@ -1,4 +1,17 @@
-﻿namespace HealthExpertAPI.Controllers
+﻿using AutoMapper;
+using BussinessObject.ContextData;
+using BussinessObject.Model.ModelCourse;
+using DataAccess.Repository;
+using DataAccess.Repository.IRepository;
+using HealthExpertAPI.DTO.DTOCourse;
+using HealthExpertAPI.DTO.DTOEnrollment;
+using HealthExpertAPI.Extension.ExCourse;
+using HealthExpertAPI.Extension.ExEnrollment;
+using HealthExpertAPI.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace HealthExpertAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
