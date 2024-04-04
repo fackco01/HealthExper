@@ -235,24 +235,109 @@ namespace HealthExpertAPI.Controllers
         }
 
         //Enroll in Course
-        [HttpPost("enroll")]
+        //[HttpPost("enroll")]
+        //[AllowAnonymous]
+        //public IActionResult EnrollInCourse(EnrollmentDTO enrollmentDTO)
+        //{
+        //    var course = _context.courses.Find(enrollmentDTO.courseId);
+        //    if (course == null)
+        //    {
+        //        return BadRequest("Course not found!!");
+        //    }
+
+        //    var user = _context.accounts.FirstOrDefault(x => x.accountId.Equals(enrollmentDTO.accountId));
+        //    if (user == null)
+        //    {
+        //        return BadRequest("User not found!!");
+        //    }
+
+        //    var enrollment = _context.enrollments.FirstOrDefault(e => e.accountId == enrollmentDTO.accountId && e.courseId == enrollmentDTO.courseId);
+        //    if (enrollment != null)
+        //    {
+        //        return BadRequest("User is already enrolled in this course!!");
+        //    }
+
+        //    var newEnrollment = enrollmentDTO.ToEnrollment();
+        //    _context.enrollments.Add(newEnrollment);
+        //    _context.SaveChanges();
+        //    return Ok();
+        //}
+
+            //Enroll by billId
+            [HttpPost("enroll/{billId}")]
+        //[AllowAnonymous]
+        //public IActionResult EnrollInCourse(Guid billId)
+        //{
+        //    var bill = _context.bills.Find(billId);
+        //    if (bill == null)
+        //    {
+        //        return BadRequest("Bill not found!!");
+        //    }
+
+        //    var course = _context.courses.Find(bill.order.courseId);
+        //    if (course == null)
+        //    {
+        //        return BadRequest("Course not found!!");
+        //    }
+
+        //    var user = _context.accounts.Find(bill.accountId);
+        //    if (user == null)
+        //    {
+        //        return BadRequest("User not found!!");
+        //    }
+
+        //    var enrollment = _context.enrollments.FirstOrDefault(e => e.accountId == bill.accountId && e.courseId == bill.order.courseId);
+        //    if (enrollment != null)
+        //    {
+        //        return BadRequest("User is already enrolled in this course!!");
+        //    }
+
+        //    var newEnrollment = new Enrollment
+        //    {
+        //        accountId = bill.accountId,
+        //        courseId = bill.order.courseId,
+        //        enrollDate = DateTime.Now,
+        //        enrollStatus = true
+        //    };
+
+        //    _context.enrollments.Add(newEnrollment);
+        //    _context.SaveChanges();
+        //    return Ok();
+        //}
+
+        //Enroll in course by accountId and courseId
+        [HttpPost("enroll/{accountId}/{courseId}")]
         [AllowAnonymous]
-        public IActionResult EnrollInCourse(EnrollmentDTO enrollmentDTO)
+        public IActionResult EnrollInCourse(Guid accountId, string courseId)
         {
-            var course = _context.courses.Find(enrollmentDTO.courseId);
+            var course = _context.courses.Find(courseId);
             if (course == null)
             {
                 return BadRequest("Course not found!!");
             }
 
-            var user = _context.accounts.FirstOrDefault(x => x.accountId.Equals(enrollmentDTO.accountId));
+            var user = _context.accounts.Find(accountId);
             if (user == null)
             {
                 return BadRequest("User not found!!");
             }
 
-            var enrollment = enrollmentDTO.ToEnrollment();
-            _repository.AddEnrollment(enrollment);
+            var enrollment = _context.enrollments.FirstOrDefault(e => e.accountId == accountId && e.courseId == courseId);
+            if (enrollment != null)
+            {
+                return BadRequest("User is already enrolled in this course!!");
+            }
+
+            var newEnrollment = new Enrollment
+            {
+                accountId = accountId,
+                courseId = courseId,
+                enrollDate = DateTime.Now,
+                enrollStatus = true
+            };
+
+            _context.enrollments.Add(newEnrollment);
+            _context.SaveChanges();
             return Ok();
         }
 
@@ -263,6 +348,35 @@ namespace HealthExpertAPI.Controllers
         {
             var enrollments = _repository.GetEnrollments().Select(enrollments => enrollments.ToEnrollmentDTO());
             return Ok(enrollments);
+        }
+
+        //Update enrollStatus of Enrollment by accountId and courseId
+        [HttpPut("enrollments/{accountId}/{courseId}")]
+        [AllowAnonymous]
+        public IActionResult UpdateEnrollStatus(Guid accountId, string courseId, EnrollmentDTOUpdate enrollmentDTO)
+        {
+            var enrollment = _context.enrollments.FirstOrDefault(e => e.accountId == accountId && e.courseId == courseId);
+            if (enrollment == null)
+            {
+                return NotFound("Enrollment not found!!");
+            }
+
+            enrollment.enrollStatus = enrollmentDTO.enrollStatus;
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        //Get courseId by orderId
+        [HttpGet("order/{orderId}")]
+        [AllowAnonymous]
+        public IActionResult GetCourseIdByOrderId(Guid orderId)
+        {
+            var order = _context.orders.FirstOrDefault(c => c.orderId == orderId);
+            if (order == null)
+            {
+                return NotFound("Course not found!!");
+            }
+            return Ok(order.courseId);
         }
     }
 }

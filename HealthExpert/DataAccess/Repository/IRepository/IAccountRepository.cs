@@ -17,5 +17,6 @@ namespace DataAccess.Repository.IRepository
         void AddAccount(Account account);
         void UpdateAccount(Guid id,Account account);
         void DeleteAccount(Guid id);
+        Guid GetAccountId(string userName);
     }
 }

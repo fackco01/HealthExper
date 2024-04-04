@@ -67,8 +67,8 @@ namespace DataAccess.DAO
                     var roleId = 3; // Assuming the role id for course manager is 3
                     var courseManager = new CourseManagement
                     {
-                       courseManagerId = GenerateUniqueCourseManagerId(),
-                       courseId = courseId
+                        courseManagerId = GenerateUniqueCourseManagerId(),
+                        courseId = courseId
                     };
                     courseManager.accounts = new List<Account> { user };
                     user.roleId = roleId;

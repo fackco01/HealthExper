@@ -25,5 +25,10 @@ namespace DataAccess.Repository
         public void DeleteAccount(Guid id)  => AccountDAO.DeleteAccount(id);
 
         public void AddAccount(Account account) => AccountDAO.AddAccount(account);
+
+        public Guid GetAccountId(string userName)
+        {
+            return AccountDAO.GetAccountId(userName);
+        }
     }
 }

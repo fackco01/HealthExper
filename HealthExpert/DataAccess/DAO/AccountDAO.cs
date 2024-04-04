@@ -135,5 +135,25 @@ namespace DataAccess.DAO
                 throw new Exception(ex.Message);
             }
         }
+
+        //Get accountId by userName
+        public static Guid GetAccountId(string userName)
+        {
+            var accountId = new Guid();
+            try
+            {
+                using (var ctx = new HealthExpertContext())
+                {
+                    var account = ctx.accounts.FirstOrDefault(account => account.userName == userName);
+                    accountId = account.accountId;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return accountId;
+        }
     }
 }
