@@ -27,5 +27,14 @@ namespace HealthExpertAPI.Extension.ExEnrollment
                 enrollStatus = enrollmentDTO.enrollStatus
             };
         }
+
+        public static EnrollmentDTOUpdate ToEnrollmentDTOUpdate(this Enrollment enrollment)
+        {
+            return new EnrollmentDTOUpdate
+            {
+                enrollStatus = enrollment.enrollStatus,
+                dateUpdate = enrollment.enrollDate
+            };
+        }
     }
 }

@@ -172,5 +172,18 @@ namespace HealthExpertAPI.Controllers
         {
             return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
         }
+
+        //Get accountId by userName
+        [AllowAnonymous]
+        [HttpGet("{userName}")]
+        public ActionResult GetAccountIdByUserName(string userName)
+        {
+            var account = _repository.GetAccountId(userName);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            return Ok(account);
+        }
     }
 }
