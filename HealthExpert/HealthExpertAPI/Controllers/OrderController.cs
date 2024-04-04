@@ -18,6 +18,7 @@ namespace HealthExpertAPI.Controllers
     {
         private readonly IOrderRepository _repository = new OrderRepository();
         private readonly IBillRepository _repoBill = new BillRepository();
+        private readonly ICourseRepository _repoCourse = new CourseRepository();
         private readonly HealthExpertContext _context;
         private static readonly Random random = new Random();
         private static List<CheckoutDTO> _checkoutDataList = new List<CheckoutDTO>();
@@ -192,16 +193,17 @@ namespace HealthExpertAPI.Controllers
                 bill.orderInfo = Convert.ToString(queryParams.vnp_OrderInfo);
               
                 _context.Database.BeginTransaction();
-                //_context.bills.Add(bill);
                 _repoBill.InsertBill(bill);
                 _context.SaveChanges();
 
-                //var enroll = _context.enrollments.FirstOrDefault(x => x.courseId == checkoutData.courseId);
-                //if (enroll != null)
-                //{
-                //    enroll.enrollStatus = true;
-                //    _repoEnroll.Update(enroll);
-                //}
+                var enroll = _context.enrollments.FirstOrDefault(x => x.courseId == checkoutData.courseId);
+                if (enroll != null)
+                {
+                    enroll.enrollStatus = true;
+                    enroll.accountId = checkoutData.accountId.HasValue ? checkoutData.accountId.Value : Guid.Empty;
+                    enroll.courseId = checkoutData.courseId;
+                    _repoCourse.UpdateEnrollment(enroll);
+                }
 
                 _checkoutDataList.Remove(checkoutData);
 

@@ -1,11 +1,6 @@
 ﻿using BussinessObject.Model.ModelCourse;
 using DataAccess.DAO;
 using DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
@@ -79,6 +74,15 @@ namespace DataAccess.Repository
         public bool IsCourseManager(string email, string courseId)
         {
             return CourseDAO.IsCourseManager(email, courseId);
+        }
+
+        //Update Enrollment 
+        public void UpdateEnrollment(Enrollment enrollment) => CourseDAO.UpdateEnrollment(enrollment);
+
+        //Delete Enrollment
+        public void DeleteEnrollment(Enrollment enrollment)
+        {
+            CourseDAO.DeleteEnrollment(enrollment);
         }
     }
 }

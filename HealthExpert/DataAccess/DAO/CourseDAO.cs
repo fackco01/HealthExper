@@ -1,12 +1,6 @@
 ﻿using BussinessObject.ContextData;
 using BussinessObject.Model.ModelCourse;
 using BussinessObject.Model.ModelUser;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
@@ -104,8 +98,43 @@ namespace DataAccess.DAO
             }
         }
 
-        //Check if user already a course manager with email and courseId
-        public static bool IsCourseManager(string email, string courseId)
+        //Update Enrollment
+        public static void UpdateEnrollment (Enrollment enrollment)
+        {
+            try
+            {
+                using (var ctx = new HealthExpertContext())
+                {
+                    ctx.enrollments.Add(enrollment);
+                    ctx.Entry(enrollment).State =
+                        Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        //Delete Enrollment
+        public static void DeleteEnrollment(Enrollment enrollment)
+        {
+            try
+            {
+                using (var ctx = new HealthExpertContext())
+                {
+                    ctx.enrollments.Remove(enrollment);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+            //Check if user already a course manager with email and courseId
+            public static bool IsCourseManager(string email, string courseId)
         {
             using (var context = new HealthExpertContext())
             {

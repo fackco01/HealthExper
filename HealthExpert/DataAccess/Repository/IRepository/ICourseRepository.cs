@@ -1,9 +1,4 @@
 ﻿using BussinessObject.Model.ModelCourse;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Repository.IRepository
 {
@@ -17,6 +12,8 @@ namespace DataAccess.Repository.IRepository
         void UpdateCourse(Course course);
         void AddCourseManagerByEmail(string email, string courseId);
         void AddEnrollment(Enrollment enrollment);
+        void UpdateEnrollment(Enrollment enrollment);
+        void DeleteEnrollment(Enrollment enrollment);
         List<Enrollment> GetEnrollments();
         bool IsCourseManager(string email, string courseId);
     }
