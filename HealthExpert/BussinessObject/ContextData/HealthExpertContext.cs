@@ -1,5 +1,6 @@
 ﻿using BussinessObject.Model.Authen;
 using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelNutrition;
 using BussinessObject.Model.ModelPayment;
 using BussinessObject.Model.ModelPost;
 using BussinessObject.Model.ModelSession;
@@ -37,6 +38,7 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Category> categories { get; set; }
         public virtual DbSet<Post_Like> post_Likes { get; set; }
         public virtual DbSet<Post_Meta> post_Metas { get; set; }
+        public virtual DbSet<Nutrition> nutritions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

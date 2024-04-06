@@ -264,7 +264,7 @@ namespace HealthExpertAPI.Controllers
         //}
 
             //Enroll by billId
-            [HttpPost("enroll/{billId}")]
+            //[HttpPost("enroll/{billId}")]
         //[AllowAnonymous]
         //public IActionResult EnrollInCourse(Guid billId)
         //{
