@@ -1,4 +1,5 @@
 ﻿using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelNutrition;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
