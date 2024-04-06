@@ -74,6 +74,15 @@ namespace HealthExpertAPI.Controllers
                 return BadRequest("Course or account not found.");
             }
 
+            // Check if the account already has the course
+            //var existingOrder = _context.orders
+            //    .FirstOrDefault(o => o.accountId == orderDTO.accountId && o.courseId == orderDTO.courseId);
+
+            //if (existingOrder != null)
+            //{
+            //    return BadRequest("You already have this course.");
+            //}
+
             var course = _context.courses.SingleOrDefault(c => c.courseId == orderDTO.courseId);
             var account = _context.accounts.SingleOrDefault(account => account.accountId == orderDTO.accountId);
 
@@ -191,19 +200,16 @@ namespace HealthExpertAPI.Controllers
                 bill.bankTranNo = Convert.ToString(queryParams.vnp_BankTranNo);
                 bill.cardType = Convert.ToString(queryParams.vnp_CardType);
                 bill.orderInfo = Convert.ToString(queryParams.vnp_OrderInfo);
-              
+
+                //var enroll = _context.enrollments.FirstOrDefault(x => x.courseId == checkoutData.courseId);
+                //enroll.enrollStatus = true;
+                //enroll.accountId = checkoutData.accountId.HasValue ? checkoutData.accountId.Value : Guid.Empty;
+                //enroll.courseId = checkoutData.courseId;
+
                 _context.Database.BeginTransaction();
                 _repoBill.InsertBill(bill);
+                //_repoCourse.UpdateEnrollment(enroll);
                 _context.SaveChanges();
-
-                var enroll = _context.enrollments.FirstOrDefault(x => x.courseId == checkoutData.courseId);
-                if (enroll != null)
-                {
-                    enroll.enrollStatus = true;
-                    enroll.accountId = checkoutData.accountId.HasValue ? checkoutData.accountId.Value : Guid.Empty;
-                    enroll.courseId = checkoutData.courseId;
-                    _repoCourse.UpdateEnrollment(enroll);
-                }
 
                 _checkoutDataList.Remove(checkoutData);
 

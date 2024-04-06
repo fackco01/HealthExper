@@ -59,6 +59,31 @@ namespace HealthExpertAPI.Controllers
             return Ok("Account successfully register!!");
         }
 
+        // Register Course Admin
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult RegisterCourseAdmin(CourseAdminRegistrationDTO accountDTO)
+        {
+            if (_context.accounts.Any(a => a.email == accountDTO.email))
+            {
+                return BadRequest("Account Exist!!");
+            }
+
+            CreatedPasswordHash(accountDTO.password,
+                out byte[] passwordHash,
+                out byte[] passwordSalt);
+
+            Account account = accountDTO.ToCourseAdminRegister(passwordHash, passwordSalt);
+            account.verificationToken = CreateRandomToken();
+            account.phone = accountDTO.phone;
+            account.roleId = 2;
+            account.gender = true;
+            account.isActive = true;
+
+            _repository.AddAccount(account);
+            return Ok("Course Admin successfully register!!");
+        }
+
         //forgot password
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(string username)
