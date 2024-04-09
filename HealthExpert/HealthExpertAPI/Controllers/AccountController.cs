@@ -145,6 +145,19 @@ namespace HealthExpertAPI.Controllers
             return Ok(account.ToAccountDTO());
         }
 
+        // Get Username by Account ID
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public ActionResult<string> GetUsernameById(Guid id)
+        {
+            var account = _repository.GetAccountById(id);
+            if (account == null || !account.isActive)
+            {
+                return NotFound();
+            }
+            return Ok(account.userName);
+        }
+
         //Update Account
         [AllowAnonymous]
         [HttpPut("{id}")]
@@ -204,6 +217,19 @@ namespace HealthExpertAPI.Controllers
         public ActionResult GetAccountIdByUserName(string userName)
         {
             var account = _repository.GetAccountId(userName);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            return Ok(account);
+        }
+
+        //Get Account by Email
+        [AllowAnonymous]
+        [HttpGet("{email}")]
+        public ActionResult GetAccountByEmail(string email)
+        {
+            var account = _repository.GetAccountByEmail(email).Select(account => account.ToAccountDTO());
             if (account == null)
             {
                 return NotFound();

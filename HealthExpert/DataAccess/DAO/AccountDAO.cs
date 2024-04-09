@@ -147,5 +147,24 @@ namespace DataAccess.DAO
 
             return accountId;
         }
+
+        //Get account by email
+        public static List<Account> GetAccountByEmail(string email)
+        {
+            List<Account> accounts;
+            try
+            {
+                using (var ctx = new HealthExpertContext())
+                {
+                    accounts = ctx.accounts.Where(account => account.email.Contains(email)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return accounts;
+        }
     }
 }

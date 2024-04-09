@@ -25,5 +25,10 @@ namespace DataAccess.Repository
         {
             return AccountDAO.GetAccountId(userName);
         }
+
+        public List<Account> GetAccountByEmail(string email)
+        {
+            return AccountDAO.GetAccountByEmail(email);
+        }
     }
 }

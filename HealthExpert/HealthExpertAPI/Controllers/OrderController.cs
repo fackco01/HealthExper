@@ -213,7 +213,9 @@ namespace HealthExpertAPI.Controllers
 
                 _checkoutDataList.Remove(checkoutData);
 
-                return Ok(new { message = "Payment successful" });
+                //return Ok(new { message = "Payment successful" });
+                var frontendURL = $"http://localhost:3000/detailCourse/{checkoutData.courseId}";
+                return Redirect(frontendURL);
             }
             else
             {

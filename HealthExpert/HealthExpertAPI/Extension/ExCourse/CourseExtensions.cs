@@ -34,7 +34,7 @@ namespace HealthExpertAPI.Extension.ExCourse
                 price = courseDTO.price,
                 rating = courseDTO.rating,
                 description = courseDTO.description,
-                studentNumber = courseDTO.studentNumber,
+                studentNumber = 0,
                 certificate = courseDTO.certificate,
                 createBy = courseDTO.createBy,
                 dateUpdate = courseDTO.dateUpdate,

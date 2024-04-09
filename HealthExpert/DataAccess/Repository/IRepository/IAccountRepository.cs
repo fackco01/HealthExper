@@ -13,5 +13,6 @@ namespace DataAccess.Repository.IRepository
         void UpdateAccount(Account account);
         void DeleteAccount(Guid id);
         Guid GetAccountId(string userName);
+        List<Account> GetAccountByEmail(string email);
     }
 }

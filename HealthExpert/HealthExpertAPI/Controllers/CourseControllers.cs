@@ -234,76 +234,6 @@ namespace HealthExpertAPI.Controllers
             return Ok();
         }
 
-        //Enroll in Course
-        //[HttpPost("enroll")]
-        //[AllowAnonymous]
-        //public IActionResult EnrollInCourse(EnrollmentDTO enrollmentDTO)
-        //{
-        //    var course = _context.courses.Find(enrollmentDTO.courseId);
-        //    if (course == null)
-        //    {
-        //        return BadRequest("Course not found!!");
-        //    }
-
-        //    var user = _context.accounts.FirstOrDefault(x => x.accountId.Equals(enrollmentDTO.accountId));
-        //    if (user == null)
-        //    {
-        //        return BadRequest("User not found!!");
-        //    }
-
-        //    var enrollment = _context.enrollments.FirstOrDefault(e => e.accountId == enrollmentDTO.accountId && e.courseId == enrollmentDTO.courseId);
-        //    if (enrollment != null)
-        //    {
-        //        return BadRequest("User is already enrolled in this course!!");
-        //    }
-
-        //    var newEnrollment = enrollmentDTO.ToEnrollment();
-        //    _context.enrollments.Add(newEnrollment);
-        //    _context.SaveChanges();
-        //    return Ok();
-        //}
-
-            //Enroll by billId
-            //[HttpPost("enroll/{billId}")]
-        //[AllowAnonymous]
-        //public IActionResult EnrollInCourse(Guid billId)
-        //{
-        //    var bill = _context.bills.Find(billId);
-        //    if (bill == null)
-        //    {
-        //        return BadRequest("Bill not found!!");
-        //    }
-
-        //    var course = _context.courses.Find(bill.order.courseId);
-        //    if (course == null)
-        //    {
-        //        return BadRequest("Course not found!!");
-        //    }
-
-        //    var user = _context.accounts.Find(bill.accountId);
-        //    if (user == null)
-        //    {
-        //        return BadRequest("User not found!!");
-        //    }
-
-        //    var enrollment = _context.enrollments.FirstOrDefault(e => e.accountId == bill.accountId && e.courseId == bill.order.courseId);
-        //    if (enrollment != null)
-        //    {
-        //        return BadRequest("User is already enrolled in this course!!");
-        //    }
-
-        //    var newEnrollment = new Enrollment
-        //    {
-        //        accountId = bill.accountId,
-        //        courseId = bill.order.courseId,
-        //        enrollDate = DateTime.Now,
-        //        enrollStatus = true
-        //    };
-
-        //    _context.enrollments.Add(newEnrollment);
-        //    _context.SaveChanges();
-        //    return Ok();
-        //}
 
         //Enroll in course by accountId and courseId
         [HttpPost("enroll/{accountId}/{courseId}")]
@@ -377,6 +307,111 @@ namespace HealthExpertAPI.Controllers
                 return NotFound("Course not found!!");
             }
             return Ok(order.courseId);
+        }
+
+        [HttpPost("increase-student-number/{courseId}")]
+        [AllowAnonymous]
+        public IActionResult IncreaseStudentNumber(string courseId)
+        {
+            var course = _context.courses.Find(courseId);
+            if (course == null)
+            {
+                return NotFound("Course not found!!");
+            }
+
+            // Kiểm tra xem có enrollment mới nào được tạo ra không
+            var newEnrollment = _context.enrollments.Any(e => e.courseId == courseId && e.enrollStatus);
+
+            if (newEnrollment)
+            {
+                // Tăng giá trị studentNumber lên một
+                course.studentNumber++;
+
+                // Lưu các thay đổi vào cơ sở dữ liệu
+                _context.SaveChanges();
+
+                return Ok("Student number increased successfully.");
+            }
+            else
+            {
+                return BadRequest("No new enrollments found for this course.");
+            }
+        }
+
+        [HttpGet("count-student-number/{courseId}")]
+        [AllowAnonymous]
+        public IActionResult CountStudentNumber(string courseId)
+        {
+            var course = _context.courses.Find(courseId);
+            if (course == null)
+            {
+                return NotFound("Course not found!!");
+            }
+
+            // Đếm số lượng enrollments cho khóa học này
+            var enrollmentCount = _context.enrollments.Count(e => e.courseId == courseId && e.enrollStatus);
+
+            return Ok(enrollmentCount);
+        }
+
+        // Get Course Name by Id
+        [HttpGet("name/{courseId}")]
+        [AllowAnonymous]
+        public IActionResult GetCourseNameById(string courseId)
+        {
+            var course = _repository.GetCourseById(courseId);
+            if (course == null)
+            {
+                return NotFound("Course not found!!");
+            }
+
+            return Ok(course.courseName);
+        }
+
+        [HttpGet("{courseId}/users")]
+        [AllowAnonymous]
+        public IActionResult GetUsersInCourse(string courseId)
+        {
+            try
+            {
+                var course = _repository.GetCourseById(courseId);
+                if (course == null)
+                {
+                    return NotFound("Course not found!!");
+                }
+
+                var usersInCourse = _context.enrollments
+                    .Where(e => e.courseId == courseId && e.enrollStatus)
+                    .Select(e => new
+                    {
+                        accountId = e.accountId,
+                        enrollDate = e.enrollDate
+                    })
+                    .ToList();
+
+                var userDetails = _context.accounts
+                    .Where(a => usersInCourse.Select(u => u.accountId).Contains(a.accountId))
+                    .Select(a => new
+                    {
+                        accountId = a.accountId,
+                        userName = a.userName,
+                        email = a.email
+                    })
+                    .ToList();
+
+                var usersWithEnrollDate = userDetails.Select(u => new
+                {
+                    userName = u.userName,
+                    email = u.email,
+                    enrollDate = usersInCourse.FirstOrDefault(e => e.accountId == u.accountId)?.enrollDate
+                }).ToList();
+
+                return Ok(usersWithEnrollDate);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to retrieve users in course: " + ex.Message);
+            }
         }
     }
 }
