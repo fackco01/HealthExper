@@ -25,7 +25,7 @@ namespace HealthExpertAPI.Controllers
 
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-        
+
         public CourseController(IConfiguration configuration, IMapper mapper, HealthExpertContext context)
         {
             _configuration = configuration;
@@ -138,8 +138,8 @@ namespace HealthExpertAPI.Controllers
         }
 
 
-    //Update Course
-    [HttpPut("{courseId}")]
+        //Update Course
+        [HttpPut("{courseId}")]
         [AllowAnonymous]
         public IActionResult UpdateCourse(string courseId, CourseDTOUpdate courseDTO)
         {
