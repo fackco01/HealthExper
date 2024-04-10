@@ -10,6 +10,7 @@ using HealthExpertAPI.Extension.ExEnrollment;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthExpertAPI.Controllers
 {
@@ -76,10 +77,21 @@ namespace HealthExpertAPI.Controllers
         {
             try
             {
+                if (courseManagers == null)
+                {
+                    return BadRequest("No course managers provided.");
+                }
+
                 List<string> messages = new List<string>();
 
                 foreach (var manager in courseManagers)
                 {
+                    if (manager.accountEmails == null)
+                    {
+                        messages.Add($"No account emails provided for course manager with courseId {manager.courseId}");
+                        continue;
+                    }
+
                     var course = _context.courses.Find(manager.courseId);
                     if (course == null)
                     {
@@ -89,6 +101,13 @@ namespace HealthExpertAPI.Controllers
 
                     foreach (var email in manager.accountEmails)
                     {
+                        //check if users dont have roled=4
+                        var roleUser = _context.accounts.FirstOrDefault(x => x.roleId == 4);
+                        if (roleUser == null)
+                        {
+                            messages.Add($"User with email {email} is not a User!!");
+                            continue;
+                        }
                         var user = _context.accounts.FirstOrDefault(x => x.email.Equals(email));
                         if (user == null)
                         {
@@ -104,7 +123,6 @@ namespace HealthExpertAPI.Controllers
                         }
                         else
                         {
-                            var courseManager = manager.ToCreateCourseManager();
                             _repository.AddCourseManagerByEmail(email, manager.courseId);
                             messages.Add($"User with email {email} added as a Course Manager for course {manager.courseId}");
                         }
@@ -120,8 +138,8 @@ namespace HealthExpertAPI.Controllers
         }
 
 
-        //Update Course
-        [HttpPut("{courseId}")]
+    //Update Course
+    [HttpPut("{courseId}")]
         [AllowAnonymous]
         public IActionResult UpdateCourse(string courseId, CourseDTOUpdate courseDTO)
         {
@@ -166,6 +184,7 @@ namespace HealthExpertAPI.Controllers
             }
 
             var courseManagers = _context.courseManagements
+                .Include(cm => cm.accounts) // Ensure accounts are included
                 .Where(c => c.courseId == courseId)
                 .Select(c => c.ToCourseManagerDTO())
                 .ToList();
@@ -191,6 +210,7 @@ namespace HealthExpertAPI.Controllers
 
             return Ok(courseDTO);
         }
+
 
         //Get Course Managers by Email
         [HttpGet("managers/email/{email}")]

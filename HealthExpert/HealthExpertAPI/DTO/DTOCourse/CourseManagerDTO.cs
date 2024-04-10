@@ -6,7 +6,6 @@ namespace HealthExpertAPI.DTO.DTOCourse
     {
         public string courseId { get; set; }
         public int courseManagerId { get; set; }
-        [JsonIgnore]
-        public List<string> accountEmails { get; set; }
+        public List<string>? accountEmails { get; set; }
     }
 }
