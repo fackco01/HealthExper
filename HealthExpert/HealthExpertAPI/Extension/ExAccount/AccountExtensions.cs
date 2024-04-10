@@ -20,8 +20,8 @@ namespace HealthExpertAPI.Extension.ExAccount
                 createDate = account.createDate,
                 isActive = account.isActive,
                 roleId = account.roleId,
-                verificationToken = account.verificationToken
-
+                verificationToken = account.verificationToken,
+                passwordResetToken = account.passwordResetToken
             };
         }
 

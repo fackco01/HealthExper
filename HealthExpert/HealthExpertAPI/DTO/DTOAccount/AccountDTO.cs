@@ -14,5 +14,6 @@
         public bool isActive { get; set; }
         public int roleId { get; set; }
         public string verificationToken { get; set; } = string.Empty;
+        public string passwordResetToken { get; set; } = string.Empty;
     }
 }

@@ -85,34 +85,37 @@ namespace HealthExpertAPI.Controllers
         }
 
         //forgot password
-        [HttpPost("forgot-password")]
+        [HttpPost]
         public async Task<IActionResult> ForgotPassword(string username)
         {
             var account = await _context.accounts.FirstOrDefaultAsync(u => u.userName == username);
-            if (account == null && !account.isActive)
+            if (account == null)
             {
-                return BadRequest("User not found.");
+                return BadRequest();
             }
 
             account.passwordResetToken = CreateRandomToken();
             account.resetTokenExpires = DateTime.Now.AddDays(1);
             await _context.SaveChangesAsync();
 
-            return Ok("You may now reset your password.");
+            return Ok();
         }
 
         //Reset password
-        [HttpPost("reset-password")]
+        [HttpPost]
         public async Task<IActionResult> ResettPassword(ResetPasswordDTO resetPasswordDTO)
         {
             var account = await _context.accounts.FirstOrDefaultAsync(u => u.passwordResetToken == resetPasswordDTO.token);
-            if (account == null && !account.isActive || account.resetTokenExpires < DateTime.Now)
+            if (account == null || account.resetTokenExpires < DateTime.Now)
             {
-                return BadRequest("Invalid Token.");
+                return BadRequest();
             }
 
-            CreatedPasswordHash(resetPasswordDTO.password, out byte[] passwordHash, out byte[] passwordSalt);
+            CreatedPasswordHash(resetPasswordDTO.password,
+                out byte[] passwordHash,
+                out byte[] passwordSalt);
 
+            account.password = resetPasswordDTO.password;
             account.passwordHash = passwordHash;
             account.passwordSalt = passwordSalt;
             account.passwordResetToken = null;
@@ -120,7 +123,7 @@ namespace HealthExpertAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok("Password successfully reset.");
+            return Ok();
         }
 
         //Vỉew Account

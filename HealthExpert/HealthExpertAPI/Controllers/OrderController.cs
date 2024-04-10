@@ -45,7 +45,7 @@ namespace HealthExpertAPI.Controllers
         }
 
         //View Checkout Order By Id
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
