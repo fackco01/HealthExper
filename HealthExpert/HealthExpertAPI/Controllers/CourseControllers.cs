@@ -102,10 +102,10 @@ namespace HealthExpertAPI.Controllers
                     foreach (var email in manager.accountEmails)
                     {
                         //check if users dont have roled=4
-                        var roleUser = _context.accounts.FirstOrDefault(x => x.roleId == 4);
+                        var roleUser = _context.accounts.FirstOrDefault(x => x.email.Equals(manager.accountEmails) && x.roleId == 4);
                         if (roleUser == null)
                         {
-                            messages.Add($"User with email {email} is not a User!!");
+                            messages.Add($"User with email is not a normal User!!");
                             continue;
                         }
                         var user = _context.accounts.FirstOrDefault(x => x.email.Equals(email));
