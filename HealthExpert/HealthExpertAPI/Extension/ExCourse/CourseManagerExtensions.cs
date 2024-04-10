@@ -20,7 +20,7 @@ namespace HealthExpertAPI.Extension.ExCourse
                 courseId = courseManager.courseId
             };
 
-            //get the courseManager's accountEmails by using courseManagerId
+            // Get the courseManager's accountEmails by using courseManagerId
             if (courseManager.accounts != null)
             {
                 dto.accountEmails = courseManager.accounts.Select(a => a.email).ToList();
