@@ -1,16 +1,13 @@
 ﻿using BussinessObject.ContextData;
-using BussinessObject.Model.Authen;
 using DataAccess.Repository;
 using HealthExpertAPI.DTO.DTOAccount;
 using HealthExpertAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace HealthExpertAPI.Controllers
 {
@@ -37,7 +34,7 @@ namespace HealthExpertAPI.Controllers
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
             var account = await _context.accounts.FirstOrDefaultAsync(a => a.userName == loginDTO.userName);
-            if (account == null && !account.isActive)
+            if (account == null || !account.isActive)
             {
                 return BadRequest("User not found!!!");
             }

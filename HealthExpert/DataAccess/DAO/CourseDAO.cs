@@ -51,6 +51,7 @@ namespace DataAccess.DAO
             }
         }
 
+        //Add Course Manager
         public static void AddCourseManagerByEmail(string email, string courseId)
         {
             using (var context = new HealthExpertContext())
@@ -69,8 +70,16 @@ namespace DataAccess.DAO
                     context.courseManagements.Add(courseManager);
                     context.SaveChanges();
                 }
+                else
+                {
+                    // Handle the case where user is null
+                    // For example, you might throw an exception or log an error
+                    // This depends on your application's requirements
+                    throw new Exception("User with email " + email + " not found.");
+                }
             }
         }
+
         private static int GenerateUniqueCourseManagerId()
         {
             using (var context = new HealthExpertContext())
@@ -99,7 +108,7 @@ namespace DataAccess.DAO
         }
 
         //Update Enrollment
-        public static void UpdateEnrollment (Enrollment enrollment)
+        public static void UpdateEnrollment(Enrollment enrollment)
         {
             try
             {
@@ -133,8 +142,8 @@ namespace DataAccess.DAO
                 throw new Exception(ex.Message);
             }
         }
-            //Check if user already a course manager with email and courseId
-            public static bool IsCourseManager(string email, string courseId)
+        //Check if user already a course manager with email and courseId
+        public static bool IsCourseManager(string email, string courseId)
         {
             using (var context = new HealthExpertContext())
             {

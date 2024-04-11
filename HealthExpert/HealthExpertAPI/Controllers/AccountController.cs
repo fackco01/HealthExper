@@ -77,6 +77,8 @@ namespace HealthExpertAPI.Controllers
             account.verificationToken = CreateRandomToken();
             account.phone = accountDTO.phone;
             account.roleId = 2;
+            account.bankName = accountDTO.bankName;
+            account.bankNumber = accountDTO.bankNumber;
             account.gender = true;
             account.isActive = true;
 
@@ -193,6 +195,21 @@ namespace HealthExpertAPI.Controllers
                 return NotFound();
             }
             account.isActive = false;
+            _repository.UpdateAccount(account);
+            return NoContent();
+        }
+
+        //Enable Account when change isActive = true
+        [AllowAnonymous]
+        [HttpPost("{id}")]
+        public ActionResult EnableAccount(Guid id)
+        {
+            var account = _repository.GetAccountById(id);
+            if (account == null || account.isActive)
+            {
+                return NotFound();
+            }
+            account.isActive = true;
             _repository.UpdateAccount(account);
             return NoContent();
         }

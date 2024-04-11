@@ -11,6 +11,8 @@
         public bool gender { get; set; }
         public DateTime birthDate { get; set; }
         public DateTime createDate { get; set; }
+        public string bankNumber { get; set; } = string.Empty;
+        public string bankName { get; set; } = string.Empty;
         public bool isActive { get; set; }
         public int roleId { get; set; }
         public string verificationToken { get; set; } = string.Empty;

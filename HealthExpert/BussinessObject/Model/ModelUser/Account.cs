@@ -24,6 +24,8 @@ namespace BussinessObject.Model.ModelUser
         [Required] public bool gender { get; set; }
         [Required] public DateTime birthDate { get; set; }
         public DateTime createDate { get; set; } = DateTime.Now;
+        public string? bankNumber { get; set; }
+        public string? bankName { get; set; }
         [Required] public bool isActive { get; set; }
 
         [Required] public int roleId { get; set; }

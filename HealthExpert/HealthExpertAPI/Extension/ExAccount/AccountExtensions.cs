@@ -17,6 +17,8 @@ namespace HealthExpertAPI.Extension.ExAccount
                 fullName = account.fullName,
                 gender = account.gender,
                 birthDate = account.birthDate,
+                bankNumber = account.bankNumber,
+                bankName = account.bankName,
                 createDate = account.createDate,
                 isActive = account.isActive,
                 roleId = account.roleId,
@@ -56,6 +58,8 @@ namespace HealthExpertAPI.Extension.ExAccount
                 phone = accountDTO.phone,
                 gender = accountDTO.gender,
                 birthDate = accountDTO.birthDate,
+                bankNumber = accountDTO.bankNumber,
+                bankName = accountDTO.bankName,
                 roleId = accountDTO.roleId,
                 isActive = accountDTO.isActive
             };

@@ -20,6 +20,8 @@ namespace HealthExpertAPI.DTO.DTOAccount
         public bool gender { get; set; }
         [JsonIgnore]
         public DateTime birthDate { get; set; } = DateTime.Now;
+        public string bankNumber { get; set; } = string.Empty;
+        public string bankName { get; set; } = string.Empty;
         public int roleId { get; set; }
         public bool isActive { get; set; }
     }
