@@ -52,7 +52,7 @@ namespace HealthExpertAPI.Controllers
 
             if (file.VideoFile.Length > 0)
             {
-                Upload(file);
+                await Upload(file);
 
                 var lessonId = formData["lessonId"].ToString();
                 var caption = formData["caption"].ToString();

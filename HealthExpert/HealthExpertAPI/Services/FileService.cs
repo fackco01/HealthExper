@@ -23,7 +23,7 @@ namespace HealthExpertAPI.Services
 
         public async Task<Stream> Get(string name)
         {
-            var containerInstance = _blobServiceClient.GetBlobContainerClient("healthexpertvideos");
+            var containerInstance = _blobServiceClient.GetBlobContainerClient("healthexpertvideos2");
             var blobInstance = containerInstance.GetBlobClient(name);
 
             var downloadContent = await blobInstance.DownloadAsync();
