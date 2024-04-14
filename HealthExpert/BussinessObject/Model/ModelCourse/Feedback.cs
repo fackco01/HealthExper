@@ -12,10 +12,8 @@ namespace BussinessObject.Model.ModelCourse
     public class Feedback
     {
         [Key]
-        public int feedbackId { get; set; }
-        [Key]
+        public Guid feedbackId { get; set; }
         public Guid accountId { get; set; }
-        [Key]
         public string courseId { get; set; }
         public string detail { get; set; }
         public DateTime createDate { get; set; } = DateTime.Now;

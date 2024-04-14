@@ -10,6 +10,23 @@ namespace DataAccess.DAO
 {
     public class NutritionDAO
     {
+        //Add Nutrition by sessionId
+        public static void AddNutrition(string sessionId, Nutrition nutrition)
+        {
+            try
+            {
+                using (var ctx = new HealthExpertContext())
+                {
+                    var session = ctx.sessions.FirstOrDefault(session => session.sessionId == sessionId);
+                    session.Nutritions.Add(nutrition);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         //Add Nutrition
         public static void AddNutrition(Nutrition nutrition)
         {

@@ -21,7 +21,7 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeletePost(int postId)
+        public static void DeletePost(Guid postId)
         {
             using (var context = new HealthExpertContext())
             {
@@ -39,7 +39,7 @@ namespace DataAccess.DAO
             }
         }
 
-        public static Post GetPostById(int postId)
+        public static Post GetPostById(Guid postId)
         {
             using (var context = new HealthExpertContext())
             {
@@ -67,7 +67,7 @@ namespace DataAccess.DAO
         }
 
         //PostLike method
-        public static void LikePost(int postId, string userName)
+        public static void LikePost(Guid postId, string userName)
         {
             using (var context = new HealthExpertContext())
             {

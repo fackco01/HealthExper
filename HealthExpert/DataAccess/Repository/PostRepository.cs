@@ -17,7 +17,7 @@ namespace DataAccess.Repository
             PostDAO.AddPost(post);
         }
 
-        public void DeletePost(int postId)
+        public void DeletePost(Guid postId)
         {
             PostDAO.DeletePost(postId);
         }
@@ -27,7 +27,7 @@ namespace DataAccess.Repository
             return PostDAO.GetPosts();
         }
 
-        public Post GetPostById(int postId)
+        public Post GetPostById(Guid postId)
         {
             return PostDAO.GetPostById(postId);
         }
@@ -37,7 +37,7 @@ namespace DataAccess.Repository
             PostDAO.UpdatePost(post);
         }
 
-        public void LikePost(int postId, string userName)
+        public void LikePost(Guid postId, string userName)
         {
             PostDAO.LikePost(postId, userName);
         }

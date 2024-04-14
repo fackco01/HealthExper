@@ -10,6 +10,7 @@ namespace HealthExpertAPI.Extension.ExNutrition
             return new NutritionDTO
             {
                 nutriId = nutrition.nutriId,
+                sessionId = nutrition.sessionId,
                 title = nutrition.title,
                 description = nutrition.description,
                 isActive = nutrition.isActive
@@ -20,6 +21,7 @@ namespace HealthExpertAPI.Extension.ExNutrition
             return new Nutrition
             {
                 nutriId = nutritionDTO.nutriId,
+                sessionId = nutritionDTO.sessionId,
                 title = nutritionDTO.title,
                 description = nutritionDTO.description,
                 isActive = nutritionDTO.isActive

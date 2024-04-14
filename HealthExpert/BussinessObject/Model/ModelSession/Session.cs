@@ -22,6 +22,7 @@ namespace BussinessObject.Model.ModelSession
         public string? scoreResult { get; set; }
         [Required]
         public string courseId { get; set; }
+        public string nutritionId { get; set; }
 
         [JsonIgnore]
         public virtual Course? course { get; set; }
