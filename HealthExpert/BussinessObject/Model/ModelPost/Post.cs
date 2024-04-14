@@ -11,7 +11,7 @@ namespace BussinessObject.Model.ModelPost
     public class Post
     {
         [Key]
-        public int postId { get; set; }
+        public Guid postId { get; set; }
         public Guid accountId { get; set; }
         public string title { get; set; }
         public string content { get; set; }

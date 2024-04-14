@@ -34,7 +34,7 @@ namespace HealthExpertAPI.Controllers
         [AllowAnonymous]
         public IActionResult CreatePost(PostDTO postDTO)
         {
-            var user = _context.accounts.Find(postDTO.accountId);
+            var user = _context.accounts.FirstOrDefault(p => p.accountId == postDTO.accountId);
             if (user == null)
             {
                 return BadRequest("User not found!!");
@@ -47,16 +47,17 @@ namespace HealthExpertAPI.Controllers
         //Get Posts
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult GetPosts()
+        public ActionResult <List<PostDTO>> GetPosts()
         {
-            var posts = _repository.GetPosts();
+            var posts = _repository.GetPosts().Select(post => post.ToPostDTO());
+
             return Ok(posts);
         }
 
         //Get Post by Id
         [HttpGet("{postId}")]
         [AllowAnonymous]
-        public IActionResult GetPostById(int postId)
+        public IActionResult GetPostById(Guid postId)
         {
             var post = _repository.GetPostById(postId);
             if (post == null)
@@ -66,20 +67,26 @@ namespace HealthExpertAPI.Controllers
             return Ok(post);
         }
 
-        //Update Post
-        [HttpPut]
+        //Update Post by postId
+        [HttpPut("{postId}")]
         [AllowAnonymous]
-        public IActionResult UpdatePost(PostDTOUpdate postDTO)
+        public IActionResult UpdatePost(Guid postId, PostDTOUpdate postDTO)
         {
-            Post post = postDTO.ToUpdatePost();
-            _repository.UpdatePost(post);
+            var post = _repository.GetPostById(postId);
+            if (post == null)
+            {
+                return BadRequest("Post not found!!");
+            }
+            Post postUpdate = postDTO.ToUpdatePost();
+            postUpdate.postId = postId;
+            _repository.UpdatePost(postUpdate);
             return Ok();
         }
 
         //Delete Post
         [HttpDelete("{postId}")]
         [AllowAnonymous]
-        public IActionResult DeletePost(int postId)
+        public IActionResult DeletePost(Guid postId)
         {
             _repository.DeletePost(postId);
             return Ok();
@@ -88,7 +95,7 @@ namespace HealthExpertAPI.Controllers
         //Like Post
         [HttpPost("like")]
         [AllowAnonymous]
-        public IActionResult LikePost(int postId, string userName)
+        public IActionResult LikePost(Guid postId, string userName)
         {
             var post = _repository.GetPostById(postId);
             if (post == null)

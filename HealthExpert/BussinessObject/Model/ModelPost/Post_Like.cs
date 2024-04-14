@@ -11,7 +11,7 @@ namespace BussinessObject.Model.ModelPost
     {
         [Key]
         public int postLikeId { get; set; }
-        public int postId { get; set; }
+        public Guid postId { get; set; }
         public string userName { get; set; }
         public DateTime createdAt { get; set; }
         public virtual Post? post { get; set; }

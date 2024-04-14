@@ -101,17 +101,17 @@ namespace HealthExpertAPI.Controllers
 
                     foreach (var email in manager.accountEmails)
                     {
-                        //check if users dont have roled=4
-                        var roleUser = _context.accounts.FirstOrDefault(x => x.email.Equals(manager.accountEmails) && x.roleId == 4);
-                        if (roleUser == null)
-                        {
-                            messages.Add($"User with email is not a normal User!!");
-                            continue;
-                        }
                         var user = _context.accounts.FirstOrDefault(x => x.email.Equals(email));
                         if (user == null)
                         {
                             messages.Add($"User with email {email} not found!!");
+                            continue;
+                        }
+
+                        // Check if user has roleId == 4
+                        if (user.roleId != 4)
+                        {
+                            messages.Add($"User with email {email} is not a normal User!!");
                             continue;
                         }
 
@@ -128,6 +128,7 @@ namespace HealthExpertAPI.Controllers
                         }
                     }
                 }
+
 
                 return Ok(messages);
             }

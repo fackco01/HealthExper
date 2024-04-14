@@ -13,6 +13,11 @@ namespace DataAccess.Repository
     {
         public void AddNutrition(Nutrition nutrition) => NutritionDAO.AddNutrition(nutrition);
 
+        public void CreateNutritionBySessonId(string lessonId, Nutrition nutrition)
+        {
+            NutritionDAO.AddNutrition(lessonId, nutrition);
+        }
+
         public void DeleteNutrition(string id) => NutritionDAO.DeleteNutrition(id);
 
         public List<Nutrition> GetAllNutritions() => NutritionDAO.GetAllNutritions();

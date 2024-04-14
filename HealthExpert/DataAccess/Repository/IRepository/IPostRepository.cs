@@ -10,10 +10,10 @@ namespace DataAccess.Repository.IRepository
     public interface IPostRepository
     {
         void AddPost(Post post);
-        void DeletePost(int postId);
+        void DeletePost(Guid postId);
         List<Post> GetPosts();
-        Post GetPostById(int postId);
+        Post GetPostById(Guid postId);
         void UpdatePost(Post post);
-        void LikePost(int postId, string userName);
+        void LikePost(Guid postId, string userName);
     }
 }

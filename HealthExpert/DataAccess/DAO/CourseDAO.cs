@@ -51,6 +51,7 @@ namespace DataAccess.DAO
             }
         }
 
+        //Add Course Manager
         public static void AddCourseManagerByEmail(string email, string courseId)
         {
             using (var context = new HealthExpertContext())
@@ -69,8 +70,16 @@ namespace DataAccess.DAO
                     context.courseManagements.Add(courseManager);
                     context.SaveChanges();
                 }
+                else
+                {
+                    // Handle the case where user is null
+                    // For example, you might throw an exception or log an error
+                    // This depends on your application's requirements
+                    throw new Exception("User with email " + email + " not found.");
+                }
             }
         }
+
         private static int GenerateUniqueCourseManagerId()
         {
             using (var context = new HealthExpertContext())

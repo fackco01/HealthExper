@@ -11,7 +11,7 @@ namespace BussinessObject.Model.ModelPost
     {
         [Key]
         public int postMetaId { get; set; }
-        public int postId { get; set; }
+        public Guid postId { get; set; }
         public string hashTag { get; set; }
         public string content { get; set; }
         public virtual Post? post { get; set; }

@@ -59,19 +59,19 @@ namespace HealthExpertAPI.Controllers
         }
 
         //Add Nutrition
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult AddNutrition(NutritionDTO nutritionDTO)
-        {
-            if(_context.nutritions.Any(n => n.nutriId == nutritionDTO.nutriId))
-            {
-                return BadRequest("Nutrition already exists");
-            }
-            Nutrition nutrition = nutritionDTO.ToNutrition();
-            _repository.AddNutrition(nutrition);
-            return Ok();
-        }
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public ActionResult AddNutrition(NutritionDTO nutritionDTO)
+        //{
+        //    if(_context.nutritions.Any(n => n.nutriId == nutritionDTO.nutriId))
+        //    {
+        //        return BadRequest("Nutrition already exists");
+        //    }
+        //    Nutrition nutrition = nutritionDTO.ToNutrition();
+        //    _repository.AddNutrition(nutrition);
+        //    return Ok();
+        //}
 
         //Update Nutrition
         [HttpPut("{id}")]
@@ -104,5 +104,19 @@ namespace HealthExpertAPI.Controllers
             return Ok();
         }
 
+        //Create nutrition by lessonId
+        [HttpPost("{aessonId}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult CreateNutritionByLessonId(string sessionId, NutritionDTO nutritionDTO)
+        {
+            if (_context.lessons.Find(sessionId) == null)
+            {
+                return BadRequest("Lesson not found");
+            }
+            Nutrition nutrition = nutritionDTO.ToNutrition();
+            _repository.CreateNutritionBySessonId(sessionId, nutrition);
+            return Ok();
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace HealthExpertAPI.Extension.ExPost
         {
             return new PostDTO
             {
+                accountId = post.accountId,
                 postId = post.postId,
                 title = post.title,
                 content = post.content,
@@ -39,7 +40,6 @@ namespace HealthExpertAPI.Extension.ExPost
         {
             return new Post
             {
-                postId = postDTO.postId,
                 title = postDTO.title,
                 content = postDTO.content,
                 imageFile = postDTO.imageFile,
