@@ -1,4 +1,14 @@
-﻿namespace BussinessObject.ContextData
+﻿using BussinessObject.Model.Authen;
+using BussinessObject.Model.ModelCourse;
+using BussinessObject.Model.ModelNutrition;
+using BussinessObject.Model.ModelPayment;
+using BussinessObject.Model.ModelPost;
+using BussinessObject.Model.ModelSession;
+using BussinessObject.Model.ModelUser;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+namespace BussinessObject.ContextData
 {
     public class HealthExpertContext : DbContext
     {
