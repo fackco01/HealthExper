@@ -49,5 +49,38 @@ namespace HealthExpertAPI.Extension.ExPost
             };
         }
 
+        //to post detail
+        public static PostDetail ToCreatePostDetail(this PostDetailDTO postDetailDTO)
+        {
+            return new PostDetail
+            {
+                postId = postDetailDTO.postId,
+                postTitle = postDetailDTO.postTitle,
+                postDescription = postDetailDTO.postDescription
+            };
+        }
+        
+        //to post detail dto
+        public static PostDetailDTO ToPostDetailDTO(this PostDetail postDetail)
+        {
+            return new PostDetailDTO
+            {
+                postDetailId = postDetail.postDetailId,
+                postId = postDetail.postId,
+                postTitle = postDetail.postTitle,
+                postDescription = postDetail.postDescription
+            };
+        }
+
+        //to update post detail
+        public static PostDetail ToUpdatePostDetail(this PostDetailUpdateDTO postDetailDTO)
+        {
+            return new PostDetail
+            {
+                postDetailId = postDetailDTO.postDetailId,
+                postTitle = postDetailDTO.postTitle,
+                postDescription = postDetailDTO.postDescription
+            };
+        }
     }
 }

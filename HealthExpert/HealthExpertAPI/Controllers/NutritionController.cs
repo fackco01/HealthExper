@@ -45,18 +45,18 @@ namespace HealthExpertAPI.Controllers
         }
 
         //View Nutrition By Title
-        [HttpGet("{title}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Nutrition> GetNutritionByTitle(string title)
-        {
-            var nutrition = _repository.GetNutritionByTitle(title);
-            if (nutrition == null)
-            {
-                return NotFound();
-            }
-            return Ok(nutrition);
-        }
+        //[HttpGet("{title}")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public ActionResult<Nutrition> GetNutritionByTitle(string title)
+        //{
+        //    var nutrition = _repository.GetNutritionByTitle(title);
+        //    if (nutrition == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(nutrition);
+        //}
 
         //Add Nutrition
         //[HttpPost]
@@ -105,17 +105,17 @@ namespace HealthExpertAPI.Controllers
         }
 
         //Create nutrition by lessonId
-        [HttpPost("{aessonId}")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult CreateNutritionByLessonId(string sessionId, NutritionDTO nutritionDTO)
+        public ActionResult CreateNutritionByLessonId(NutritionDTO nutritionDTO)
         {
-            if (_context.lessons.Find(sessionId) == null)
+            if (_context.sessions.FirstOrDefault(n => n.sessionId == nutritionDTO.sessionId) == null)
             {
-                return BadRequest("Lesson not found");
+                return BadRequest("Session not found");
             }
             Nutrition nutrition = nutritionDTO.ToNutrition();
-            _repository.CreateNutritionBySessonId(sessionId, nutrition);
+            _repository.CreateNutritionBySessonId(nutrition);
             return Ok();
         }
     }

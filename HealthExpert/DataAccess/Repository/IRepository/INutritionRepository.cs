@@ -15,6 +15,6 @@ namespace DataAccess.Repository.IRepository
         List<Nutrition> GetAllNutritions();
         Nutrition GetNutritionById(string id);
         Nutrition GetNutritionByTitle(string title);
-        void CreateNutritionBySessonId(string sessionId, Nutrition nutrition);
+        void CreateNutritionBySessonId(Nutrition nutrition);
     }
 }

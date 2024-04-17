@@ -44,6 +44,46 @@ namespace HealthExpertAPI.Controllers
             return Ok();
         }
 
+        //Create Post Detail by postId
+        [HttpPost("createPostDetails")]
+        [AllowAnonymous]
+        public IActionResult CreatePostDetail(PostDetailDTO postDetailDTO)
+        {
+            var post = _context.posts.FirstOrDefault(p => p.postId == postDetailDTO.postId);
+            if (post == null)
+            {
+                return BadRequest("Post not found!!");
+            }
+            PostDetail postDetail = postDetailDTO.ToCreatePostDetail();
+            _repository.AddPostDetail(postDetail);
+            return Ok();
+        }
+
+        //update Post Detail by postDetailId
+        [HttpPut("updatePostDetail")]
+        [AllowAnonymous]
+        public IActionResult UpdatePostDetail(PostDetailUpdateDTO postDetailDTO)
+        {
+            var postDetail = _context.postDetails.FirstOrDefault(p => p.postDetailId == postDetailDTO.postDetailId);
+            if (postDetail == null)
+            {
+                return BadRequest("Post Detail not found!!");
+            }
+            PostDetail postDetailUpdate = postDetailDTO.ToUpdatePostDetail();
+            _repository.UpdatePostDetail(postDetailUpdate);
+            return Ok();
+        }
+
+        //Get all Post Details by postId
+        [HttpGet("details/{postId}")]
+        [AllowAnonymous]
+        public ActionResult <List<PostDetailDTO>> GetPostDetails(Guid postId)
+        {
+            var postDetails = _repository.GetPostDetails(postId).Select(postDetail => postDetail.ToPostDetailDTO());
+
+            return Ok(postDetails);
+        }
+
         //Get Posts
         [HttpGet]
         [AllowAnonymous]

@@ -15,5 +15,9 @@ namespace DataAccess.Repository.IRepository
         Post GetPostById(Guid postId);
         void UpdatePost(Post post);
         void LikePost(Guid postId, string userName);
+        List<PostDetail> GetPostDetails(Guid postId);
+        void AddPostDetail(PostDetail postDetail);
+        //update post detail
+        void UpdatePostDetail(PostDetail postDetail);
     }
 }

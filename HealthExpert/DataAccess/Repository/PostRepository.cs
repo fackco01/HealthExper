@@ -41,5 +41,22 @@ namespace DataAccess.Repository
         {
             PostDAO.LikePost(postId, userName);
         }
+
+        public List<PostDetail> GetPostDetails(Guid postId)
+        {
+            return PostDAO.GetPostDetails(postId);
+        }
+
+        //Add PostDetail
+        public void AddPostDetail(PostDetail postDetail)
+        {
+            PostDAO.AddPostDetail(postDetail);
+        }
+
+        //update post detail
+        public void UpdatePostDetail(PostDetail postDetail)
+        {
+            PostDAO.UpdatePostDetail(postDetail);
+        }
     }
 }

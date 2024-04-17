@@ -21,6 +21,16 @@ namespace DataAccess.DAO
             }
         }
 
+        //Add Post Detail
+        public static void AddPostDetail(PostDetail postDetail)
+        {
+            using (var context = new HealthExpertContext())
+            {
+                context.postDetails.Add(postDetail);
+                context.SaveChanges();
+            }
+        }
+
         public static void DeletePost(Guid postId)
         {
             using (var context = new HealthExpertContext())
@@ -66,6 +76,23 @@ namespace DataAccess.DAO
             }
         }
 
+        //update post detail
+        public static void UpdatePostDetail(PostDetail postDetail)
+        {
+            using (var context = new HealthExpertContext())
+            {
+                var existingPostDetail = context.postDetails.FirstOrDefault(pd => pd.postDetailId == postDetail.postDetailId);
+                if(existingPostDetail == null)
+                {
+                    throw new Exception("Post Detail not found!!!");
+                }
+                existingPostDetail.postTitle = postDetail.postTitle;
+                existingPostDetail.postDescription = postDetail.postDescription;
+                context.postDetails.Update(existingPostDetail);
+                context.SaveChanges();
+            }
+        }
+
         //PostLike method
         public static void LikePost(Guid postId, string userName)
         {
@@ -103,5 +130,15 @@ namespace DataAccess.DAO
                 }
             }
         }
+
+        //Get PostDetail
+        public static List<PostDetail> GetPostDetails(Guid postId)
+        {
+            using (var context = new HealthExpertContext())
+            {
+                return context.postDetails.Where(pd => pd.postId == postId).ToList();
+            }
+        }
+
     }
 }
