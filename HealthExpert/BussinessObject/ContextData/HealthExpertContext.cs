@@ -39,6 +39,7 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Post_Like> post_Likes { get; set; }
         public virtual DbSet<Post_Meta> post_Metas { get; set; }
         public virtual DbSet<Nutrition> nutritions { get; set; }
+        public virtual DbSet<CurrentProgress> CurrentProgresses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

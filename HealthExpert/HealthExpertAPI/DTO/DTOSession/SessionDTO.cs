@@ -1,5 +1,4 @@
-﻿using BussinessObject.Model.ModelSession;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace HealthExpertAPI.DTO.DTOSession

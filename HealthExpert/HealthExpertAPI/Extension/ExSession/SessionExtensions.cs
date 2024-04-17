@@ -1,5 +1,4 @@
-﻿using BussinessObject.Model.ModelCourse;
-using BussinessObject.Model.ModelSession;
+﻿using BussinessObject.Model.ModelSession;
 using HealthExpertAPI.DTO.DTOSession;
 
 namespace HealthExpertAPI.Extension.ExSession

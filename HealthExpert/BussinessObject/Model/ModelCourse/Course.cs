@@ -45,5 +45,7 @@ namespace BussinessObject.Model.ModelCourse
         public virtual ICollection<Type> types { get; set; }
         [JsonIgnore]
         public virtual ICollection<Order>? orders { get; set; }
+        [JsonIgnore]
+        public virtual CurrentProgress? currentProgresse { get; set; }
     }
 }

@@ -1,12 +1,7 @@
 ﻿using BussinessObject.Model.ModelCourse;
 using BussinessObject.Model.ModelNutrition;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace BussinessObject.Model.ModelSession
 {
@@ -22,7 +17,6 @@ namespace BussinessObject.Model.ModelSession
         public string? scoreResult { get; set; }
         [Required]
         public string courseId { get; set; }
-        public string nutritionId { get; set; }
 
         [JsonIgnore]
         public virtual Course? course { get; set; }
