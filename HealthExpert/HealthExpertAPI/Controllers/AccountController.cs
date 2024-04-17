@@ -128,8 +128,27 @@ namespace HealthExpertAPI.Controllers
             return Ok();
         }
 
-        //Vỉew Account
-        [AllowAnonymous]
+        //Change password
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO changePasswordDTO)
+        {
+            var account = await _context.accounts.FirstOrDefaultAsync(u => u.userName == changePasswordDTO.username);
+            if (account == null)
+            {
+                return BadRequest();
+            }
+            CreatedPasswordHash(changePasswordDTO.newPassword,
+                            out byte[] passwordHash,
+                            out byte[] passwordSalt);
+            account.password = changePasswordDTO.newPassword;
+            account.passwordHash = passwordHash;
+            account.passwordSalt = passwordSalt;
+            account.passwordResetToken = null;
+            _repository.UpdateAccount(account);
+            return Ok();
+        }
+            //Vỉew Account
+            [AllowAnonymous]
         [HttpGet]
         public ActionResult<List<AccountDTO>> GetListAccount()
         {

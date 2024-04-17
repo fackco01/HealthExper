@@ -106,5 +106,15 @@ namespace HealthExpertAPI.Extension.ExAccount
                 passwordSalt = passwordSalt
             };
         }
+        public static Account ToChangePassword(this ChangePasswordDTO changePasswordDTO, byte[] password)
+        {
+            return new Account
+            {
+                userName = changePasswordDTO.username,
+                password = changePasswordDTO.oldPassword,
+                passwordHash = password,
+                passwordSalt = null
+            };
+        }
     }
 }
