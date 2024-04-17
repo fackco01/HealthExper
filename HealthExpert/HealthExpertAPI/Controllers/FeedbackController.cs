@@ -46,18 +46,18 @@ namespace HealthExpertAPI.Controllers
         }
 
         //Update Feedback by feedbackId
-        [HttpPut("{id}")]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult UpdateFeedback(Guid id, FeedbackUpdateDTO feedbackDTO)
+        public ActionResult UpdateFeedback(FeedbackUpdateDTO feedbackDTO)
         {
-            var feedback = _repository.GetFeedbackById(id);
+            var feedback = _context.feedbacks.FirstOrDefault(f => f.accountId == feedbackDTO.accountId && f.courseId == feedbackDTO.courseId);
             if(feedback == null)
             {
                 return NotFound();
             }
             Feedback fb = feedbackDTO.ToUpdateFeedback();
-            fb.feedbackId = id;
+            fb.feedbackId = feedback.feedbackId;
             fb.accountId = feedback.accountId;
             fb.courseId = feedback.courseId;
             _repository.UpdateFeedback(fb);
@@ -65,12 +65,17 @@ namespace HealthExpertAPI.Controllers
         }
 
         //Delete Feedback
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult DeleteFeedback(Guid id)
+        public ActionResult DeleteFeedback(FeedbackDeleteDTO feedbackDTO)
         {
-            _repository.DeleteFeedback(id);
+            var feedback = _context.feedbacks.FirstOrDefault(f => f.accountId == feedbackDTO.accountId && f.courseId == feedbackDTO.courseId);
+            if (feedback == null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteFeedback(feedback);
             return Ok();
         }
 
@@ -80,8 +85,13 @@ namespace HealthExpertAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult AddFeedback(FeedbackDTO feedbackDTO)
         {
-            var feedback = feedbackDTO.ToCreateFeedback();
-            _repository.AddFeedback(feedback);
+            var feedback = _context.feedbacks.FirstOrDefault(f => f.accountId == feedbackDTO.accountId && f.courseId == feedbackDTO.courseId);
+            if (feedback != null)
+            {
+                return BadRequest("You only can give a feedback!!!");
+            }
+            Feedback fb = feedbackDTO.ToCreateFeedback();
+            _repository.AddFeedback(fb);
             return Ok();
         }
     }

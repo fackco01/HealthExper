@@ -39,11 +39,10 @@ namespace DataAccess.DAO
             }
         }
 
-        public static void DeleteFeedback(Guid feedbackId)
+        public static void DeleteFeedback(Feedback feedback)
         {
             using (var context = new HealthExpertContext())
             {
-                var feedback = context.feedbacks.Find(feedbackId);
                 context.feedbacks.Remove(feedback);
                 context.SaveChanges();
             }
