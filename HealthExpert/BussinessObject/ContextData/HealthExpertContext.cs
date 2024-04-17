@@ -1,14 +1,4 @@
-﻿using BussinessObject.Model.Authen;
-using BussinessObject.Model.ModelCourse;
-using BussinessObject.Model.ModelNutrition;
-using BussinessObject.Model.ModelPayment;
-using BussinessObject.Model.ModelPost;
-using BussinessObject.Model.ModelSession;
-using BussinessObject.Model.ModelUser;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
-namespace BussinessObject.ContextData
+﻿namespace BussinessObject.ContextData
 {
     public class HealthExpertContext : DbContext
     {
@@ -39,6 +29,7 @@ namespace BussinessObject.ContextData
         public virtual DbSet<Post_Like> post_Likes { get; set; }
         public virtual DbSet<Post_Meta> post_Metas { get; set; }
         public virtual DbSet<Nutrition> nutritions { get; set; }
+        public virtual DbSet<CurrentProgress> CurrentProgresses { get; set; }
         public virtual DbSet<PostDetail> postDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

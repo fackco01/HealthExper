@@ -43,5 +43,6 @@ namespace BussinessObject.Model.ModelUser
         public virtual CourseAdmin? courseAdmin { get; set; }
         public virtual CourseManagement? courseManager { get; set; }
         public ICollection<Post>? posts { get; set; }
+        public ICollection<CurrentProgress>? currentProgresses { get; set; }
     }
 }

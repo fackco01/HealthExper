@@ -3,6 +3,7 @@ using BussinessObject.ContextData;
 using BussinessObject.Model.ModelCourse;
 using DataAccess.Repository;
 using DataAccess.Repository.IRepository;
+using HealthExpertAPI.DTO.DTOAccount;
 using HealthExpertAPI.DTO.DTOCourse;
 using HealthExpertAPI.DTO.DTOEnrollment;
 using HealthExpertAPI.Extension.ExCourse;
@@ -433,6 +434,146 @@ namespace HealthExpertAPI.Controllers
             {
                 return BadRequest("Failed to retrieve users in course: " + ex.Message);
             }
+        }
+
+        ////Get Current Progress
+        //[HttpGet("current-progress/{accountId}")]
+        //public async Task<IActionResult> GetCurrentProgress(Guid accountId)
+        //{
+        //    var account = await _context.accounts.FindAsync(accountId);
+        //    if (account == null)
+        //    {
+        //        return NotFound($"Account with ID {accountId} not found.");
+        //    }
+
+        //    var currentProgress = new CurrentProgressDTO
+        //    {
+        //        accountId = account.accountId,
+        //        currentCourseId = account.CurentCourseId,
+        //        currentSessionId = account.CurrentSessionId,
+        //        currentLessonId = account.CurrentLessonId
+        //    };
+
+        //    return Ok(currentProgress);
+        //}
+
+        ////update Current Progress
+        //[HttpPost("update-progress/{accountId}")]
+        //public async Task<IActionResult> UpdateCurrentProgress(Guid accountId, [FromBody] UpdateProgressDTO request)
+        //{
+        //    var account = await _context.accounts.FindAsync(accountId);
+        //    if (account == null)
+        //    {
+        //        return NotFound($"Account with ID {accountId} not found.");
+        //    }
+
+        //    var course = await _context.courses.FindAsync(request.courseId);
+        //    if (course == null)
+        //    {
+        //        return NotFound($"Course with ID {request.courseId} not found.");
+        //    }
+
+        //    var session = await _context.sessions.FindAsync(request.sessionId);
+        //    if (session == null)
+        //    {
+        //        return NotFound($"Session with ID {request.sessionId} not found.");
+        //    }
+
+        //    var lesson = await _context.lessons.FindAsync(request.lessonId);
+        //    if (lesson == null)
+        //    {
+        //        return NotFound($"Lesson with ID {request.lessonId} not found.");
+        //    }
+
+        //    account.CurentCourseId = course.courseId;
+        //    account.CurrentSessionId = session.sessionId;
+        //    account.CurrentLessonId = lesson.lessonId;
+
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok();
+        //}
+        // Get Current Progress
+        [HttpGet("current-progress/{accountId}")]
+        public async Task<IActionResult> GetCurrentProgress(Guid accountId, [FromQuery] string courseId)
+        {
+            var account = await _context.accounts.FindAsync(accountId);
+            if (account == null)
+            {
+                return NotFound($"Account with ID {accountId} not found.");
+            }
+
+            IQueryable<CurrentProgress> progressQuery = _context.CurrentProgresses
+                .Where(cp => cp.AccountId == accountId);
+
+            // Filter the query by courseId if it is provided
+            if (!string.IsNullOrEmpty(courseId))
+            {
+                progressQuery = progressQuery
+                    .Where(cp => cp.courseId == courseId);
+            }
+
+            var currentProgressList = await progressQuery.ToListAsync();
+
+            var progressDTOList = currentProgressList.Select(cp => new CurrentProgressDTO
+            {
+                accountId = cp.AccountId,
+                currentCourseId = cp.courseId,
+                currentSessionId = cp.CurrentSessionId,
+                currentLessonId = cp.CurrentLessonId
+            }).ToList();
+
+            return Ok(progressDTOList);
+        }
+
+        // Update Current Progress
+        [HttpPost("update-progress/{accountId}")]
+        public async Task<IActionResult> UpdateCurrentProgress(Guid accountId, UpdateProgressDTO request)
+        {
+            var account = await _context.accounts.FindAsync(accountId);
+            if (account == null)
+            {
+                return NotFound($"Account with ID {accountId} not found.");
+            }
+
+            var session = await _context.sessions.FindAsync(request.sessionId);
+            if (session == null)
+            {
+                return NotFound($"Session with ID {request.sessionId} not found.");
+            }
+
+            var lesson = await _context.lessons.FindAsync(request.lessonId);
+            if (lesson == null)
+            {
+                return NotFound($"Lesson with ID {request.lessonId} not found.");
+            }
+
+            // Check if a CurrentProgress record already exists for the account
+            var currentProgress = await _context.CurrentProgresses.FirstOrDefaultAsync(cp => cp.AccountId == accountId && cp.courseId == request.courseId);
+
+            if (currentProgress == null)
+            {
+                // Create a new CurrentProgress record for the account
+                currentProgress = new CurrentProgress
+                {
+                    AccountId = accountId,
+                    courseId = request.courseId,
+                    CurrentSessionId = request.sessionId,
+                    CurrentLessonId = request.lessonId
+                };
+
+                _context.CurrentProgresses.Add(currentProgress);
+            }
+            else
+            {
+                // Update the existing CurrentProgress record
+                currentProgress.CurrentSessionId = request.sessionId;
+                currentProgress.CurrentLessonId = request.lessonId;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }
