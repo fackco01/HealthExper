@@ -16,9 +16,9 @@ namespace DataAccess.Repository
             FeedbackDAO.AddFeedback(feedback);
         }
 
-        public void DeleteFeedback(Guid feedbackId)
+        public void DeleteFeedback(Feedback feedback)
         {
-            FeedbackDAO.DeleteFeedback(feedbackId);
+            FeedbackDAO.DeleteFeedback(feedback);
         }
 
         public List<Feedback> GetFeedbacks()

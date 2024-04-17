@@ -1,9 +1,8 @@
 ﻿namespace HealthExpertAPI.DTO.DTOFeedback
 {
-    public class FeedbackUpdateDTO
+    public class FeedbackDeleteDTO
     {
         public Guid accountId { get; set; }
         public string courseId { get; set; }
-        public string detail { get; set; }
     }
 }
