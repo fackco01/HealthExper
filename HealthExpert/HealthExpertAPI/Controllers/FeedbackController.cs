@@ -64,13 +64,13 @@ namespace HealthExpertAPI.Controllers
             return Ok();
         }
 
-        //Delete Feedback
-        [HttpDelete]
+        //Delete Feedback by courseId and accountId
+        [HttpDelete("{accountId}/{courseId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult DeleteFeedback(FeedbackDeleteDTO feedbackDTO)
+        public ActionResult DeleteFeedback(Guid accountId, string courseId)
         {
-            var feedback = _context.feedbacks.FirstOrDefault(f => f.accountId == feedbackDTO.accountId && f.courseId == feedbackDTO.courseId);
+            var feedback = _context.feedbacks.FirstOrDefault(f => f.accountId == accountId && f.courseId == courseId);
             if (feedback == null)
             {
                 return NotFound();
