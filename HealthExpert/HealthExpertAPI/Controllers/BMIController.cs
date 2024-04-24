@@ -34,7 +34,7 @@ namespace HealthExpertAPI.Controllers
         [AllowAnonymous]
         public IActionResult AddBMI(BMIDTO bmiDTO)
         {
-            var account = _context.accounts.Find(bmiDTO.accountId);
+            var account = _context.accounts.FirstOrDefault(x => x.accountId == bmiDTO.accountId);
             if (account == null)
             {
                 return BadRequest("Account not found!!");
