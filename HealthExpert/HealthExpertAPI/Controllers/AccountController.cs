@@ -80,7 +80,7 @@ namespace HealthExpertAPI.Controllers
             account.bankName = accountDTO.bankName;
             account.bankNumber = accountDTO.bankNumber;
             account.gender = true;
-            account.isActive = true;
+            account.isActive = false;
 
             _repository.AddAccount(account);
             return Ok("Course Admin successfully register!!");

@@ -100,6 +100,19 @@ namespace HealthExpertAPI.Controllers
                         continue;
                     }
 
+                    // Check if the course already has a manager
+                    var existingManager = _context.courseManagements
+                        .Include(cm => cm.accounts)
+                        .FirstOrDefault(cm => cm.courseId == manager.courseId);
+
+                    if (existingManager != null)
+                    {
+                        messages.Add($"Course with ID {manager.courseId} already has a manager!");
+                        continue;
+                    }
+
+                    bool managerFound = false; // Flag to track if manager is found
+
                     foreach (var email in manager.accountEmails)
                     {
                         var user = _context.accounts.FirstOrDefault(x => x.email.Equals(email));
@@ -116,20 +129,25 @@ namespace HealthExpertAPI.Controllers
                             continue;
                         }
 
-                        //Check if user is already a course manager
-                        var isManager = _repository.IsCourseManager(email, manager.courseId);
-                        if (isManager)
+                        // Check if user is already a course manager for another course
+                        var isManagerForOtherCourse = _repository.IsCourseManager(email, manager.courseId);
+                        if (isManagerForOtherCourse)
                         {
-                            messages.Add($"User with email {email} is already a Course Manager for course {manager.courseId}");
+                            messages.Add($"User with email {email} is already a Course Manager for another course.");
+                            continue;
                         }
-                        else
-                        {
-                            _repository.AddCourseManagerByEmail(email, manager.courseId);
-                            messages.Add($"User with email {email} added as a Course Manager for course {manager.courseId}");
-                        }
+
+                        _repository.AddCourseManagerByEmail(email, manager.courseId);
+                        messages.Add($"User with email {email} added as a Course Manager for course {manager.courseId}");
+                        managerFound = true; // Set flag to true if manager is found
+                        break; // Exit loop since manager is found
+                    }
+
+                    if (!managerFound)
+                    {
+                        messages.Add($"No suitable user found to be a Course Manager for course {manager.courseId}");
                     }
                 }
-
 
                 return Ok(messages);
             }
